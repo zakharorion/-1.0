@@ -9,7 +9,8 @@ import numpy as np
 from PIL import Image
 from scipy import ndimage
 
-NAMES = ["caramel", "banana", "vanilla", "cherry", "blueberry"]
+NAMES = ["caramel", "banana", "vanilla", "cherry", "blueberry",
+         "apple", "cinnamon", "cookie", "fruit", "strawberry"]
 T = 72          # max-channel brightness below this counts as "dark"
 ERODE = 1       # px to trim halo
 

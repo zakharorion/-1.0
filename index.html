@@ -30,6 +30,11 @@
   --c-vanilla:#d9cfe8;
   --c-cherry:#f4b9cb;
   --c-blueberry:#a9d6ea;
+  --c-apple:#98b185;
+  --c-cinnamon:#d8c49d;
+  --c-cookie:#c6966f;
+  --c-fruit:#90c2af;
+  --c-strawberry:#d65961;
 }
 
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -234,7 +239,7 @@ footer a{color:var(--color-forest-canopy);text-decoration:none;}
 </head>
 <body>
 
-<div class="announce">Бесплатная доставка от 2 000 ₽ · Набор из 5 вкусов со скидкой 25%</div>
+<div class="announce">Бесплатная доставка от 2 000 ₽ · Набор из 10 вкусов со скидкой 25%</div>
 
 <div class="nav-outer">
   <nav class="nav">
@@ -276,7 +281,7 @@ footer a{color:var(--color-forest-canopy);text-decoration:none;}
   <section class="section">
     <div class="dark">
       <div class="sec-head">
-        <h2>Пять вкусов</h2>
+        <h2>Десять вкусов</h2>
         <a href="#" class="shoplink">Смотреть все →</a>
       </div>
       <div class="grid">
@@ -336,6 +341,61 @@ footer a{color:var(--color-forest-canopy);text-decoration:none;}
           <a href="#" class="btn btn-white">В корзину</a>
         </div>
 
+        <!-- 6 apple -->
+        <div class="tile">
+          <div class="top"><span class="badge stone">Новинка</span><span class="code">OS-06®</span></div>
+          <div class="product-img" style="--pouch:var(--c-apple)">
+            <img src="images/apple.png" alt="OFF Сянка — Яблоко с корицей" onerror="this.style.display='none'">
+          </div>
+          <h3>Яблоко с корицей</h3>
+          <div class="price">390 ₽ · 24 г белка</div>
+          <a href="#" class="btn btn-white">В корзину</a>
+        </div>
+
+        <!-- 7 cinnamon -->
+        <div class="tile">
+          <div class="top"><span class="badge stone">Новинка</span><span class="code">OS-07®</span></div>
+          <div class="product-img" style="--pouch:var(--c-cinnamon)">
+            <img src="images/cinnamon.png" alt="OFF Сянка — Рулет с корицей и глазурью" onerror="this.style.display='none'">
+          </div>
+          <h3>Рулет с корицей и глазурью</h3>
+          <div class="price">390 ₽ · 25 г белка</div>
+          <a href="#" class="btn btn-white">В корзину</a>
+        </div>
+
+        <!-- 8 cookie -->
+        <div class="tile">
+          <div class="top"><span class="badge stone">Новинка</span><span class="code">OS-08®</span></div>
+          <div class="product-img" style="--pouch:var(--c-cookie)">
+            <img src="images/cookie.png" alt="OFF Сянка — Печенье со сливками" onerror="this.style.display='none'">
+          </div>
+          <h3>Печенье со сливками</h3>
+          <div class="price">390 ₽ · 25 г белка</div>
+          <a href="#" class="btn btn-white">В корзину</a>
+        </div>
+
+        <!-- 9 fruit -->
+        <div class="tile">
+          <div class="top"><span class="badge stone">Новинка</span><span class="code">OS-09®</span></div>
+          <div class="product-img" style="--pouch:var(--c-fruit)">
+            <img src="images/fruit.png" alt="OFF Сянка — Фруктовые хлопья" onerror="this.style.display='none'">
+          </div>
+          <h3>Фруктовые хлопья</h3>
+          <div class="price">390 ₽ · 24 г белка</div>
+          <a href="#" class="btn btn-white">В корзину</a>
+        </div>
+
+        <!-- 10 strawberry -->
+        <div class="tile">
+          <div class="top"><span class="badge stone">Новинка</span><span class="code">OS-10®</span></div>
+          <div class="product-img" style="--pouch:var(--c-strawberry)">
+            <img src="images/strawberry.png" alt="OFF Сянка — Клубника со сливками" onerror="this.style.display='none'">
+          </div>
+          <h3>Клубника со сливками</h3>
+          <div class="price">390 ₽ · 24 г белка</div>
+          <a href="#" class="btn btn-white">В корзину</a>
+        </div>
+
       </div>
     </div>
   </section>
@@ -372,9 +432,9 @@ footer a{color:var(--color-forest-canopy);text-decoration:none;}
     <div class="bundle">
       <div>
         <span class="badge">Набор · −25%</span>
-        <h2>Все пять вкусов<br>в одном наборе</h2>
-        <p>Попробуй всю линейку OFF Сянка и найди свой любимый вкус. Пять пакетов со скидкой 25%.</p>
-        <a href="#" class="btn btn-fill btn-lg">Купить набор · 1 460 ₽</a>
+        <h2>Все десять вкусов<br>в одном наборе</h2>
+        <p>Попробуй всю линейку OFF Сянка и найди свой любимый вкус. Десять пакетов со скидкой 25%.</p>
+        <a href="#" class="btn btn-fill btn-lg">Купить набор · 2 925 ₽</a>
       </div>
       <div class="bundle-photos">
         <div class="product-img" style="--pouch:var(--c-caramel)"><img src="images/caramel.png" alt="Карамель" onerror="this.style.display='none'"></div>
@@ -382,6 +442,11 @@ footer a{color:var(--color-forest-canopy);text-decoration:none;}
         <div class="product-img" style="--pouch:var(--c-vanilla)"><img src="images/vanilla.png" alt="Ваниль" onerror="this.style.display='none'"></div>
         <div class="product-img" style="--pouch:var(--c-cherry)"><img src="images/cherry.png" alt="Вишня" onerror="this.style.display='none'"></div>
         <div class="product-img" style="--pouch:var(--c-blueberry)"><img src="images/blueberry.png" alt="Черника" onerror="this.style.display='none'"></div>
+        <div class="product-img" style="--pouch:var(--c-apple)"><img src="images/apple.png" alt="Яблоко с корицей" onerror="this.style.display='none'"></div>
+        <div class="product-img" style="--pouch:var(--c-cinnamon)"><img src="images/cinnamon.png" alt="Рулет с корицей" onerror="this.style.display='none'"></div>
+        <div class="product-img" style="--pouch:var(--c-cookie)"><img src="images/cookie.png" alt="Печенье со сливками" onerror="this.style.display='none'"></div>
+        <div class="product-img" style="--pouch:var(--c-fruit)"><img src="images/fruit.png" alt="Фруктовые хлопья" onerror="this.style.display='none'"></div>
+        <div class="product-img" style="--pouch:var(--c-strawberry)"><img src="images/strawberry.png" alt="Клубника со сливками" onerror="this.style.display='none'"></div>
       </div>
     </div>
   </section>
