@@ -86,19 +86,22 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   display:flex;align-items:center;justify-content:space-between;
   padding:22px 0;gap:24px;
 }
-.nav-links{display:flex;gap:28px;flex:1;}
+.nav-links{display:flex;gap:28px;flex:2;justify-content:center;}
 .nav-links a{
   font-size:14px;font-weight:600;letter-spacing:var(--tk-sub);
   text-transform:uppercase;
 }
 .nav-links a:hover{color:var(--red);}
+/* Brand / logo — top-left */
 .brand{
+  display:inline-flex;align-items:center;
+  flex:1;min-width:0;
   font-weight:900;font-size:22px;letter-spacing:0.02em;
   text-transform:uppercase;white-space:nowrap;
-  flex:1;text-align:center;
 }
-.brand .reg{font-weight:500;}
-.brand .dot{
+.brand .logo-img{height:44px;width:auto;display:block;}
+.brand .logo-text .reg{font-weight:500;}
+.brand .logo-text .dot{
   display:inline-block;width:9px;height:9px;background:var(--red);
   margin-left:6px;vertical-align:baseline;
 }
@@ -372,12 +375,16 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 <!-- NAV -->
 <div class="wrap">
   <nav class="nav" aria-label="Основная навигация">
+    <a href="#" class="brand" aria-label="OFF Сянка — на главную">
+      <img src="images/logo.png" alt="OFF Сянка" class="logo-img"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='inline';">
+      <span class="logo-text" style="display:none;">OFF <span class="reg">Сянка</span><span class="dot" aria-hidden="true"></span></span>
+    </a>
     <div class="nav-links">
       <a href="#flavors">Вкусы</a>
       <a href="#how">Как готовить</a>
       <a href="#why">Состав</a>
     </div>
-    <a href="#" class="brand" aria-label="OFF Сянка — на главную">OFF <span class="reg">Сянка</span><span class="dot" aria-hidden="true"></span></a>
     <div class="nav-right">
       <a href="#" class="signin">Войти</a>
       <a href="#flavors" class="btn btn-fill">Купить</a>
