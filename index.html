@@ -3,252 +3,391 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>OFF Сянка — ленивая овсянка с белком</title>
+<title>OFF Сянка — протеиновая овсянка, которую не нужно варить</title>
+<meta name="description" content="Ленивая протеиновая овсянка OFF Сянка. 25 г белка, без сахара, без варки. Десять вкусов. Просто добавь молоко с вечера." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
+/* ============================================================
+   OFF Сянка — "punk-rock candy wrapper on cream paper"
+   Style language adapted from the Gigantic reference.
+   Inter is used as the Cyrillic-capable substitute for
+   Neue Haas Grotesk Display (Space Grotesk has no Cyrillic).
+   ============================================================ */
 :root{
-  /* Seed design tokens */
-  --color-forest-canopy:#1c3a13;
-  --color-lime-sprout:#d3fa99;
-  --color-warm-parchment:#fcfcf7;
-  --color-pale-stone:#eeeee9;
-  --color-soft-sage:#c4c7c4;
-  --color-quiet-gray:#b3b3b3;
+  /* Colors — mononeutral + one red */
+  --ink:#231f20;
+  --cream:#f0ede7;
+  --white:#ffffff;
+  --red:#ff634b;
+  --black:#000000;
 
-  --font-sans:'Inter',ui-sans-serif,system-ui,-apple-system,sans-serif;
+  /* Fonts */
+  --font-display:'Inter',ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
   --font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
 
-  --page-max:1200px;
-  --section-gap:64px;
-  --card-pad:24px;
+  /* Tracking — widens with size (hand-tuned, never 'normal') */
+  --tk-caption:0.016em;
+  --tk-body-sm:0.025em;
+  --tk-body:0.028em;
+  --tk-sub:0.031em;
+  --tk-h-sm:0.036em;
+  --tk-h-lg:0.05em;
+  --tk-display:0.055em;
 
-  /* Flavor / pouch colors (from product photography) */
-  --c-caramel:#f1bd95;
-  --c-banana:#f6df3f;
-  --c-vanilla:#d9cfe8;
-  --c-cherry:#f4b9cb;
-  --c-blueberry:#a9d6ea;
-  --c-apple:#98b185;
-  --c-cinnamon:#d8c49d;
-  --c-cookie:#c6966f;
-  --c-fruit:#90c2af;
-  --c-strawberry:#d65961;
+  /* Layout */
+  --page-max:1200px;
+  --section-gap:80px;
+  --card-pad:30px;
+  --gap:20px;
 }
 
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 body{
-  font-family:var(--font-sans);
-  background:var(--color-warm-parchment);
-  color:var(--color-forest-canopy);
+  font-family:var(--font-display);
+  background:var(--cream);
+  color:var(--ink);
   font-weight:400;
-  letter-spacing:-0.4px;
+  font-size:16px;
+  line-height:1.8;
+  letter-spacing:var(--tk-body);
   -webkit-font-smoothing:antialiased;
-  line-height:1.4;
+  text-rendering:optimizeLegibility;
 }
-.wrap{max-width:var(--page-max);margin:0 auto;padding:0 48px;}
+img{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
 
-/* ---------- Announcement bar ---------- */
-.announce{
-  background:var(--color-lime-sprout);
-  color:var(--color-forest-canopy);
-  text-align:center;
-  font-size:14px;font-weight:500;letter-spacing:-0.42px;
-  padding:6px 16px;
+/* Visible focus rings — accessibility */
+a:focus-visible,button:focus-visible,input:focus-visible{
+  outline:3px solid var(--red);
+  outline-offset:3px;
 }
 
-/* ---------- Floating pill nav ---------- */
-.nav-outer{position:sticky;top:0;z-index:50;padding:20px 48px;background:transparent;}
-.nav{
-  max-width:var(--page-max);margin:0 auto;
-  display:flex;align-items:center;justify-content:space-between;
-  background:var(--color-warm-parchment);
-  border:1px solid var(--color-forest-canopy);
-  border-radius:9999px;
-  padding:10px 12px 10px 24px;
-}
-.brand{display:flex;align-items:center;font-size:20px;font-weight:500;letter-spacing:-0.6px;gap:1px;}
-.brand .dot{width:8px;height:8px;border-radius:9999px;background:var(--color-lime-sprout);margin-left:3px;align-self:flex-end;margin-bottom:5px;}
-.nav-links{display:flex;gap:28px;}
-.nav-links a{color:var(--color-forest-canopy);text-decoration:none;font-size:14px;font-weight:400;letter-spacing:-0.42px;}
-.nav-links a:hover{text-decoration:underline;}
-.nav-right{display:flex;align-items:center;gap:16px;}
-.nav-right .signin{font-size:14px;color:var(--color-forest-canopy);text-decoration:none;}
+.wrap{max-width:var(--page-max);margin:0 auto;padding:0 28px;}
 
-/* ---------- Buttons ---------- */
+/* ---------- Buttons: flat, 0px radius, color-flip interaction ---------- */
 .btn{
-  display:inline-flex;align-items:center;gap:8px;
-  border-radius:9999px;border:none;cursor:pointer;
-  font-family:var(--font-sans);font-weight:500;font-size:14px;letter-spacing:-0.42px;
-  padding:9px 18px;text-decoration:none;
+  display:inline-flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);
+  font-weight:600;font-size:15px;
+  letter-spacing:var(--tk-sub);
+  text-transform:uppercase;
+  padding:16px 22px;
+  border:1.5px solid var(--ink);
+  border-radius:0;
+  cursor:pointer;
+  min-height:48px;
+  transition:background-color .18s ease,color .18s ease;
 }
-.btn-fill{background:var(--color-forest-canopy);color:var(--color-warm-parchment);}
-.btn-fill:hover{opacity:.9;}
-.btn-white{background:var(--color-warm-parchment);color:var(--color-forest-canopy);}
-.btn-lg{font-size:16px;padding:12px 24px;}
-.ghost{
-  display:inline-flex;align-items:center;gap:6px;
-  color:var(--color-forest-canopy);text-decoration:none;font-size:16px;font-weight:400;
-}
-.ghost u{text-underline-offset:3px;}
+.btn-fill{background:var(--ink);color:var(--white);}
+.btn-fill:hover{background:var(--cream);color:var(--ink);}
+.btn-outline{background:transparent;color:var(--ink);}
+.btn-outline:hover{background:var(--ink);color:var(--cream);}
+.btn-lg{font-size:16px;padding:18px 30px;}
+/* On dark surfaces */
+.on-dark .btn-outline{border-color:var(--cream);color:var(--cream);}
+.on-dark .btn-outline:hover{background:var(--cream);color:var(--ink);}
 
-/* ---------- Hero ---------- */
-.hero{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;padding:48px 0 var(--section-gap);}
-.hero h1{font-weight:300;font-size:48px;line-height:1;letter-spacing:-1.44px;margin-bottom:24px;}
-.hero p{font-size:18px;line-height:1.4;letter-spacing:-0.36px;max-width:440px;margin-bottom:32px;}
-.hero-cta{display:flex;align-items:center;gap:24px;}
-.hero-photo{
-  position:relative;aspect-ratio:1/1;border-radius:32px;
-  background:radial-gradient(circle at 50% 45%, #fff 0%, var(--color-pale-stone) 70%);
-  display:flex;align-items:center;justify-content:center;overflow:hidden;
+/* ---------- Announcement bar + ticker ---------- */
+.announce{
+  background:var(--white);
+  border-bottom:1.5px solid var(--ink);
+  overflow:hidden;white-space:nowrap;
 }
-.powder-ring{position:absolute;width:78%;height:78%;border-radius:50%;border:2px dashed rgba(28,58,19,.12);}
+.ticker{
+  display:inline-block;padding:9px 0;
+  font-size:13px;font-weight:600;letter-spacing:var(--tk-body-sm);
+  text-transform:uppercase;
+  animation:marquee 28s linear infinite;
+}
+.ticker span{margin:0 28px;}
+.ticker .dot{color:var(--red);}
+@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 
-/* ---------- Section header ---------- */
+/* ---------- Nav ---------- */
+.nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:22px 0;gap:24px;
+}
+.nav-links{display:flex;gap:28px;flex:1;}
+.nav-links a{
+  font-size:14px;font-weight:600;letter-spacing:var(--tk-sub);
+  text-transform:uppercase;
+}
+.nav-links a:hover{color:var(--red);}
+.brand{
+  font-weight:900;font-size:22px;letter-spacing:0.02em;
+  text-transform:uppercase;white-space:nowrap;
+  flex:1;text-align:center;
+}
+.brand .reg{font-weight:500;}
+.brand .dot{
+  display:inline-block;width:9px;height:9px;background:var(--red);
+  margin-left:6px;vertical-align:baseline;
+}
+.nav-right{display:flex;gap:18px;align-items:center;flex:1;justify-content:flex-end;}
+.nav-right .signin{
+  font-size:14px;font-weight:600;letter-spacing:var(--tk-sub);text-transform:uppercase;
+}
+.nav-right .signin:hover{color:var(--red);}
+
+/* ---------- Hero: type IS the hero ---------- */
+.hero{
+  text-align:center;
+  padding:70px 0 64px;
+  min-height:62vh;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+}
+.hero h1{
+  font-weight:800;
+  font-size:clamp(48px,11vw,150px);
+  line-height:0.98;
+  letter-spacing:var(--tk-display);
+  text-transform:uppercase;
+  max-width:14ch;
+}
+.hero h1 em{font-style:italic;font-weight:800;}
+.hero .intro{
+  margin:34px auto 0;max-width:54ch;
+  font-size:17px;font-weight:500;line-height:1.65;
+  letter-spacing:var(--tk-sub);text-transform:uppercase;
+}
+.hero .markmark{
+  display:inline-block;width:12px;height:12px;background:var(--red);
+  margin-bottom:26px;
+}
+.hero .hero-cta{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap;justify-content:center;}
+
+/* ---------- Dark feature / variety reveal ---------- */
+.dark-feature{
+  background:var(--ink);color:var(--cream);
+  /* full-bleed */
+  width:100vw;position:relative;left:50%;right:50%;
+  margin-left:-50vw;margin-right:-50vw;
+  padding:74px 0 0;
+  overflow:hidden;
+}
+.dark-feature .inner{max-width:var(--page-max);margin:0 auto;padding:0 28px;}
+.dark-feature .eyebrow{
+  font-family:var(--font-mono);font-size:13px;letter-spacing:0.04em;
+  text-transform:uppercase;color:var(--red);margin-bottom:14px;
+}
+.dark-feature h2{
+  font-weight:800;
+  font-size:clamp(56px,14vw,170px);
+  line-height:0.9;letter-spacing:var(--tk-display);
+  text-transform:uppercase;
+}
+.dark-feature .lead{
+  margin-top:22px;max-width:46ch;
+  font-size:16px;font-weight:500;line-height:1.7;letter-spacing:var(--tk-sub);
+  text-transform:uppercase;color:#cfcac1;
+}
+.reveal-pouch{
+  margin:30px auto -2px;max-width:420px;
+}
+.reveal-pouch img{margin:0 auto;}
+
+/* ---------- Section scaffolding ---------- */
 .section{padding:var(--section-gap) 0;}
-.sec-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:40px;}
-.sec-head h2{font-weight:300;font-size:40px;line-height:1.1;letter-spacing:-1.2px;}
-.sec-head .shoplink{font-size:14px;color:var(--color-forest-canopy);text-decoration:none;}
-.sec-head .shoplink:hover{text-decoration:underline;}
-
-/* ---------- Dark product grid ---------- */
-.dark{background:var(--color-forest-canopy);color:var(--color-warm-parchment);border-radius:32px;padding:56px 48px;}
-.dark .sec-head h2{color:var(--color-warm-parchment);}
-.dark .sec-head .shoplink{color:var(--color-lime-sprout);}
-.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;}
-.tile{
-  border:1px solid rgba(252,252,247,.22);border-radius:16px;padding:16px;
-  display:flex;flex-direction:column;gap:12px;
+.sec-head{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:20px;margin-bottom:40px;flex-wrap:wrap;
 }
-.tile .top{display:flex;align-items:center;justify-content:space-between;}
+.sec-head h2{
+  font-weight:800;font-size:clamp(32px,5.5vw,58px);
+  line-height:1.0;letter-spacing:var(--tk-h-lg);text-transform:uppercase;
+}
+.sec-head .shoplink{
+  font-size:14px;font-weight:600;letter-spacing:var(--tk-sub);
+  text-transform:uppercase;border-bottom:1.5px solid var(--ink);padding-bottom:2px;
+}
+.sec-head .shoplink:hover{color:var(--red);border-color:var(--red);}
+
+/* ---------- Product grid ---------- */
+.grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap);
+}
+.tile{display:flex;flex-direction:column;}
+.tile .meta{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:10px;
+}
 .badge{
-  display:inline-block;border-radius:9999px;font-size:12px;font-weight:500;letter-spacing:-0.36px;
-  padding:5px 10px;background:var(--color-lime-sprout);color:var(--color-forest-canopy);
+  font-size:11px;font-weight:700;letter-spacing:var(--tk-body-sm);
+  text-transform:uppercase;
+  border:1.5px solid var(--ink);padding:3px 8px;
 }
-.badge.stone{background:var(--color-pale-stone);}
+.badge.hit{background:var(--red);border-color:var(--red);color:var(--ink);}
 .code{
-  font-family:var(--font-mono);font-size:10px;letter-spacing:.15px;
-  border:1px solid rgba(252,252,247,.6);color:var(--color-warm-parchment);
-  border-radius:9999px;padding:4px 8px;
+  font-family:var(--font-mono);font-size:12px;letter-spacing:0.02em;
+  color:var(--ink);opacity:.7;
 }
-.tile h3{font-weight:400;font-size:18px;letter-spacing:-0.36px;line-height:1.15;color:var(--color-warm-parchment);min-height:42px;}
-.tile .price{font-size:12px;color:var(--color-soft-sage);}
-.tile .btn-white{justify-content:center;width:100%;}
-
-/* ---------- Pouch (CSS recreation of product) ---------- */
-.pouch{
-  position:relative;width:100%;aspect-ratio:3/4;border-radius:14px 14px 18px 18px;
-  background:var(--pouch);padding:14px 12px;display:flex;flex-direction:column;
-  color:#111;overflow:hidden;
-}
-.pouch.lg{border-radius:18px;}
-.pouch::before{ /* top zip seal */
-  content:"";position:absolute;top:6px;left:8px;right:8px;height:7px;
-  background:repeating-linear-gradient(90deg, rgba(0,0,0,.18) 0 2px, transparent 2px 5px);
-  border-radius:9999px;opacity:.5;
-}
-.pouch .logo{margin-top:10px;font-weight:800;line-height:.82;letter-spacing:-1.5px;}
-.pouch .logo .off{font-size:clamp(26px,7vw,34px);font-weight:900;display:flex;align-items:flex-start;}
-.pouch .logo .off sup{font-size:.32em;margin-top:.3em;}
-.pouch .logo .syanka{font-size:clamp(15px,3.6vw,18px);font-weight:800;letter-spacing:-0.8px;}
-.pouch .tag-add{font-size:8px;font-style:italic;opacity:.7;margin-top:2px;}
-.pouch .marks{position:absolute;left:10px;top:46%;display:flex;flex-direction:column;gap:8px;}
-.hexmark{
-  background:#fff;border-radius:6px;font-size:7px;font-weight:700;text-align:center;
-  padding:5px 4px;width:42px;line-height:1.05;color:#1a1a1a;
-  clip-path:polygon(12% 0,88% 0,100% 50%,88% 100%,12% 100%,0 50%);
-}
-.starburst{
-  position:absolute;right:8px;top:52%;width:54px;height:54px;
-  background:var(--color-lime-sprout);
-  display:flex;align-items:center;justify-content:center;text-align:center;
-  font-size:9px;font-weight:800;color:#1a1a1a;line-height:1;
-  clip-path:polygon(50% 0%,61% 18%,82% 12%,77% 33%,98% 38%,82% 52%,98% 67%,76% 70%,82% 91%,61% 82%,50% 100%,39% 82%,18% 91%,24% 70%,2% 67%,18% 52%,2% 38%,23% 33%,18% 12%,39% 18%);
-}
-.pouch .cup{
-  margin-top:auto;height:42%;border-radius:8px 8px 4px 4px;
-  background:linear-gradient(180deg, rgba(255,255,255,.5), rgba(255,255,255,.15));
-  position:relative;
-}
-.flavor-label{
-  position:absolute;bottom:14px;left:50%;transform:translateX(-50%);
-  background:#fff;border-radius:5px;padding:5px 8px;font-size:8px;font-weight:700;
-  text-align:center;width:78%;line-height:1.1;color:#1a1a1a;
-  clip-path:polygon(8% 0,92% 0,100% 50%,92% 100%,8% 100%,0 50%);
-}
-.pouch.hero-pouch{max-width:380px;margin:0 auto;}
-
-/* ---------- Real product photo frame ---------- */
-.product-img{
-  position:relative;width:100%;aspect-ratio:3/4;border-radius:14px;overflow:hidden;
-  background:var(--pouch); /* fallback color shown if photo missing */
+.photo{
+  background:var(--white);
+  border:1.5px solid var(--ink);
+  aspect-ratio:3/4;
   display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
 }
-.product-img img{width:100%;height:100%;object-fit:cover;display:block;}
-.product-img.hero-pouch{max-width:380px;aspect-ratio:3/4;border-radius:24px;}
+.photo img{
+  width:100%;height:100%;object-fit:contain;padding:14px;
+  transition:transform .25s ease;
+}
+.tile:hover .photo img{transform:scale(1.04);}
+.photo .ph-fallback{
+  font-family:var(--font-mono);font-size:12px;letter-spacing:0.04em;
+  text-transform:uppercase;color:var(--ink);opacity:.45;
+}
+.tile h3{
+  margin-top:16px;
+  font-weight:700;font-size:20px;line-height:1.15;
+  letter-spacing:var(--tk-h-sm);text-transform:uppercase;
+  min-height:2.3em;
+}
+.tile .price{
+  margin-top:8px;margin-bottom:16px;
+  font-family:var(--font-mono);font-size:13px;letter-spacing:0.02em;
+}
+.tile .btn{margin-top:auto;width:100%;}
 
 /* ---------- Benefits ---------- */
-.benefits{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
-.bcard{background:var(--color-pale-stone);border-radius:16px;padding:24px;}
-.bcard .num{font-family:var(--font-mono);font-size:12px;color:var(--color-forest-canopy);opacity:.6;margin-bottom:24px;}
-.bcard h4{font-weight:400;font-size:20px;letter-spacing:-0.3px;margin-bottom:8px;}
-.bcard p{font-size:14px;letter-spacing:-0.42px;opacity:.8;}
+.benefits{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap);}
+.bcard{border-top:1.5px solid var(--ink);padding-top:18px;}
+.bcard .num{
+  font-family:var(--font-mono);font-size:13px;color:var(--red);
+  letter-spacing:0.04em;margin-bottom:12px;
+}
+.bcard h4{
+  font-weight:700;font-size:22px;letter-spacing:var(--tk-h-sm);
+  text-transform:uppercase;line-height:1.05;margin-bottom:10px;
+}
+.bcard p{font-size:15px;line-height:1.6;letter-spacing:var(--tk-body-sm);}
+
+/* ---------- How / steps ---------- */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap);}
+.step{border:1.5px solid var(--ink);padding:var(--card-pad);}
+.step .n{
+  font-family:var(--font-mono);font-size:13px;color:var(--red);
+  letter-spacing:0.06em;text-transform:uppercase;margin-bottom:18px;
+}
+.step h4{
+  font-weight:700;font-size:24px;letter-spacing:var(--tk-h-sm);
+  text-transform:uppercase;line-height:1.05;margin-bottom:12px;
+}
+.step p{font-size:15px;line-height:1.6;letter-spacing:var(--tk-body-sm);}
 
 /* ---------- Bundle ---------- */
-.bundle{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;
-  background:var(--color-pale-stone);border-radius:32px;padding:48px;}
-.bundle h2{font-weight:300;font-size:40px;line-height:1.1;letter-spacing:-1.2px;margin:16px 0 16px;}
-.bundle p{font-size:16px;max-width:380px;margin-bottom:24px;}
-.bundle-photos{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;align-items:end;}
-
-/* ---------- Steps ---------- */
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
-.step{border:1px solid var(--color-forest-canopy);border-radius:16px;padding:24px;}
-.step .n{font-family:var(--font-mono);font-size:12px;opacity:.6;margin-bottom:16px;}
-.step h4{font-weight:400;font-size:20px;letter-spacing:-0.3px;margin-bottom:8px;}
-.step p{font-size:14px;opacity:.8;}
-
-/* ---------- Signup / footer ---------- */
-.signup{text-align:center;padding:var(--section-gap) 0;}
-.signup h2{font-weight:300;font-size:40px;letter-spacing:-1.2px;margin-bottom:24px;}
-.form{display:flex;gap:8px;justify-content:center;max-width:460px;margin:0 auto;}
-.form input{
-  flex:1;border:1px solid var(--color-forest-canopy);border-radius:8px;
-  background:var(--color-warm-parchment);padding:12px 18px;font-family:var(--font-sans);
-  font-size:16px;color:var(--color-forest-canopy);
+.bundle{
+  background:var(--ink);color:var(--cream);
+  padding:clamp(32px,5vw,55px);
+  display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;
 }
-.form input::placeholder{color:var(--color-soft-sage);}
-footer{border-top:1px solid var(--color-pale-stone);padding:40px 0;margin-top:32px;
-  display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--color-forest-canopy);}
-footer .fl{display:flex;gap:24px;}
-footer a{color:var(--color-forest-canopy);text-decoration:none;}
+.bundle .copy h2{
+  font-weight:800;font-size:clamp(34px,4.5vw,56px);line-height:0.98;
+  letter-spacing:var(--tk-h-lg);text-transform:uppercase;margin:16px 0 18px;
+}
+.bundle .copy p{
+  font-size:16px;line-height:1.7;letter-spacing:var(--tk-body);
+  color:#cfcac1;margin-bottom:26px;max-width:42ch;
+}
+.bundle .badge{border-color:var(--red);background:var(--red);color:var(--ink);}
+.bundle-photos{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:10px;
+}
+.bundle-photos .photo{aspect-ratio:3/4;border-color:#3a3636;}
 
-@media(max-width:900px){
-  .wrap{padding:0 24px;}
+/* ---------- Signup ---------- */
+.signup{text-align:center;padding:var(--section-gap) 0;}
+.signup h2{
+  font-weight:800;font-size:clamp(36px,6vw,72px);line-height:0.98;
+  letter-spacing:var(--tk-h-lg);text-transform:uppercase;
+}
+.signup .sub{
+  margin:18px auto 28px;max-width:46ch;
+  font-size:16px;font-weight:500;letter-spacing:var(--tk-sub);text-transform:uppercase;
+}
+.form{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.form input{
+  font-family:var(--font-display);font-size:15px;letter-spacing:var(--tk-body-sm);
+  text-transform:uppercase;
+  padding:16px 18px;min-height:48px;min-width:280px;
+  border:1.5px solid var(--ink);border-radius:0;background:var(--white);color:var(--ink);
+}
+.form input::placeholder{color:var(--ink);opacity:.5;}
+
+/* ---------- Footer band (the only full red surface) ---------- */
+.footer{
+  background:var(--red);color:var(--ink);
+  width:100vw;position:relative;left:50%;right:50%;
+  margin-left:-50vw;margin-right:-50vw;
+  padding:48px 0;
+}
+.footer .inner{
+  max-width:var(--page-max);margin:0 auto;padding:0 28px;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:24px;flex-wrap:wrap;
+}
+.footer .brand{flex:none;text-align:left;color:var(--ink);}
+.footer .brand .dot{background:var(--ink);}
+.footer .fl{display:flex;gap:24px;flex-wrap:wrap;}
+.footer .fl a{
+  font-size:14px;font-weight:600;letter-spacing:var(--tk-sub);text-transform:uppercase;
+}
+.footer .fl a:hover{text-decoration:underline;}
+.footer .copy{
+  font-family:var(--font-mono);font-size:13px;letter-spacing:0.02em;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width:980px){
+  .grid{grid-template-columns:repeat(3,1fr);}
+}
+@media (max-width:760px){
   .nav-links{display:none;}
-  .hero{grid-template-columns:1fr;}
-  .hero h1{font-size:36px;}
+  .brand{text-align:left;flex:1;}
   .grid{grid-template-columns:repeat(2,1fr);}
-  .benefits,.steps{grid-template-columns:1fr 1fr;}
+  .benefits{grid-template-columns:repeat(2,1fr);}
+  .steps{grid-template-columns:1fr;}
   .bundle{grid-template-columns:1fr;}
   .bundle-photos{grid-template-columns:repeat(5,1fr);}
+}
+@media (max-width:440px){
+  .grid{grid-template-columns:1fr 1fr;}
+  .bundle-photos{grid-template-columns:repeat(3,1fr);}
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important;transition:none !important;scroll-behavior:auto !important;}
 }
 </style>
 </head>
 <body>
 
-<div class="announce">Бесплатная доставка от 2 000 ₽ · Набор из 10 вкусов со скидкой 25%</div>
+<!-- ANNOUNCEMENT TICKER -->
+<div class="announce" aria-label="Промо">
+  <div class="ticker">
+    <span>Бесплатная доставка от 2 000 ₽ <b class="dot">●</b></span>
+    <span>Набор из 10 вкусов · −25% <b class="dot">●</b></span>
+    <span>25 Г белка · без сахара · без варки <b class="dot">●</b></span>
+    <span>Бесплатная доставка от 2 000 ₽ <b class="dot">●</b></span>
+    <span>Набор из 10 вкусов · −25% <b class="dot">●</b></span>
+    <span>25 Г белка · без сахара · без варки <b class="dot">●</b></span>
+  </div>
+</div>
 
-<div class="nav-outer">
-  <nav class="nav">
-    <div class="brand">OFF<span class="syanka" style="font-size:20px;font-weight:300;margin-left:4px;letter-spacing:-0.6px;">сянка</span><span class="dot"></span></div>
+<!-- NAV -->
+<div class="wrap">
+  <nav class="nav" aria-label="Основная навигация">
     <div class="nav-links">
       <a href="#flavors">Вкусы</a>
       <a href="#how">Как готовить</a>
       <a href="#why">Состав</a>
     </div>
+    <a href="#" class="brand" aria-label="OFF Сянка — на главную">OFF <span class="reg">Сянка</span><span class="dot" aria-hidden="true"></span></a>
     <div class="nav-right">
       <a href="#" class="signin">Войти</a>
       <a href="#flavors" class="btn btn-fill">Купить</a>
@@ -256,147 +395,121 @@ footer a{color:var(--color-forest-canopy);text-decoration:none;}
   </nav>
 </div>
 
-<!-- HERO -->
+<!-- HERO — type is the hero -->
 <div class="wrap">
-  <section class="hero">
-    <div>
-      <h1>Овсянка, которую<br>не нужно варить</h1>
-      <p>Просто добавь молоко с вечера — и утром тебя ждёт густой протеиновый завтрак. 25 г белка, без сахара, без варки.</p>
-      <div class="hero-cta">
-        <a href="#flavors" class="btn btn-fill btn-lg">Выбрать вкус</a>
-        <a href="#how" class="ghost"><u>Как это работает</u> →</a>
-      </div>
+  <header class="hero">
+    <h1>Овсянка,<br>которую не нужно<br><em>варить</em></h1>
+    <span class="markmark" aria-hidden="true"></span>
+    <p class="intro">25 г белка. Без сахара. Без варки. Просто добавь молоко с вечера — и утром тебя ждёт густой протеиновый завтрак.</p>
+    <div class="hero-cta">
+      <a href="#flavors" class="btn btn-fill btn-lg">Выбрать вкус</a>
+      <a href="#how" class="btn btn-outline btn-lg">Как это работает</a>
     </div>
-    <div class="hero-photo">
-      <div class="powder-ring"></div>
-      <div class="product-img hero-pouch" style="--pouch:var(--c-caramel)">
-        <img src="images/caramel.png" alt="OFF Сянка — Арахис и солёная карамель" onerror="this.style.display='none'">
-      </div>
-    </div>
-  </section>
+  </header>
 </div>
 
-<!-- DARK PRODUCT GRID -->
+<!-- DARK VARIETY REVEAL -->
+<section class="dark-feature on-dark" aria-label="Десять вкусов">
+  <div class="inner">
+    <p class="eyebrow">10 SKU · OS-01 → OS-10</p>
+    <h2>Десять<br>вкусов</h2>
+    <p class="lead">Одна линейка. Десять характеров. От солёной карамели до клубники со сливками — выбери свой и собери набор.</p>
+  </div>
+  <div class="reveal-pouch">
+    <img src="images/caramel.png" alt="OFF Сянка — Арахис и солёная карамель" loading="lazy"
+         onerror="this.onerror=null;this.style.display='none';">
+  </div>
+</section>
+
+<!-- PRODUCT GRID -->
 <div class="wrap" id="flavors">
   <section class="section">
-    <div class="dark">
-      <div class="sec-head">
-        <h2>Десять вкусов</h2>
-        <a href="#" class="shoplink">Смотреть все →</a>
-      </div>
-      <div class="grid">
+    <div class="sec-head">
+      <h2>Все вкусы</h2>
+      <a href="#bundle" class="shoplink">Взять набор →</a>
+    </div>
+    <div class="grid">
 
-        <!-- 1 caramel -->
-        <div class="tile">
-          <div class="top"><span class="badge">Хит</span><span class="code">OS-01®</span></div>
-          <div class="product-img" style="--pouch:var(--c-caramel)">
-            <img src="images/caramel.png" alt="OFF Сянка — Арахис и солёная карамель" onerror="this.style.display='none'">
-          </div>
-          <h3>Арахис и солёная карамель</h3>
-          <div class="price">390 ₽ · 25 г белка</div>
-          <a href="#" class="btn btn-white">В корзину</a>
-        </div>
+      <article class="tile">
+        <div class="meta"><span class="badge hit">Хит</span><span class="code">OS-01®</span></div>
+        <div class="photo"><img src="images/caramel.png" alt="OFF Сянка — Арахис и солёная карамель" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-01'}))"></div>
+        <h3>Арахис и солёная карамель</h3>
+        <div class="price">390 ₽ · 25 г белка</div>
+        <a href="#" class="btn btn-outline">В корзину</a>
+      </article>
 
-        <!-- 2 banana -->
-        <div class="tile">
-          <div class="top"><span class="badge">Хит</span><span class="code">OS-02®</span></div>
-          <div class="product-img" style="--pouch:var(--c-banana)">
-            <img src="images/banana.png" alt="OFF Сянка — Банан с арахисовой пастой и шоколадом" onerror="this.style.display='none'">
-          </div>
-          <h3>Банан с арахисовой пастой и шоколадом</h3>
-          <div class="price">390 ₽ · 25 г белка</div>
-          <a href="#" class="btn btn-white">В корзину</a>
-        </div>
+      <article class="tile">
+        <div class="meta"><span class="badge hit">Хит</span><span class="code">OS-02®</span></div>
+        <div class="photo"><img src="images/banana.png" alt="OFF Сянка — Банан с арахисовой пастой и шоколадом" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-02'}))"></div>
+        <h3>Банан, паста и шоколад</h3>
+        <div class="price">390 ₽ · 25 г белка</div>
+        <a href="#" class="btn btn-outline">В корзину</a>
+      </article>
 
-        <!-- 3 vanilla -->
-        <div class="tile">
-          <div class="top"><span class="badge stone">Новинка</span><span class="code">OS-03®</span></div>
-          <div class="product-img" style="--pouch:var(--c-vanilla)">
-            <img src="images/vanilla.png" alt="OFF Сянка — Ванильное мороженое" onerror="this.style.display='none'">
-          </div>
-          <h3>Ванильное мороженое</h3>
-          <div class="price">390 ₽ · 25 г белка</div>
-          <a href="#" class="btn btn-white">В корзину</a>
-        </div>
+      <article class="tile">
+        <div class="meta"><span class="badge">Новинка</span><span class="code">OS-03®</span></div>
+        <div class="photo"><img src="images/vanilla.png" alt="OFF Сянка — Ванильное мороженое" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-03'}))"></div>
+        <h3>Ванильное мороженое</h3>
+        <div class="price">390 ₽ · 25 г белка</div>
+        <a href="#" class="btn btn-outline">В корзину</a>
+      </article>
 
-        <!-- 4 cherry -->
-        <div class="tile">
-          <div class="top"><span class="badge stone">Новинка</span><span class="code">OS-04®</span></div>
-          <div class="product-img" style="--pouch:var(--c-cherry)">
-            <img src="images/cherry.png" alt="OFF Сянка — Вишнёвый пирог" onerror="this.style.display='none'">
-          </div>
-          <h3>Вишнёвый пирог</h3>
-          <div class="price">390 ₽ · 25 г белка</div>
-          <a href="#" class="btn btn-white">В корзину</a>
-        </div>
+      <article class="tile">
+        <div class="meta"><span class="badge">Новинка</span><span class="code">OS-04®</span></div>
+        <div class="photo"><img src="images/cherry.png" alt="OFF Сянка — Вишнёвый пирог" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-04'}))"></div>
+        <h3>Вишнёвый пирог</h3>
+        <div class="price">390 ₽ · 25 г белка</div>
+        <a href="#" class="btn btn-outline">В корзину</a>
+      </article>
 
-        <!-- 5 blueberry -->
-        <div class="tile">
-          <div class="top"><span class="badge stone">Новинка</span><span class="code">OS-05®</span></div>
-          <div class="product-img" style="--pouch:var(--c-blueberry)">
-            <img src="images/blueberry.png" alt="OFF Сянка — Глазированный пончик с черникой" onerror="this.style.display='none'">
-          </div>
-          <h3>Глазированный пончик с черникой</h3>
-          <div class="price">390 ₽ · 24 г белка</div>
-          <a href="#" class="btn btn-white">В корзину</a>
-        </div>
+      <article class="tile">
+        <div class="meta"><span class="badge">Новинка</span><span class="code">OS-05®</span></div>
+        <div class="photo"><img src="images/blueberry.png" alt="OFF Сянка — Глазированный пончик с черникой" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-05'}))"></div>
+        <h3>Пончик с черникой</h3>
+        <div class="price">390 ₽ · 24 г белка</div>
+        <a href="#" class="btn btn-outline">В корзину</a>
+      </article>
 
-        <!-- 6 apple -->
-        <div class="tile">
-          <div class="top"><span class="badge stone">Новинка</span><span class="code">OS-06®</span></div>
-          <div class="product-img" style="--pouch:var(--c-apple)">
-            <img src="images/apple.png" alt="OFF Сянка — Яблоко с корицей" onerror="this.style.display='none'">
-          </div>
-          <h3>Яблоко с корицей</h3>
-          <div class="price">390 ₽ · 24 г белка</div>
-          <a href="#" class="btn btn-white">В корзину</a>
-        </div>
+      <article class="tile">
+        <div class="meta"><span class="badge">Новинка</span><span class="code">OS-06®</span></div>
+        <div class="photo"><img src="images/apple.png" alt="OFF Сянка — Яблоко с корицей" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-06'}))"></div>
+        <h3>Яблоко с корицей</h3>
+        <div class="price">390 ₽ · 24 г белка</div>
+        <a href="#" class="btn btn-outline">В корзину</a>
+      </article>
 
-        <!-- 7 cinnamon -->
-        <div class="tile">
-          <div class="top"><span class="badge stone">Новинка</span><span class="code">OS-07®</span></div>
-          <div class="product-img" style="--pouch:var(--c-cinnamon)">
-            <img src="images/cinnamon.png" alt="OFF Сянка — Рулет с корицей и глазурью" onerror="this.style.display='none'">
-          </div>
-          <h3>Рулет с корицей и глазурью</h3>
-          <div class="price">390 ₽ · 25 г белка</div>
-          <a href="#" class="btn btn-white">В корзину</a>
-        </div>
+      <article class="tile">
+        <div class="meta"><span class="badge">Новинка</span><span class="code">OS-07®</span></div>
+        <div class="photo"><img src="images/cinnamon.png" alt="OFF Сянка — Рулет с корицей и глазурью" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-07'}))"></div>
+        <h3>Рулет с корицей</h3>
+        <div class="price">390 ₽ · 25 г белка</div>
+        <a href="#" class="btn btn-outline">В корзину</a>
+      </article>
 
-        <!-- 8 cookie -->
-        <div class="tile">
-          <div class="top"><span class="badge stone">Новинка</span><span class="code">OS-08®</span></div>
-          <div class="product-img" style="--pouch:var(--c-cookie)">
-            <img src="images/cookie.png" alt="OFF Сянка — Печенье со сливками" onerror="this.style.display='none'">
-          </div>
-          <h3>Печенье со сливками</h3>
-          <div class="price">390 ₽ · 25 г белка</div>
-          <a href="#" class="btn btn-white">В корзину</a>
-        </div>
+      <article class="tile">
+        <div class="meta"><span class="badge">Новинка</span><span class="code">OS-08®</span></div>
+        <div class="photo"><img src="images/cookie.png" alt="OFF Сянка — Печенье со сливками" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-08'}))"></div>
+        <h3>Печенье со сливками</h3>
+        <div class="price">390 ₽ · 25 г белка</div>
+        <a href="#" class="btn btn-outline">В корзину</a>
+      </article>
 
-        <!-- 9 fruit -->
-        <div class="tile">
-          <div class="top"><span class="badge stone">Новинка</span><span class="code">OS-09®</span></div>
-          <div class="product-img" style="--pouch:var(--c-fruit)">
-            <img src="images/fruit.png" alt="OFF Сянка — Фруктовые хлопья" onerror="this.style.display='none'">
-          </div>
-          <h3>Фруктовые хлопья</h3>
-          <div class="price">390 ₽ · 24 г белка</div>
-          <a href="#" class="btn btn-white">В корзину</a>
-        </div>
+      <article class="tile">
+        <div class="meta"><span class="badge">Новинка</span><span class="code">OS-09®</span></div>
+        <div class="photo"><img src="images/fruit.png" alt="OFF Сянка — Фруктовые хлопья" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-09'}))"></div>
+        <h3>Фруктовые хлопья</h3>
+        <div class="price">390 ₽ · 24 г белка</div>
+        <a href="#" class="btn btn-outline">В корзину</a>
+      </article>
 
-        <!-- 10 strawberry -->
-        <div class="tile">
-          <div class="top"><span class="badge stone">Новинка</span><span class="code">OS-10®</span></div>
-          <div class="product-img" style="--pouch:var(--c-strawberry)">
-            <img src="images/strawberry.png" alt="OFF Сянка — Клубника со сливками" onerror="this.style.display='none'">
-          </div>
-          <h3>Клубника со сливками</h3>
-          <div class="price">390 ₽ · 24 г белка</div>
-          <a href="#" class="btn btn-white">В корзину</a>
-        </div>
+      <article class="tile">
+        <div class="meta"><span class="badge">Новинка</span><span class="code">OS-10®</span></div>
+        <div class="photo"><img src="images/strawberry.png" alt="OFF Сянка — Клубника со сливками" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-10'}))"></div>
+        <h3>Клубника со сливками</h3>
+        <div class="price">390 ₽ · 24 г белка</div>
+        <a href="#" class="btn btn-outline">В корзину</a>
+      </article>
 
-      </div>
     </div>
   </section>
 </div>
@@ -409,7 +522,7 @@ footer a{color:var(--color-forest-canopy);text-decoration:none;}
       <div class="bcard"><div class="num">01</div><h4>25 г белка</h4><p>Полноценный завтрак, который держит сытость до обеда.</p></div>
       <div class="bcard"><div class="num">02</div><h4>Без сахара</h4><p>Сладость без добавленного сахара — чистый состав.</p></div>
       <div class="bcard"><div class="num">03</div><h4>Без варки</h4><p>Ничего не нужно готовить — залил молоком с вечера.</p></div>
-      <div class="bcard"><div class="num">04</div><h4>Просто добавь молоко</h4><p>Готово за 8 часов в холодильнике. Утром просто достань.</p></div>
+      <div class="bcard"><div class="num">04</div><h4>Добавь молоко</h4><p>Готово за 8 часов в холодильнике. Утром просто достань.</p></div>
     </div>
   </section>
 </div>
@@ -419,34 +532,34 @@ footer a{color:var(--color-forest-canopy);text-decoration:none;}
   <section class="section">
     <div class="sec-head"><h2>Три шага до завтрака</h2></div>
     <div class="steps">
-      <div class="step"><div class="n">ШАГ 01</div><h4>Добавь молоко</h4><p>Залей содержимое пакета молоком или растительным напитком прямо в банку.</p></div>
-      <div class="step"><div class="n">ШАГ 02</div><h4>Оставь на ночь</h4><p>Перемешай, закрой и убери в холодильник на 6–8 часов.</p></div>
-      <div class="step"><div class="n">ШАГ 03</div><h4>Наслаждайся</h4><p>Утром тебя ждёт густой кремовый завтрак с 25 г белка.</p></div>
+      <div class="step"><div class="n">Шаг 01</div><h4>Добавь молоко</h4><p>Залей содержимое пакета молоком или растительным напитком прямо в банку.</p></div>
+      <div class="step"><div class="n">Шаг 02</div><h4>Оставь на ночь</h4><p>Перемешай, закрой и убери в холодильник на 6–8 часов.</p></div>
+      <div class="step"><div class="n">Шаг 03</div><h4>Наслаждайся</h4><p>Утром тебя ждёт густой кремовый завтрак с 25 г белка.</p></div>
     </div>
   </section>
 </div>
 
 <!-- BUNDLE -->
-<div class="wrap">
+<div class="wrap" id="bundle">
   <section class="section">
     <div class="bundle">
-      <div>
+      <div class="copy">
         <span class="badge">Набор · −25%</span>
-        <h2>Все десять вкусов<br>в одном наборе</h2>
+        <h2>Все десять вкусов в одном наборе</h2>
         <p>Попробуй всю линейку OFF Сянка и найди свой любимый вкус. Десять пакетов со скидкой 25%.</p>
-        <a href="#" class="btn btn-fill btn-lg">Купить набор · 2 925 ₽</a>
+        <a href="#" class="btn btn-outline btn-lg">Купить набор · 2 925 ₽</a>
       </div>
       <div class="bundle-photos">
-        <div class="product-img" style="--pouch:var(--c-caramel)"><img src="images/caramel.png" alt="Карамель" onerror="this.style.display='none'"></div>
-        <div class="product-img" style="--pouch:var(--c-banana)"><img src="images/banana.png" alt="Банан" onerror="this.style.display='none'"></div>
-        <div class="product-img" style="--pouch:var(--c-vanilla)"><img src="images/vanilla.png" alt="Ваниль" onerror="this.style.display='none'"></div>
-        <div class="product-img" style="--pouch:var(--c-cherry)"><img src="images/cherry.png" alt="Вишня" onerror="this.style.display='none'"></div>
-        <div class="product-img" style="--pouch:var(--c-blueberry)"><img src="images/blueberry.png" alt="Черника" onerror="this.style.display='none'"></div>
-        <div class="product-img" style="--pouch:var(--c-apple)"><img src="images/apple.png" alt="Яблоко с корицей" onerror="this.style.display='none'"></div>
-        <div class="product-img" style="--pouch:var(--c-cinnamon)"><img src="images/cinnamon.png" alt="Рулет с корицей" onerror="this.style.display='none'"></div>
-        <div class="product-img" style="--pouch:var(--c-cookie)"><img src="images/cookie.png" alt="Печенье со сливками" onerror="this.style.display='none'"></div>
-        <div class="product-img" style="--pouch:var(--c-fruit)"><img src="images/fruit.png" alt="Фруктовые хлопья" onerror="this.style.display='none'"></div>
-        <div class="product-img" style="--pouch:var(--c-strawberry)"><img src="images/strawberry.png" alt="Клубника со сливками" onerror="this.style.display='none'"></div>
+        <div class="photo"><img src="images/caramel.png" alt="Арахис и солёная карамель" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'01'}))"></div>
+        <div class="photo"><img src="images/banana.png" alt="Банан, паста и шоколад" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'02'}))"></div>
+        <div class="photo"><img src="images/vanilla.png" alt="Ванильное мороженое" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'03'}))"></div>
+        <div class="photo"><img src="images/cherry.png" alt="Вишнёвый пирог" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'04'}))"></div>
+        <div class="photo"><img src="images/blueberry.png" alt="Пончик с черникой" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'05'}))"></div>
+        <div class="photo"><img src="images/apple.png" alt="Яблоко с корицей" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'06'}))"></div>
+        <div class="photo"><img src="images/cinnamon.png" alt="Рулет с корицей" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'07'}))"></div>
+        <div class="photo"><img src="images/cookie.png" alt="Печенье со сливками" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'08'}))"></div>
+        <div class="photo"><img src="images/fruit.png" alt="Фруктовые хлопья" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'09'}))"></div>
+        <div class="photo"><img src="images/strawberry.png" alt="Клубника со сливками" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'10'}))"></div>
       </div>
     </div>
   </section>
@@ -456,18 +569,28 @@ footer a{color:var(--color-forest-canopy);text-decoration:none;}
 <div class="wrap">
   <section class="signup">
     <h2>−10% на первый заказ</h2>
-    <p style="margin-bottom:24px;opacity:.8;">Подпишись и получи промокод на первую покупку.</p>
+    <p class="sub">Подпишись и получи промокод на первую покупку.</p>
     <form class="form" onsubmit="return false">
-      <input type="email" placeholder="Твоя почта" />
-      <button class="btn btn-fill btn-lg">Получить</button>
+      <label for="email" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Электронная почта</label>
+      <input id="email" type="email" inputmode="email" autocomplete="email" placeholder="Твоя почта" required />
+      <button class="btn btn-fill btn-lg" type="submit">Получить</button>
     </form>
-    <footer class="wrap" style="padding-left:0;padding-right:0;">
-      <div class="brand" style="font-size:16px;">OFF<span style="font-weight:300;margin-left:3px;">сянка</span><span class="dot" style="margin-bottom:3px;"></span></div>
-      <div class="fl"><a href="#flavors">Вкусы</a><a href="#how">Как готовить</a><a href="#why">Состав</a><a href="#">Контакты</a></div>
-      <div>© 2026 OFF Сянка</div>
-    </footer>
   </section>
 </div>
+
+<!-- FOOTER BAND -->
+<footer class="footer">
+  <div class="inner">
+    <div class="brand">OFF <span class="reg">Сянка</span><span class="dot" aria-hidden="true"></span></div>
+    <nav class="fl" aria-label="Подвал">
+      <a href="#flavors">Вкусы</a>
+      <a href="#how">Как готовить</a>
+      <a href="#why">Состав</a>
+      <a href="#">Контакты</a>
+    </nav>
+    <div class="copy">© 2026 OFF Сянка</div>
+  </div>
+</footer>
 
 </body>
 </html>

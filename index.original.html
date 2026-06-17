@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>OFF Сянка — ленивая овсянка с белком</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet" />
+<style>
+:root{
+  /* Seed design tokens */
+  --color-forest-canopy:#1c3a13;
+  --color-lime-sprout:#d3fa99;
+  --color-warm-parchment:#fcfcf7;
+  --color-pale-stone:#eeeee9;
+  --color-soft-sage:#c4c7c4;
+  --color-quiet-gray:#b3b3b3;
+
+  --font-sans:'Inter',ui-sans-serif,system-ui,-apple-system,sans-serif;
+  --font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+
+  --page-max:1200px;
+  --section-gap:64px;
+  --card-pad:24px;
+
+  /* Flavor / pouch colors (from product photography) */
+  --c-caramel:#f1bd95;
+  --c-banana:#f6df3f;
+  --c-vanilla:#d9cfe8;
+  --c-cherry:#f4b9cb;
+  --c-blueberry:#a9d6ea;
+  --c-apple:#98b185;
+  --c-cinnamon:#d8c49d;
+  --c-cookie:#c6966f;
+  --c-fruit:#90c2af;
+  --c-strawberry:#d65961;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:var(--font-sans);
+  background:var(--color-warm-parchment);
+  color:var(--color-forest-canopy);
+  font-weight:400;
+  letter-spacing:-0.4px;
+  -webkit-font-smoothing:antialiased;
+  line-height:1.4;
+}
+.wrap{max-width:var(--page-max);margin:0 auto;padding:0 48px;}
+
+/* ---------- Announcement bar ---------- */
+.announce{
+  background:var(--color-lime-sprout);
+  color:var(--color-forest-canopy);
+  text-align:center;
+  font-size:14px;font-weight:500;letter-spacing:-0.42px;
+  padding:6px 16px;
+}
+
+/* ---------- Floating pill nav ---------- */
+.nav-outer{position:sticky;top:0;z-index:50;padding:20px 48px;background:transparent;}
+.nav{
+  max-width:var(--page-max);margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--color-warm-parchment);
+  border:1px solid var(--color-forest-canopy);
+  border-radius:9999px;
+  padding:10px 12px 10px 24px;
+}
+.brand{display:flex;align-items:center;font-size:20px;font-weight:500;letter-spacing:-0.6px;gap:1px;}
+.brand .dot{width:8px;height:8px;border-radius:9999px;background:var(--color-lime-sprout);margin-left:3px;align-self:flex-end;margin-bottom:5px;}
+.nav-links{display:flex;gap:28px;}
+.nav-links a{color:var(--color-forest-canopy);text-decoration:none;font-size:14px;font-weight:400;letter-spacing:-0.42px;}
+.nav-links a:hover{text-decoration:underline;}
+.nav-right{display:flex;align-items:center;gap:16px;}
+.nav-right .signin{font-size:14px;color:var(--color-forest-canopy);text-decoration:none;}
+
+/* ---------- Buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  border-radius:9999px;border:none;cursor:pointer;
+  font-family:var(--font-sans);font-weight:500;font-size:14px;letter-spacing:-0.42px;
+  padding:9px 18px;text-decoration:none;
+}
+.btn-fill{background:var(--color-forest-canopy);color:var(--color-warm-parchment);}
+.btn-fill:hover{opacity:.9;}
+.btn-white{background:var(--color-warm-parchment);color:var(--color-forest-canopy);}
+.btn-lg{font-size:16px;padding:12px 24px;}
+.ghost{
+  display:inline-flex;align-items:center;gap:6px;
+  color:var(--color-forest-canopy);text-decoration:none;font-size:16px;font-weight:400;
+}
+.ghost u{text-underline-offset:3px;}
+
+/* ---------- Hero ---------- */
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;padding:48px 0 var(--section-gap);}
+.hero h1{font-weight:300;font-size:48px;line-height:1;letter-spacing:-1.44px;margin-bottom:24px;}
+.hero p{font-size:18px;line-height:1.4;letter-spacing:-0.36px;max-width:440px;margin-bottom:32px;}
+.hero-cta{display:flex;align-items:center;gap:24px;}
+.hero-photo{
+  position:relative;aspect-ratio:1/1;border-radius:32px;
+  background:radial-gradient(circle at 50% 45%, #fff 0%, var(--color-pale-stone) 70%);
+  display:flex;align-items:center;justify-content:center;overflow:hidden;
+}
+.powder-ring{position:absolute;width:78%;height:78%;border-radius:50%;border:2px dashed rgba(28,58,19,.12);}
+
+/* ---------- Section header ---------- */
+.section{padding:var(--section-gap) 0;}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:40px;}
+.sec-head h2{font-weight:300;font-size:40px;line-height:1.1;letter-spacing:-1.2px;}
+.sec-head .shoplink{font-size:14px;color:var(--color-forest-canopy);text-decoration:none;}
+.sec-head .shoplink:hover{text-decoration:underline;}
+
+/* ---------- Dark product grid ---------- */
+.dark{background:var(--color-forest-canopy);color:var(--color-warm-parchment);border-radius:32px;padding:56px 48px;}
+.dark .sec-head h2{color:var(--color-warm-parchment);}
+.dark .sec-head .shoplink{color:var(--color-lime-sprout);}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;}
+.tile{
+  border:1px solid rgba(252,252,247,.22);border-radius:16px;padding:16px;
+  display:flex;flex-direction:column;gap:12px;
+}
+.tile .top{display:flex;align-items:center;justify-content:space-between;}
+.badge{
+  display:inline-block;border-radius:9999px;font-size:12px;font-weight:500;letter-spacing:-0.36px;
+  padding:5px 10px;background:var(--color-lime-sprout);color:var(--color-forest-canopy);
+}
+.badge.stone{background:var(--color-pale-stone);}
+.code{
+  font-family:var(--font-mono);font-size:10px;letter-spacing:.15px;
+  border:1px solid rgba(252,252,247,.6);color:var(--color-warm-parchment);
+  border-radius:9999px;padding:4px 8px;
+}
+.tile h3{font-weight:400;font-size:18px;letter-spacing:-0.36px;line-height:1.15;color:var(--color-warm-parchment);min-height:42px;}
+.tile .price{font-size:12px;color:var(--color-soft-sage);}
+.tile .btn-white{justify-content:center;width:100%;}
+
+/* ---------- Pouch (CSS recreation of product) ---------- */
+.pouch{
+  position:relative;width:100%;aspect-ratio:3/4;border-radius:14px 14px 18px 18px;
+  background:var(--pouch);padding:14px 12px;display:flex;flex-direction:column;
+  color:#111;overflow:hidden;
+}
+.pouch.lg{border-radius:18px;}
+.pouch::before{ /* top zip seal */
+  content:"";position:absolute;top:6px;left:8px;right:8px;height:7px;
+  background:repeating-linear-gradient(90deg, rgba(0,0,0,.18) 0 2px, transparent 2px 5px);
+  border-radius:9999px;opacity:.5;
+}
+.pouch .logo{margin-top:10px;font-weight:800;line-height:.82;letter-spacing:-1.5px;}
+.pouch .logo .off{font-size:clamp(26px,7vw,34px);font-weight:900;display:flex;align-items:flex-start;}
+.pouch .logo .off sup{font-size:.32em;margin-top:.3em;}
+.pouch .logo .syanka{font-size:clamp(15px,3.6vw,18px);font-weight:800;letter-spacing:-0.8px;}
+.pouch .tag-add{font-size:8px;font-style:italic;opacity:.7;margin-top:2px;}
+.pouch .marks{position:absolute;left:10px;top:46%;display:flex;flex-direction:column;gap:8px;}
+.hexmark{
+  background:#fff;border-radius:6px;font-size:7px;font-weight:700;text-align:center;
+  padding:5px 4px;width:42px;line-height:1.05;color:#1a1a1a;
+  clip-path:polygon(12% 0,88% 0,100% 50%,88% 100%,12% 100%,0 50%);
+}
+.starburst{
+  position:absolute;right:8px;top:52%;width:54px;height:54px;
+  background:var(--color-lime-sprout);
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  font-size:9px;font-weight:800;color:#1a1a1a;line-height:1;
+  clip-path:polygon(50% 0%,61% 18%,82% 12%,77% 33%,98% 38%,82% 52%,98% 67%,76% 70%,82% 91%,61% 82%,50% 100%,39% 82%,18% 91%,24% 70%,2% 67%,18% 52%,2% 38%,23% 33%,18% 12%,39% 18%);
+}
+.pouch .cup{
+  margin-top:auto;height:42%;border-radius:8px 8px 4px 4px;
+  background:linear-gradient(180deg, rgba(255,255,255,.5), rgba(255,255,255,.15));
+  position:relative;
+}
+.flavor-label{
+  position:absolute;bottom:14px;left:50%;transform:translateX(-50%);
+  background:#fff;border-radius:5px;padding:5px 8px;font-size:8px;font-weight:700;
+  text-align:center;width:78%;line-height:1.1;color:#1a1a1a;
+  clip-path:polygon(8% 0,92% 0,100% 50%,92% 100%,8% 100%,0 50%);
+}
+.pouch.hero-pouch{max-width:380px;margin:0 auto;}
+
+/* ---------- Real product photo frame ---------- */
+.product-img{
+  position:relative;width:100%;aspect-ratio:3/4;border-radius:14px;overflow:hidden;
+  background:var(--pouch); /* fallback color shown if photo missing */
+  display:flex;align-items:center;justify-content:center;
+}
+.product-img img{width:100%;height:100%;object-fit:cover;display:block;}
+.product-img.hero-pouch{max-width:380px;aspect-ratio:3/4;border-radius:24px;}
+
+/* ---------- Benefits ---------- */
+.benefits{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.bcard{background:var(--color-pale-stone);border-radius:16px;padding:24px;}
+.bcard .num{font-family:var(--font-mono);font-size:12px;color:var(--color-forest-canopy);opacity:.6;margin-bottom:24px;}
+.bcard h4{font-weight:400;font-size:20px;letter-spacing:-0.3px;margin-bottom:8px;}
+.bcard p{font-size:14px;letter-spacing:-0.42px;opacity:.8;}
+
+/* ---------- Bundle ---------- */
+.bundle{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;
+  background:var(--color-pale-stone);border-radius:32px;padding:48px;}
+.bundle h2{font-weight:300;font-size:40px;line-height:1.1;letter-spacing:-1.2px;margin:16px 0 16px;}
+.bundle p{font-size:16px;max-width:380px;margin-bottom:24px;}
+.bundle-photos{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;align-items:end;}
+
+/* ---------- Steps ---------- */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.step{border:1px solid var(--color-forest-canopy);border-radius:16px;padding:24px;}
+.step .n{font-family:var(--font-mono);font-size:12px;opacity:.6;margin-bottom:16px;}
+.step h4{font-weight:400;font-size:20px;letter-spacing:-0.3px;margin-bottom:8px;}
+.step p{font-size:14px;opacity:.8;}
+
+/* ---------- Signup / footer ---------- */
+.signup{text-align:center;padding:var(--section-gap) 0;}
+.signup h2{font-weight:300;font-size:40px;letter-spacing:-1.2px;margin-bottom:24px;}
+.form{display:flex;gap:8px;justify-content:center;max-width:460px;margin:0 auto;}
+.form input{
+  flex:1;border:1px solid var(--color-forest-canopy);border-radius:8px;
+  background:var(--color-warm-parchment);padding:12px 18px;font-family:var(--font-sans);
+  font-size:16px;color:var(--color-forest-canopy);
+}
+.form input::placeholder{color:var(--color-soft-sage);}
+footer{border-top:1px solid var(--color-pale-stone);padding:40px 0;margin-top:32px;
+  display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--color-forest-canopy);}
+footer .fl{display:flex;gap:24px;}
+footer a{color:var(--color-forest-canopy);text-decoration:none;}
+
+@media(max-width:900px){
+  .wrap{padding:0 24px;}
+  .nav-links{display:none;}
+  .hero{grid-template-columns:1fr;}
+  .hero h1{font-size:36px;}
+  .grid{grid-template-columns:repeat(2,1fr);}
+  .benefits,.steps{grid-template-columns:1fr 1fr;}
+  .bundle{grid-template-columns:1fr;}
+  .bundle-photos{grid-template-columns:repeat(5,1fr);}
+}
+</style>
+</head>
+<body>
+
+<div class="announce">Бесплатная доставка от 2 000 ₽ · Набор из 10 вкусов со скидкой 25%</div>
+
+<div class="nav-outer">
+  <nav class="nav">
+    <div class="brand">OFF<span class="syanka" style="font-size:20px;font-weight:300;margin-left:4px;letter-spacing:-0.6px;">сянка</span><span class="dot"></span></div>
+    <div class="nav-links">
+      <a href="#flavors">Вкусы</a>
+      <a href="#how">Как готовить</a>
+      <a href="#why">Состав</a>
+    </div>
+    <div class="nav-right">
+      <a href="#" class="signin">Войти</a>
+      <a href="#flavors" class="btn btn-fill">Купить</a>
+    </div>
+  </nav>
+</div>
+
+<!-- HERO -->
+<div class="wrap">
+  <section class="hero">
+    <div>
+      <h1>Овсянка, которую<br>не нужно варить</h1>
+      <p>Просто добавь молоко с вечера — и утром тебя ждёт густой протеиновый завтрак. 25 г белка, без сахара, без варки.</p>
+      <div class="hero-cta">
+        <a href="#flavors" class="btn btn-fill btn-lg">Выбрать вкус</a>
+        <a href="#how" class="ghost"><u>Как это работает</u> →</a>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <div class="powder-ring"></div>
+      <div class="product-img hero-pouch" style="--pouch:var(--c-caramel)">
+        <img src="images/caramel.png" alt="OFF Сянка — Арахис и солёная карамель" onerror="this.style.display='none'">
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- DARK PRODUCT GRID -->
+<div class="wrap" id="flavors">
+  <section class="section">
+    <div class="dark">
+      <div class="sec-head">
+        <h2>Десять вкусов</h2>
+        <a href="#" class="shoplink">Смотреть все →</a>
+      </div>
+      <div class="grid">
+
+        <!-- 1 caramel -->
+        <div class="tile">
+          <div class="top"><span class="badge">Хит</span><span class="code">OS-01®</span></div>
+          <div class="product-img" style="--pouch:var(--c-caramel)">
+            <img src="images/caramel.png" alt="OFF Сянка — Арахис и солёная карамель" onerror="this.style.display='none'">
+          </div>
+          <h3>Арахис и солёная карамель</h3>
+          <div class="price">390 ₽ · 25 г белка</div>
+          <a href="#" class="btn btn-white">В корзину</a>
+        </div>
+
+        <!-- 2 banana -->
+        <div class="tile">
+          <div class="top"><span class="badge">Хит</span><span class="code">OS-02®</span></div>
+          <div class="product-img" style="--pouch:var(--c-banana)">
+            <img src="images/banana.png" alt="OFF Сянка — Банан с арахисовой пастой и шоколадом" onerror="this.style.display='none'">
+          </div>
+          <h3>Банан с арахисовой пастой и шоколадом</h3>
+          <div class="price">390 ₽ · 25 г белка</div>
+          <a href="#" class="btn btn-white">В корзину</a>
+        </div>
+
+        <!-- 3 vanilla -->
+        <div class="tile">
+          <div class="top"><span class="badge stone">Новинка</span><span class="code">OS-03®</span></div>
+          <div class="product-img" style="--pouch:var(--c-vanilla)">
+            <img src="images/vanilla.png" alt="OFF Сянка — Ванильное мороженое" onerror="this.style.display='none'">
+          </div>
+          <h3>Ванильное мороженое</h3>
+          <div class="price">390 ₽ · 25 г белка</div>
+          <a href="#" class="btn btn-white">В корзину</a>
+        </div>
+
+        <!-- 4 cherry -->
+        <div class="tile">
+          <div class="top"><span class="badge stone">Новинка</span><span class="code">OS-04®</span></div>
+          <div class="product-img" style="--pouch:var(--c-cherry)">
+            <img src="images/cherry.png" alt="OFF Сянка — Вишнёвый пирог" onerror="this.style.display='none'">
+          </div>
+          <h3>Вишнёвый пирог</h3>
+          <div class="price">390 ₽ · 25 г белка</div>
+          <a href="#" class="btn btn-white">В корзину</a>
+        </div>
+
+        <!-- 5 blueberry -->
+        <div class="tile">
+          <div class="top"><span class="badge stone">Новинка</span><span class="code">OS-05®</span></div>
+          <div class="product-img" style="--pouch:var(--c-blueberry)">
+            <img src="images/blueberry.png" alt="OFF Сянка — Глазированный пончик с черникой" onerror="this.style.display='none'">
+          </div>
+          <h3>Глазированный пончик с черникой</h3>
+          <div class="price">390 ₽ · 24 г белка</div>
+          <a href="#" class="btn btn-white">В корзину</a>
+        </div>
+
+        <!-- 6 apple -->
+        <div class="tile">
+          <div class="top"><span class="badge stone">Новинка</span><span class="code">OS-06®</span></div>
+          <div class="product-img" style="--pouch:var(--c-apple)">
+            <img src="images/apple.png" alt="OFF Сянка — Яблоко с корицей" onerror="this.style.display='none'">
+          </div>
+          <h3>Яблоко с корицей</h3>
+          <div class="price">390 ₽ · 24 г белка</div>
+          <a href="#" class="btn btn-white">В корзину</a>
+        </div>
+
+        <!-- 7 cinnamon -->
+        <div class="tile">
+          <div class="top"><span class="badge stone">Новинка</span><span class="code">OS-07®</span></div>
+          <div class="product-img" style="--pouch:var(--c-cinnamon)">
+            <img src="images/cinnamon.png" alt="OFF Сянка — Рулет с корицей и глазурью" onerror="this.style.display='none'">
+          </div>
+          <h3>Рулет с корицей и глазурью</h3>
+          <div class="price">390 ₽ · 25 г белка</div>
+          <a href="#" class="btn btn-white">В корзину</a>
+        </div>
+
+        <!-- 8 cookie -->
+        <div class="tile">
+          <div class="top"><span class="badge stone">Новинка</span><span class="code">OS-08®</span></div>
+          <div class="product-img" style="--pouch:var(--c-cookie)">
+            <img src="images/cookie.png" alt="OFF Сянка — Печенье со сливками" onerror="this.style.display='none'">
+          </div>
+          <h3>Печенье со сливками</h3>
+          <div class="price">390 ₽ · 25 г белка</div>
+          <a href="#" class="btn btn-white">В корзину</a>
+        </div>
+
+        <!-- 9 fruit -->
+        <div class="tile">
+          <div class="top"><span class="badge stone">Новинка</span><span class="code">OS-09®</span></div>
+          <div class="product-img" style="--pouch:var(--c-fruit)">
+            <img src="images/fruit.png" alt="OFF Сянка — Фруктовые хлопья" onerror="this.style.display='none'">
+          </div>
+          <h3>Фруктовые хлопья</h3>
+          <div class="price">390 ₽ · 24 г белка</div>
+          <a href="#" class="btn btn-white">В корзину</a>
+        </div>
+
+        <!-- 10 strawberry -->
+        <div class="tile">
+          <div class="top"><span class="badge stone">Новинка</span><span class="code">OS-10®</span></div>
+          <div class="product-img" style="--pouch:var(--c-strawberry)">
+            <img src="images/strawberry.png" alt="OFF Сянка — Клубника со сливками" onerror="this.style.display='none'">
+          </div>
+          <h3>Клубника со сливками</h3>
+          <div class="price">390 ₽ · 24 г белка</div>
+          <a href="#" class="btn btn-white">В корзину</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- WHY / BENEFITS -->
+<div class="wrap" id="why">
+  <section class="section">
+    <div class="sec-head"><h2>Почему OFF Сянка</h2></div>
+    <div class="benefits">
+      <div class="bcard"><div class="num">01</div><h4>25 г белка</h4><p>Полноценный завтрак, который держит сытость до обеда.</p></div>
+      <div class="bcard"><div class="num">02</div><h4>Без сахара</h4><p>Сладость без добавленного сахара — чистый состав.</p></div>
+      <div class="bcard"><div class="num">03</div><h4>Без варки</h4><p>Ничего не нужно готовить — залил молоком с вечера.</p></div>
+      <div class="bcard"><div class="num">04</div><h4>Просто добавь молоко</h4><p>Готово за 8 часов в холодильнике. Утром просто достань.</p></div>
+    </div>
+  </section>
+</div>
+
+<!-- HOW -->
+<div class="wrap" id="how">
+  <section class="section">
+    <div class="sec-head"><h2>Три шага до завтрака</h2></div>
+    <div class="steps">
+      <div class="step"><div class="n">ШАГ 01</div><h4>Добавь молоко</h4><p>Залей содержимое пакета молоком или растительным напитком прямо в банку.</p></div>
+      <div class="step"><div class="n">ШАГ 02</div><h4>Оставь на ночь</h4><p>Перемешай, закрой и убери в холодильник на 6–8 часов.</p></div>
+      <div class="step"><div class="n">ШАГ 03</div><h4>Наслаждайся</h4><p>Утром тебя ждёт густой кремовый завтрак с 25 г белка.</p></div>
+    </div>
+  </section>
+</div>
+
+<!-- BUNDLE -->
+<div class="wrap">
+  <section class="section">
+    <div class="bundle">
+      <div>
+        <span class="badge">Набор · −25%</span>
+        <h2>Все десять вкусов<br>в одном наборе</h2>
+        <p>Попробуй всю линейку OFF Сянка и найди свой любимый вкус. Десять пакетов со скидкой 25%.</p>
+        <a href="#" class="btn btn-fill btn-lg">Купить набор · 2 925 ₽</a>
+      </div>
+      <div class="bundle-photos">
+        <div class="product-img" style="--pouch:var(--c-caramel)"><img src="images/caramel.png" alt="Карамель" onerror="this.style.display='none'"></div>
+        <div class="product-img" style="--pouch:var(--c-banana)"><img src="images/banana.png" alt="Банан" onerror="this.style.display='none'"></div>
+        <div class="product-img" style="--pouch:var(--c-vanilla)"><img src="images/vanilla.png" alt="Ваниль" onerror="this.style.display='none'"></div>
+        <div class="product-img" style="--pouch:var(--c-cherry)"><img src="images/cherry.png" alt="Вишня" onerror="this.style.display='none'"></div>
+        <div class="product-img" style="--pouch:var(--c-blueberry)"><img src="images/blueberry.png" alt="Черника" onerror="this.style.display='none'"></div>
+        <div class="product-img" style="--pouch:var(--c-apple)"><img src="images/apple.png" alt="Яблоко с корицей" onerror="this.style.display='none'"></div>
+        <div class="product-img" style="--pouch:var(--c-cinnamon)"><img src="images/cinnamon.png" alt="Рулет с корицей" onerror="this.style.display='none'"></div>
+        <div class="product-img" style="--pouch:var(--c-cookie)"><img src="images/cookie.png" alt="Печенье со сливками" onerror="this.style.display='none'"></div>
+        <div class="product-img" style="--pouch:var(--c-fruit)"><img src="images/fruit.png" alt="Фруктовые хлопья" onerror="this.style.display='none'"></div>
+        <div class="product-img" style="--pouch:var(--c-strawberry)"><img src="images/strawberry.png" alt="Клубника со сливками" onerror="this.style.display='none'"></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- SIGNUP -->
+<div class="wrap">
+  <section class="signup">
+    <h2>−10% на первый заказ</h2>
+    <p style="margin-bottom:24px;opacity:.8;">Подпишись и получи промокод на первую покупку.</p>
+    <form class="form" onsubmit="return false">
+      <input type="email" placeholder="Твоя почта" />
+      <button class="btn btn-fill btn-lg">Получить</button>
+    </form>
+    <footer class="wrap" style="padding-left:0;padding-right:0;">
+      <div class="brand" style="font-size:16px;">OFF<span style="font-weight:300;margin-left:3px;">сянка</span><span class="dot" style="margin-bottom:3px;"></span></div>
+      <div class="fl"><a href="#flavors">Вкусы</a><a href="#how">Как готовить</a><a href="#why">Состав</a><a href="#">Контакты</a></div>
+      <div>© 2026 OFF Сянка</div>
+    </footer>
+  </section>
+</div>
+
+</body>
+</html>
