@@ -162,14 +162,29 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 
 /* ---------- Dark feature / variety reveal ---------- */
 .dark-feature{
-  background:var(--ink);color:var(--cream);
+  background-color:var(--ink);color:var(--cream);
+  /* halftone / risograph dot texture overlay */
+  background-image:radial-gradient(rgba(240,237,231,0.06) 1px,transparent 1.5px);
+  background-size:13px 13px;
   /* full-bleed */
   width:100vw;position:relative;left:50%;right:50%;
   margin-left:-50vw;margin-right:-50vw;
   padding:74px 0 0;
   overflow:hidden;
 }
-.dark-feature .inner{max-width:var(--page-max);margin:0 auto;padding:0 28px;}
+/* torn-paper edge: cream rips into the ink at the top */
+.dark-feature::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:22px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 22' preserveAspectRatio='none'%3E%3Cpath d='M0 0 L1200 0 L1200 11 L1150 18 L1100 5 L1050 16 L1000 7 L950 18 L900 6 L850 15 L800 4 L750 17 L700 7 L650 18 L600 6 L550 15 L500 5 L450 17 L400 7 L350 18 L300 6 L250 15 L200 5 L150 17 L100 7 L50 18 L0 9 Z' fill='%23f0ede7'/%3E%3C/svg%3E") top center/100% 100% no-repeat;
+  z-index:2;
+}
+/* torn-paper edge: ink rips back into cream at the bottom */
+.dark-feature::after{
+  content:"";position:absolute;bottom:0;left:0;right:0;height:22px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 22' preserveAspectRatio='none'%3E%3Cpath d='M0 22 L1200 22 L1200 9 L1150 16 L1100 4 L1050 17 L1000 6 L950 18 L900 5 L850 16 L800 7 L750 18 L700 5 L650 16 L600 6 L550 17 L500 4 L450 16 L400 7 L350 18 L300 5 L250 16 L200 6 L150 17 L100 5 L50 16 L0 8 Z' fill='%23f0ede7'/%3E%3C/svg%3E") bottom center/100% 100% no-repeat;
+  z-index:2;
+}
+.dark-feature .inner{max-width:var(--page-max);margin:0 auto;padding:0 28px;position:relative;z-index:1;}
 .dark-feature .eyebrow{
   font-family:var(--font-mono);font-size:13px;letter-spacing:0.04em;
   text-transform:uppercase;color:var(--red);margin-bottom:14px;
