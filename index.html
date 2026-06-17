@@ -8,40 +8,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="tokens.css" />
 <style>
 /* ============================================================
    OFF Сянка — "punk-rock candy wrapper on cream paper"
    Style language adapted from the Gigantic reference.
    Inter is used as the Cyrillic-capable substitute for
    Neue Haas Grotesk Display (Space Grotesk has no Cyrillic).
+   Design tokens (CSS custom properties) live in tokens.css.
    ============================================================ */
-:root{
-  /* Colors — mononeutral + one red */
-  --ink:#231f20;
-  --cream:#f0ede7;
-  --white:#ffffff;
-  --red:#ff634b;
-  --black:#000000;
-
-  /* Fonts */
-  --font-display:'Inter',ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-  --font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
-
-  /* Tracking — widens with size (hand-tuned, never 'normal') */
-  --tk-caption:0.016em;
-  --tk-body-sm:0.025em;
-  --tk-body:0.028em;
-  --tk-sub:0.031em;
-  --tk-h-sm:0.036em;
-  --tk-h-lg:0.05em;
-  --tk-display:0.055em;
-
-  /* Layout */
-  --page-max:1200px;
-  --section-gap:80px;
-  --card-pad:30px;
-  --gap:20px;
-}
 
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
