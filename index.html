@@ -84,18 +84,11 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 /* ---------- Nav ---------- */
 .nav{
   display:flex;align-items:center;justify-content:space-between;
-  padding:22px 0;gap:24px;
+  padding:18px 0;gap:24px;
 }
-.nav-links{display:flex;gap:28px;flex:2;justify-content:center;}
-.nav-links a{
-  font-size:14px;font-weight:600;letter-spacing:var(--tk-sub);
-  text-transform:uppercase;
-}
-.nav-links a:hover{color:var(--red);}
 /* Brand / logo — top-left */
 .brand{
-  display:inline-flex;align-items:center;
-  flex:1;min-width:0;
+  display:inline-flex;align-items:center;flex:none;min-width:0;
   font-weight:900;font-size:22px;letter-spacing:0.02em;
   text-transform:uppercase;white-space:nowrap;
 }
@@ -105,11 +98,46 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   display:inline-block;width:9px;height:9px;background:var(--red);
   margin-left:6px;vertical-align:baseline;
 }
-.nav-right{display:flex;gap:18px;align-items:center;flex:1;justify-content:flex-end;}
-.nav-right .signin{
-  font-size:14px;font-weight:600;letter-spacing:var(--tk-sub);text-transform:uppercase;
+/* Main menu + search */
+.nav-menu{
+  display:flex;align-items:center;gap:22px;
+  flex:1;justify-content:space-between;
 }
-.nav-right .signin:hover{color:var(--red);}
+.menu{
+  display:flex;align-items:center;gap:16px;list-style:none;flex-wrap:nowrap;
+  justify-content:flex-start;
+}
+.menu a{
+  font-size:12px;font-weight:600;letter-spacing:0.012em;
+  text-transform:uppercase;white-space:nowrap;
+  padding-bottom:2px;border-bottom:2px solid transparent;
+}
+.menu a:hover,.menu a:focus-visible{color:var(--red);border-color:var(--red);}
+.site-search{display:flex;align-items:stretch;flex:none;margin-left:24px;}
+.site-search input{
+  font-family:var(--font-display);font-size:13px;letter-spacing:0.02em;
+  text-transform:uppercase;
+  padding:9px 12px;width:120px;height:40px;
+  border:1.5px solid var(--ink);border-right:none;border-radius:0;
+  background:var(--white);color:var(--ink);
+}
+.site-search input::placeholder{color:var(--ink);opacity:.5;}
+.site-search button{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:42px;height:40px;flex:none;
+  background:var(--ink);border:1.5px solid var(--ink);border-radius:0;
+  cursor:pointer;transition:background-color .18s ease;
+}
+.site-search button svg{stroke:var(--white);}
+.site-search button:hover{background:var(--cream);}
+.site-search button:hover svg{stroke:var(--ink);}
+/* Hamburger — hidden on desktop */
+.nav-toggle{
+  display:none;flex:none;
+  width:48px;height:48px;align-items:center;justify-content:center;
+  background:transparent;border:1.5px solid var(--ink);border-radius:0;cursor:pointer;
+}
+.nav-toggle svg{stroke:var(--ink);}
 
 /* ---------- Hero: type IS the hero ---------- */
 .hero{
@@ -335,12 +363,29 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 }
 
 /* ---------- Responsive ---------- */
+/* Collapse main menu into a hamburger panel */
+@media (max-width:1200px){
+  .nav-toggle{display:inline-flex;}
+  .nav-menu{
+    position:absolute;left:0;right:0;top:100%;z-index:1000;
+    flex-direction:column;align-items:stretch;gap:0;
+    background:var(--cream);border-top:1.5px solid var(--ink);
+    border-bottom:1.5px solid var(--ink);
+    padding:8px 28px 18px;
+    display:none;
+  }
+  .nav{position:relative;}
+  .nav-menu.open{display:flex;}
+  .menu{flex-direction:column;align-items:stretch;gap:0;width:100%;}
+  .menu li{border-bottom:1.5px solid rgba(35,31,32,.12);}
+  .menu a{display:block;padding:14px 0;border-bottom:none;font-size:15px;}
+  .site-search{margin-top:14px;}
+  .site-search input{flex:1;width:auto;}
+}
 @media (max-width:980px){
   .grid{grid-template-columns:repeat(3,1fr);}
 }
 @media (max-width:760px){
-  .nav-links{display:none;}
-  .brand{text-align:left;flex:1;}
   .brand .logo-img{height:60px;}
   .grid{grid-template-columns:repeat(2,1fr);}
   .benefits{grid-template-columns:repeat(2,1fr);}
@@ -362,7 +407,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 <body>
 
 <!-- ANNOUNCEMENT TICKER -->
-<div class="announce" aria-label="Промо">
+<div class="announce" id="top" aria-label="Промо">
   <div class="ticker">
     <span>Бесплатная доставка от 2 000 ₽ <b class="dot">●</b></span>
     <span>Набор из 10 вкусов · −25% <b class="dot">●</b></span>
@@ -376,19 +421,31 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 <!-- NAV -->
 <div class="wrap">
   <nav class="nav" aria-label="Основная навигация">
-    <a href="#" class="brand" aria-label="OFF Сянка — на главную">
+    <a href="#top" class="brand" aria-label="OFF Сянка — на главную">
       <img src="images/logo.svg" alt="OFF Сянка" class="logo-img"
            onerror="this.onerror=null;this.src='images/logo.png';">
       <span class="logo-text" style="display:none;">OFF <span class="reg">Сянка</span><span class="dot" aria-hidden="true"></span></span>
     </a>
-    <div class="nav-links">
-      <a href="#flavors">Вкусы</a>
-      <a href="#how">Как готовить</a>
-      <a href="#why">Состав</a>
-    </div>
-    <div class="nav-right">
-      <a href="#" class="signin">Войти</a>
-      <a href="#flavors" class="btn btn-fill">Купить</a>
+    <button class="nav-toggle" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav-menu"
+            onclick="var m=document.getElementById('nav-menu'),o=m.classList.toggle('open');this.setAttribute('aria-expanded',o);this.setAttribute('aria-label',o?'Закрыть меню':'Открыть меню');">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <div class="nav-menu" id="nav-menu">
+      <ul class="menu">
+        <li><a href="#top">Главная</a></li>
+        <li><a href="#flavors">Вкусы</a></li>
+        <li><a href="#production">Производство</a></li>
+        <li><a href="#about">О нас</a></li>
+        <li><a href="#social">Мы в соцсетях</a></li>
+        <li><a href="#partnership">Сотрудничество</a></li>
+        <li><a href="#contacts">Контактные данные</a></li>
+      </ul>
+      <form class="site-search" role="search" onsubmit="return false" aria-label="Поиск по сайту">
+        <input type="search" name="q" placeholder="Поиск по сайту" aria-label="Поиск по сайту" inputmode="search" />
+        <button type="submit" aria-label="Найти">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+      </form>
     </div>
   </nav>
 </div>
