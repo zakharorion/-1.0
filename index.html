@@ -175,6 +175,15 @@ body{
 }
 .pouch.hero-pouch{max-width:380px;margin:0 auto;}
 
+/* ---------- Real product photo frame ---------- */
+.product-img{
+  position:relative;width:100%;aspect-ratio:3/4;border-radius:14px;overflow:hidden;
+  background:var(--pouch); /* fallback color shown if photo missing */
+  display:flex;align-items:center;justify-content:center;
+}
+.product-img img{width:100%;height:100%;object-fit:cover;display:block;}
+.product-img.hero-pouch{max-width:380px;aspect-ratio:3/4;border-radius:24px;}
+
 /* ---------- Benefits ---------- */
 .benefits{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
 .bcard{background:var(--color-pale-stone);border-radius:16px;padding:24px;}
@@ -255,15 +264,8 @@ footer a{color:var(--color-forest-canopy);text-decoration:none;}
     </div>
     <div class="hero-photo">
       <div class="powder-ring"></div>
-      <div class="pouch hero-pouch" style="--pouch:var(--c-caramel)">
-        <div class="logo"><span class="off">OFF<sup>®</sup></span><span class="syanka">сянка</span></div>
-        <div class="tag-add">« просто добавь молоко »</div>
-        <div class="marks">
-          <div class="hexmark">без<br>сахара</div>
-          <div class="hexmark">без<br>варки</div>
-        </div>
-        <div class="starburst">25 г<br>белка</div>
-        <div class="cup"><div class="flavor-label">Арахис и<br>солёная карамель</div></div>
+      <div class="product-img hero-pouch" style="--pouch:var(--c-caramel)">
+        <img src="images/caramel.png" alt="OFF Сянка — Арахис и солёная карамель" onerror="this.style.display='none'">
       </div>
     </div>
   </section>
@@ -282,11 +284,8 @@ footer a{color:var(--color-forest-canopy);text-decoration:none;}
         <!-- 1 caramel -->
         <div class="tile">
           <div class="top"><span class="badge">Хит</span><span class="code">OS-01®</span></div>
-          <div class="pouch" style="--pouch:var(--c-caramel)">
-            <div class="logo"><span class="off">OFF<sup>®</sup></span><span class="syanka">сянка</span></div>
-            <div class="marks"><div class="hexmark">без<br>сахара</div><div class="hexmark">без<br>варки</div></div>
-            <div class="starburst">25 г<br>белка</div>
-            <div class="cup"><div class="flavor-label">Арахис и<br>солёная карамель</div></div>
+          <div class="product-img" style="--pouch:var(--c-caramel)">
+            <img src="images/caramel.png" alt="OFF Сянка — Арахис и солёная карамель" onerror="this.style.display='none'">
           </div>
           <h3>Арахис и солёная карамель</h3>
           <div class="price">390 ₽ · 25 г белка</div>
@@ -296,11 +295,8 @@ footer a{color:var(--color-forest-canopy);text-decoration:none;}
         <!-- 2 banana -->
         <div class="tile">
           <div class="top"><span class="badge">Хит</span><span class="code">OS-02®</span></div>
-          <div class="pouch" style="--pouch:var(--c-banana)">
-            <div class="logo"><span class="off">OFF<sup>®</sup></span><span class="syanka">сянка</span></div>
-            <div class="marks"><div class="hexmark">без<br>сахара</div><div class="hexmark">без<br>варки</div></div>
-            <div class="starburst">25 г<br>белка</div>
-            <div class="cup"><div class="flavor-label">Банан, паста<br>и шоколад</div></div>
+          <div class="product-img" style="--pouch:var(--c-banana)">
+            <img src="images/banana.png" alt="OFF Сянка — Банан с арахисовой пастой и шоколадом" onerror="this.style.display='none'">
           </div>
           <h3>Банан с арахисовой пастой и шоколадом</h3>
           <div class="price">390 ₽ · 25 г белка</div>
@@ -310,11 +306,8 @@ footer a{color:var(--color-forest-canopy);text-decoration:none;}
         <!-- 3 vanilla -->
         <div class="tile">
           <div class="top"><span class="badge stone">Новинка</span><span class="code">OS-03®</span></div>
-          <div class="pouch" style="--pouch:var(--c-vanilla)">
-            <div class="logo"><span class="off">OFF<sup>®</sup></span><span class="syanka">сянка</span></div>
-            <div class="marks"><div class="hexmark">без<br>сахара</div><div class="hexmark">без<br>варки</div></div>
-            <div class="starburst">25 г<br>белка</div>
-            <div class="cup"><div class="flavor-label">Ванильное<br>мороженое</div></div>
+          <div class="product-img" style="--pouch:var(--c-vanilla)">
+            <img src="images/vanilla.png" alt="OFF Сянка — Ванильное мороженое" onerror="this.style.display='none'">
           </div>
           <h3>Ванильное мороженое</h3>
           <div class="price">390 ₽ · 25 г белка</div>
@@ -324,11 +317,8 @@ footer a{color:var(--color-forest-canopy);text-decoration:none;}
         <!-- 4 cherry -->
         <div class="tile">
           <div class="top"><span class="badge stone">Новинка</span><span class="code">OS-04®</span></div>
-          <div class="pouch" style="--pouch:var(--c-cherry)">
-            <div class="logo"><span class="off">OFF<sup>®</sup></span><span class="syanka">сянка</span></div>
-            <div class="marks"><div class="hexmark">без<br>сахара</div><div class="hexmark">без<br>варки</div></div>
-            <div class="starburst">25 г<br>белка</div>
-            <div class="cup"><div class="flavor-label">Вишнёвый<br>пирог</div></div>
+          <div class="product-img" style="--pouch:var(--c-cherry)">
+            <img src="images/cherry.png" alt="OFF Сянка — Вишнёвый пирог" onerror="this.style.display='none'">
           </div>
           <h3>Вишнёвый пирог</h3>
           <div class="price">390 ₽ · 25 г белка</div>
@@ -338,11 +328,8 @@ footer a{color:var(--color-forest-canopy);text-decoration:none;}
         <!-- 5 blueberry -->
         <div class="tile">
           <div class="top"><span class="badge stone">Новинка</span><span class="code">OS-05®</span></div>
-          <div class="pouch" style="--pouch:var(--c-blueberry)">
-            <div class="logo"><span class="off">OFF<sup>®</sup></span><span class="syanka">сянка</span></div>
-            <div class="marks"><div class="hexmark">без<br>сахара</div><div class="hexmark">без<br>варки</div></div>
-            <div class="starburst">24 г<br>белка</div>
-            <div class="cup"><div class="flavor-label">Глазированный<br>пончик с черникой</div></div>
+          <div class="product-img" style="--pouch:var(--c-blueberry)">
+            <img src="images/blueberry.png" alt="OFF Сянка — Глазированный пончик с черникой" onerror="this.style.display='none'">
           </div>
           <h3>Глазированный пончик с черникой</h3>
           <div class="price">390 ₽ · 24 г белка</div>
@@ -390,11 +377,11 @@ footer a{color:var(--color-forest-canopy);text-decoration:none;}
         <a href="#" class="btn btn-fill btn-lg">Купить набор · 1 460 ₽</a>
       </div>
       <div class="bundle-photos">
-        <div class="pouch" style="--pouch:var(--c-caramel)"><div class="logo"><span class="off" style="font-size:18px">OFF</span></div><div class="cup"><div class="flavor-label">Карамель</div></div></div>
-        <div class="pouch" style="--pouch:var(--c-banana)"><div class="logo"><span class="off" style="font-size:18px">OFF</span></div><div class="cup"><div class="flavor-label">Банан</div></div></div>
-        <div class="pouch" style="--pouch:var(--c-vanilla)"><div class="logo"><span class="off" style="font-size:18px">OFF</span></div><div class="cup"><div class="flavor-label">Ваниль</div></div></div>
-        <div class="pouch" style="--pouch:var(--c-cherry)"><div class="logo"><span class="off" style="font-size:18px">OFF</span></div><div class="cup"><div class="flavor-label">Вишня</div></div></div>
-        <div class="pouch" style="--pouch:var(--c-blueberry)"><div class="logo"><span class="off" style="font-size:18px">OFF</span></div><div class="cup"><div class="flavor-label">Черника</div></div></div>
+        <div class="product-img" style="--pouch:var(--c-caramel)"><img src="images/caramel.png" alt="Карамель" onerror="this.style.display='none'"></div>
+        <div class="product-img" style="--pouch:var(--c-banana)"><img src="images/banana.png" alt="Банан" onerror="this.style.display='none'"></div>
+        <div class="product-img" style="--pouch:var(--c-vanilla)"><img src="images/vanilla.png" alt="Ваниль" onerror="this.style.display='none'"></div>
+        <div class="product-img" style="--pouch:var(--c-cherry)"><img src="images/cherry.png" alt="Вишня" onerror="this.style.display='none'"></div>
+        <div class="product-img" style="--pouch:var(--c-blueberry)"><img src="images/blueberry.png" alt="Черника" onerror="this.style.display='none'"></div>
       </div>
     </div>
   </section>
