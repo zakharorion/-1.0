@@ -216,10 +216,37 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   font-size:16px;font-weight:500;line-height:1.7;letter-spacing:var(--tk-sub);
   text-transform:uppercase;color:#cfcac1;
 }
+/* Auto flavor carousel — slides left, 1.5s per flavor, infinite loop.
+   Track holds 11 slides (10 flavors + caramel repeat) for a seamless loop. */
 .reveal-pouch{
-  margin:30px auto -2px;max-width:420px;
+  width:360px;max-width:84vw;height:480px;
+  margin:34px auto 38px;          /* raised ~1cm above the bottom edge */
+  overflow:hidden;
 }
-.reveal-pouch img{margin:0 auto;}
+.reveal-track{
+  display:flex;width:1100%;height:100%;
+  animation:flavorSlide 15s linear infinite;
+}
+.reveal-track .slide{
+  width:calc(100%/11);height:100%;flex:0 0 auto;
+  display:flex;align-items:flex-end;justify-content:center;
+}
+.reveal-track .slide img{
+  max-width:100%;height:100%;width:auto;object-fit:contain;display:block;
+}
+@keyframes flavorSlide{
+  0%,7%    {transform:translateX(0);}
+  10%,17%  {transform:translateX(-9.0909%);}
+  20%,27%  {transform:translateX(-18.1818%);}
+  30%,37%  {transform:translateX(-27.2727%);}
+  40%,47%  {transform:translateX(-36.3636%);}
+  50%,57%  {transform:translateX(-45.4545%);}
+  60%,67%  {transform:translateX(-54.5455%);}
+  70%,77%  {transform:translateX(-63.6364%);}
+  80%,87%  {transform:translateX(-72.7273%);}
+  90%,97%  {transform:translateX(-81.8182%);}
+  100%     {transform:translateX(-90.9091%);}
+}
 
 /* ---------- Section scaffolding ---------- */
 .section{padding:var(--section-gap) 0;}
@@ -477,11 +504,22 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   <div class="inner">
     <p class="eyebrow">10 SKU · OS-01 → OS-10</p>
     <h2>Десять<br>вкусов</h2>
-    <p class="lead">Одна линейка. Десять характеров. От солёной карамели до клубники со сливками — выбери свой и собери набор.</p>
+    <p class="lead">Одна линейка. Десять характеров. От солёной карамели до клубники со сливками — выбери свой или попробуй их все.</p>
   </div>
-  <div class="reveal-pouch">
-    <img src="images/caramel.png" alt="OFF Сянка — Арахис и солёная карамель" loading="lazy"
-         onerror="this.onerror=null;this.style.display='none';">
+  <div class="reveal-pouch" aria-label="Все десять вкусов поочерёдно">
+    <div class="reveal-track">
+      <div class="slide"><img src="images/caramel.png" alt="OFF Сянка — Арахис и солёная карамель" loading="lazy"></div>
+      <div class="slide"><img src="images/banana.png" alt="OFF Сянка — Банан с арахисовой пастой и шоколадом" loading="lazy"></div>
+      <div class="slide"><img src="images/vanilla.png" alt="OFF Сянка — Ванильное мороженое" loading="lazy"></div>
+      <div class="slide"><img src="images/cherry.png" alt="OFF Сянка — Вишнёвый пирог" loading="lazy"></div>
+      <div class="slide"><img src="images/blueberry.png" alt="OFF Сянка — Глазированный пончик с черникой" loading="lazy"></div>
+      <div class="slide"><img src="images/apple.png" alt="OFF Сянка — Яблоко с корицей" loading="lazy"></div>
+      <div class="slide"><img src="images/cinnamon.png" alt="OFF Сянка — Рулет с корицей и глазурью" loading="lazy"></div>
+      <div class="slide"><img src="images/cookie.png" alt="OFF Сянка — Печенье со сливками" loading="lazy"></div>
+      <div class="slide"><img src="images/fruit.png" alt="OFF Сянка — Фруктовые хлопья" loading="lazy"></div>
+      <div class="slide"><img src="images/strawberry.png" alt="OFF Сянка — Клубника со сливками" loading="lazy"></div>
+      <div class="slide" aria-hidden="true"><img src="images/caramel.png" alt="" loading="lazy"></div>
+    </div>
   </div>
 </section>
 
