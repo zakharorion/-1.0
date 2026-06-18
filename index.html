@@ -98,9 +98,14 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   display:inline-block;width:9px;height:9px;background:var(--red);
   margin-left:6px;vertical-align:baseline;
 }
-/* Right-side cluster: primary links + burger + order button */
+/* Right-side stack: row 1 (cluster) + row 2 (secondary), left-aligned
+   within the stack so the second row begins under "Вкусы" */
+.nav-stack{
+  margin-left:auto;
+  display:flex;flex-direction:column;align-items:flex-start;gap:12px;
+}
 .nav-cluster{
-  display:flex;align-items:center;gap:20px;margin-left:auto;flex-wrap:nowrap;
+  display:flex;align-items:center;gap:20px;flex-wrap:nowrap;
   flex-shrink:0;justify-content:flex-end;
 }
 .menu{display:flex;align-items:center;gap:20px;list-style:none;flex-wrap:wrap;}
@@ -122,11 +127,11 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 .nav.menu-expanded .burger .ic-open{display:none;}
 .nav.menu-expanded .burger .ic-close{display:block;}
 .order-btn{flex:none;}
-/* Secondary row — wraps full-width under the primary row */
+/* Secondary row — under the primary row, starting under "Вкусы" */
 .menu-secondary{
-  flex-basis:100%;width:100%;
-  display:none;justify-content:flex-end;gap:22px;
-  border-top:1.5px solid var(--ink);margin-top:2px;padding-top:14px;
+  width:100%;
+  display:none;justify-content:flex-start;gap:22px;
+  border-top:1.5px solid var(--ink);padding-top:14px;
 }
 .nav.menu-expanded .menu-secondary{display:flex;}
 
@@ -441,28 +446,30 @@ a:focus-visible,button:focus-visible,input:focus-visible{
            onerror="this.onerror=null;this.src='images/logo.png';">
       <span class="logo-text" style="display:none;">OFF <span class="reg">Сянка</span><span class="dot" aria-hidden="true"></span></span>
     </a>
-    <div class="nav-cluster">
-      <ul class="menu menu-primary">
-        <li><a href="#flavors">Вкусы</a></li>
-        <li><a href="#production">Производство</a></li>
-        <li><a href="#partnership">Сотрудничество</a></li>
-        <li><a href="#about">О нас</a></li>
+    <div class="nav-stack">
+      <div class="nav-cluster">
+        <ul class="menu menu-primary">
+          <li><a href="#flavors">Вкусы</a></li>
+          <li><a href="#production">Производство</a></li>
+          <li><a href="#partnership">Сотрудничество</a></li>
+          <li><a href="#about">О нас</a></li>
+        </ul>
+        <button class="burger" aria-label="Ещё разделы" aria-expanded="false" aria-controls="menu-secondary"
+                onclick="var n=document.getElementById('site-nav'),o=n.classList.toggle('menu-expanded');this.setAttribute('aria-expanded',o);this.setAttribute('aria-label',o?'Свернуть меню':'Ещё разделы');">
+          <img class="ic-open"  src="images/icon-open.png"  alt="Открыть меню"
+               onerror="this.onerror=null;this.src='images/icon-open.svg';">
+          <img class="ic-close" src="images/icon-close.png" alt="Свернуть меню"
+               onerror="this.onerror=null;this.src='images/icon-close.svg';">
+        </button>
+        <a href="#flavors" class="btn btn-fill order-btn">Заказать</a>
+      </div>
+      <ul class="menu menu-secondary" id="menu-secondary">
+        <li><a href="#why">Почему OFFсянка</a></li>
+        <li><a href="#social">Мы в Соцсетях</a></li>
+        <li><a href="#where">Где Купить</a></li>
+        <li><a href="#contacts">Контактные Данные</a></li>
       </ul>
-      <button class="burger" aria-label="Ещё разделы" aria-expanded="false" aria-controls="menu-secondary"
-              onclick="var n=document.getElementById('site-nav'),o=n.classList.toggle('menu-expanded');this.setAttribute('aria-expanded',o);this.setAttribute('aria-label',o?'Свернуть меню':'Ещё разделы');">
-        <img class="ic-open"  src="images/icon-open.png"  alt="Открыть меню"
-             onerror="this.onerror=null;this.src='images/icon-open.svg';">
-        <img class="ic-close" src="images/icon-close.png" alt="Свернуть меню"
-             onerror="this.onerror=null;this.src='images/icon-close.svg';">
-      </button>
-      <a href="#flavors" class="btn btn-fill order-btn">Заказать</a>
     </div>
-    <ul class="menu menu-secondary" id="menu-secondary">
-      <li><a href="#why">Почему OFFсянка</a></li>
-      <li><a href="#social">Мы в Соцсетях</a></li>
-      <li><a href="#where">Где Купить</a></li>
-      <li><a href="#contacts">Контактные Данные</a></li>
-    </ul>
   </nav>
 </div>
 
