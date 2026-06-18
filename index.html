@@ -127,9 +127,14 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 .nav.menu-expanded .burger .ic-open{display:none;}
 .nav.menu-expanded .burger .ic-close{display:block;}
 .order-btn{flex:none;}
-/* Secondary row — under the primary row, starting under "Вкусы" */
+/* Secondary row — text begins under "Вкусы"; separator line spans full width.
+   The negative margin stretches the top border left (under the logo); the
+   matching padding keeps the links starting under "Вкусы". */
 .menu-secondary{
-  width:100%;
+  --sep-offset:186px;            /* ≈ logo width (164) + nav gap (22) */
+  width:calc(100% + var(--sep-offset));
+  margin-left:calc(-1 * var(--sep-offset));
+  padding-left:var(--sep-offset);
   display:none;justify-content:flex-start;gap:22px;
   border-top:1.5px solid var(--ink);padding-top:14px;
 }
@@ -404,7 +409,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   .nav-cluster{gap:14px;}
   .menu{gap:14px;}
   .menu a{font-size:13px;}
-  .menu-secondary{justify-content:flex-start;flex-wrap:wrap;}
+  .menu-secondary{--sep-offset:0px;justify-content:flex-start;flex-wrap:wrap;}
   .grid{grid-template-columns:repeat(2,1fr);}
   .benefits{grid-template-columns:repeat(2,1fr);}
   .steps{grid-template-columns:1fr;}
