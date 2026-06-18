@@ -114,10 +114,10 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 /* Burger toggle for the secondary row */
 .burger{
   display:inline-flex;align-items:center;justify-content:center;
-  flex:none;width:48px;height:48px;padding:0;
+  flex:none;min-width:48px;height:48px;padding:0 2px;
   background:transparent;border:none;border-radius:0;cursor:pointer;
 }
-.burger img{width:42px;height:42px;display:block;}
+.burger img{height:46px;width:auto;display:block;}
 .burger .ic-close{display:none;}
 .nav.menu-expanded .burger .ic-open{display:none;}
 .nav.menu-expanded .burger .ic-close{display:block;}
