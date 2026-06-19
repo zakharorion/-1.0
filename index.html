@@ -81,14 +81,18 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 .ticker .dot{color:var(--red);}
 @keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 
-/* ---------- Nav (two-row main menu) ---------- */
+/* ---------- Nav (CSS grid: logo | menu cluster) ---------- */
 .nav{
-  display:flex;align-items:flex-start;flex-wrap:wrap;
-  gap:16px 22px;padding:16px 0;overflow:hidden;
+  display:grid;
+  grid-template-columns:1fr auto;   /* col1: logo side · col2: menu cluster */
+  align-items:center;               /* logo vertically centered with the menu row */
+  column-gap:22px;row-gap:14px;
+  padding:16px 0;
 }
-/* Brand / logo — top-left */
+/* Brand / logo — top-left, row 1 */
 .brand{
-  display:inline-flex;align-items:center;flex:none;min-width:0;
+  grid-column:1;grid-row:1;
+  display:inline-flex;align-items:center;justify-self:start;min-width:0;
   font-weight:900;font-size:22px;letter-spacing:0.02em;
   text-transform:uppercase;white-space:nowrap;
 }
@@ -98,16 +102,10 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   display:inline-block;width:9px;height:9px;background:var(--red);
   margin-left:6px;vertical-align:baseline;
 }
-/* Right-side stack: row 1 (cluster) + row 2 (secondary), left-aligned
-   within the stack so the second row begins under "Вкусы" */
-.nav-stack{
-  margin-left:auto;
-  display:flex;flex-direction:column;align-items:flex-start;gap:12px;
-}
+/* Row 1 cluster: primary links + burger + order (defines col 2) */
 .nav-cluster{
+  grid-column:2;grid-row:1;
   display:flex;align-items:center;gap:20px;flex-wrap:nowrap;
-  flex-shrink:0;justify-content:flex-end;
-  min-height:88px;            /* match logo height → divider sits below the logo */
 }
 .menu{display:flex;align-items:center;gap:20px;list-style:none;flex-wrap:wrap;}
 .menu-primary{flex-wrap:nowrap;flex-shrink:0;}
@@ -128,21 +126,15 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 .nav.menu-expanded .burger .ic-open{display:none;}
 .nav.menu-expanded .burger .ic-close{display:block;}
 .order-btn{flex:none;}
-/* Full-width separator above the secondary row. The element spans the
-   stack width; the ::before bleeds left to the nav edge (clipped by
-   .nav overflow:hidden) so the line runs logo→right edge. */
+/* Full-width separator — row 2, spans both columns (below the logo) */
 .nav-sep{
-  display:none;position:relative;align-self:stretch;height:0;
-  border-top:1.5px solid var(--ink);
-}
-.nav-sep::before{
-  content:"";position:absolute;top:-1.5px;right:100%;
-  width:100vw;border-top:1.5px solid var(--ink);
+  grid-column:1 / -1;grid-row:2;
+  display:none;height:0;border-top:1.5px solid var(--ink);
 }
 .nav.menu-expanded .nav-sep{display:block;}
-/* Secondary row — links begin under "Вкусы" (left edge of the stack) */
+/* Secondary row — col 2 only → begins under "Вкусы" */
 .menu-secondary{
-  width:100%;
+  grid-column:2;grid-row:3;
   display:none;justify-content:flex-start;gap:22px;
 }
 .nav.menu-expanded .menu-secondary{display:flex;}
@@ -458,31 +450,29 @@ a:focus-visible,button:focus-visible,input:focus-visible{
            onerror="this.onerror=null;this.src='images/logo.png';">
       <span class="logo-text" style="display:none;">OFF <span class="reg">Сянка</span><span class="dot" aria-hidden="true"></span></span>
     </a>
-    <div class="nav-stack">
-      <div class="nav-cluster">
-        <ul class="menu menu-primary">
-          <li><a href="#flavors">Вкусы</a></li>
-          <li><a href="#production">Производство</a></li>
-          <li><a href="#partnership">Сотрудничество</a></li>
-          <li><a href="#about">О нас</a></li>
-        </ul>
-        <button class="burger" aria-label="Ещё разделы" aria-expanded="false" aria-controls="menu-secondary"
-                onclick="var n=document.getElementById('site-nav'),o=n.classList.toggle('menu-expanded');this.setAttribute('aria-expanded',o);this.setAttribute('aria-label',o?'Свернуть меню':'Ещё разделы');">
-          <img class="ic-open"  src="images/icon-open.png"  alt="Открыть меню"
-               onerror="this.onerror=null;this.src='images/icon-open.svg';">
-          <img class="ic-close" src="images/icon-close.png" alt="Свернуть меню"
-               onerror="this.onerror=null;this.src='images/icon-close.svg';">
-        </button>
-        <a href="#flavors" class="btn btn-fill order-btn">Заказать</a>
-      </div>
-      <div class="nav-sep" aria-hidden="true"></div>
-      <ul class="menu menu-secondary" id="menu-secondary">
-        <li><a href="#why">Почему OFFсянка</a></li>
-        <li><a href="#social">Мы в Соцсетях</a></li>
-        <li><a href="#where">Где Купить</a></li>
-        <li><a href="#contacts">Контактные Данные</a></li>
+    <div class="nav-cluster">
+      <ul class="menu menu-primary">
+        <li><a href="#flavors">Вкусы</a></li>
+        <li><a href="#production">Производство</a></li>
+        <li><a href="#partnership">Сотрудничество</a></li>
+        <li><a href="#about">О нас</a></li>
       </ul>
+      <button class="burger" aria-label="Ещё разделы" aria-expanded="false" aria-controls="menu-secondary"
+              onclick="var n=document.getElementById('site-nav'),o=n.classList.toggle('menu-expanded');this.setAttribute('aria-expanded',o);this.setAttribute('aria-label',o?'Свернуть меню':'Ещё разделы');">
+        <img class="ic-open"  src="images/icon-open.png"  alt="Открыть меню"
+             onerror="this.onerror=null;this.src='images/icon-open.svg';">
+        <img class="ic-close" src="images/icon-close.png" alt="Свернуть меню"
+             onerror="this.onerror=null;this.src='images/icon-close.svg';">
+      </button>
+      <a href="#flavors" class="btn btn-fill order-btn">Заказать</a>
     </div>
+    <div class="nav-sep" aria-hidden="true"></div>
+    <ul class="menu menu-secondary" id="menu-secondary">
+      <li><a href="#why">Почему OFFсянка</a></li>
+      <li><a href="#social">Мы в Соцсетях</a></li>
+      <li><a href="#where">Где Купить</a></li>
+      <li><a href="#contacts">Контактные Данные</a></li>
+    </ul>
   </nav>
 </div>
 
