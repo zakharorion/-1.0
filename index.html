@@ -83,7 +83,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 
 /* ---------- Nav (two-row main menu) ---------- */
 .nav{
-  display:flex;align-items:center;flex-wrap:wrap;
+  display:flex;align-items:flex-start;flex-wrap:wrap;
   gap:16px 22px;padding:16px 0;overflow:hidden;
 }
 /* Brand / logo — top-left */
@@ -107,6 +107,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 .nav-cluster{
   display:flex;align-items:center;gap:20px;flex-wrap:nowrap;
   flex-shrink:0;justify-content:flex-end;
+  min-height:88px;            /* match logo height → divider sits below the logo */
 }
 .menu{display:flex;align-items:center;gap:20px;list-style:none;flex-wrap:wrap;}
 .menu-primary{flex-wrap:nowrap;flex-shrink:0;}
@@ -412,7 +413,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 }
 @media (max-width:760px){
   .brand .logo-img{height:60px;}
-  .nav-cluster{gap:14px;}
+  .nav-cluster{gap:14px;min-height:60px;}
   .menu{gap:14px;}
   .menu a{font-size:13px;}
   .menu-secondary{justify-content:flex-start;flex-wrap:wrap;}
