@@ -142,26 +142,44 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 /* ---------- Hero: type IS the hero ---------- */
 .hero{
   position:relative;
-  /* full-bleed background */
+  /* full-bleed */
   width:100vw;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;
-  min-height:90vh;
+  min-height:92vh;
   display:flex;flex-direction:column;justify-content:center;align-items:center;
   text-align:center;overflow:hidden;
   padding:80px 24px;
+  /* cream wall → wood table */
+  background:linear-gradient(180deg,
+    #f4f0e8 0%, #f1ebdc 52%, #efe6d2 69.5%,
+    #a06f43 70%, #875a33 84%, #6f4a2a 100%);
 }
-/* Background video — fills the whole hero */
-.hero-video{
-  position:absolute;inset:0;width:100%;height:100%;
-  object-fit:cover;z-index:0;pointer-events:none;
+/* Floating interactive package scene (decorative) */
+.hero-stage{position:absolute;inset:0;z-index:1;pointer-events:none;}
+.pkg{
+  position:absolute;left:var(--l);top:var(--t);width:var(--w);
+  transform:rotate(var(--r));
+  transition:transform .45s cubic-bezier(.2,.85,.25,1);
+  pointer-events:auto;cursor:pointer;will-change:transform;
+  filter:drop-shadow(0 16px 20px rgba(60,40,20,.28));
 }
-/* Readability scrim: cream veil + soft vignette so ink text stays legible */
+.pkg-img{width:100%;display:block;
+  animation:floatY var(--dur,6s) ease-in-out infinite;animation-delay:var(--delay,0s);}
+@keyframes floatY{0%,100%{transform:translateY(0);}50%{transform:translateY(-16px);}}
+/* hover/focus → the package rises higher; returns on leave */
+.pkg:hover,.pkg:focus-visible{
+  transform:rotate(var(--r)) translateY(-48px) scale(1.07);
+  z-index:10;outline:none;
+  filter:drop-shadow(0 34px 30px rgba(60,40,20,.32));
+}
+/* readability scrim — strongest behind the centred text, fades to edges */
 .hero-scrim{
-  position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:
-    radial-gradient(120% 90% at 50% 45%, rgba(240,237,231,0.28) 0%, rgba(240,237,231,0.55) 60%, rgba(240,237,231,0.78) 100%);
+  position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:radial-gradient(80% 55% at 50% 50%,
+    rgba(240,237,231,0.66) 0%, rgba(240,237,231,0.32) 55%, rgba(240,237,231,0) 78%);
 }
-.hero-content{position:relative;z-index:2;max-width:var(--page-max);width:100%;
-  display:flex;flex-direction:column;align-items:center;}
+.hero-content{position:relative;z-index:3;max-width:var(--page-max);width:100%;
+  display:flex;flex-direction:column;align-items:center;pointer-events:none;}
+.hero-content .hero-cta{pointer-events:auto;}
 .hero h1{
   font-weight:800;
   font-size:clamp(48px,11vw,150px);
@@ -169,7 +187,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   letter-spacing:var(--tk-display);
   text-transform:uppercase;
   max-width:14ch;
-  text-shadow:0 1px 24px rgba(240,237,231,0.85),0 1px 3px rgba(240,237,231,0.9);
+  text-shadow:0 1px 24px rgba(240,237,231,0.9),0 1px 3px rgba(240,237,231,0.95);
 }
 .hero h1 em{font-style:italic;font-weight:800;}
 .hero .intro{
@@ -494,11 +512,20 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   </nav>
 </div>
 
-<!-- HERO — video background + overlaid type -->
+<!-- HERO — floating, interactive package scene + overlaid type -->
 <header class="hero" aria-label="OFF Сянка — овсянка, которую не нужно варить">
-  <video class="hero-video" autoplay muted playsinline preload="auto" aria-hidden="true">
-    <source src="images/hero.mp4" type="video/mp4">
-  </video>
+  <div class="hero-stage" aria-hidden="true">
+    <div class="pkg" style="--l:5%;--t:30%;--w:13%;--r:-16deg;--delay:0s;--dur:6.5s"><img class="pkg-img" src="images/caramel.png" alt=""></div>
+    <div class="pkg" style="--l:18%;--t:17%;--w:13%;--r:-9deg;--delay:.7s;--dur:7s"><img class="pkg-img" src="images/banana.png" alt=""></div>
+    <div class="pkg" style="--l:32%;--t:10%;--w:14%;--r:-3deg;--delay:1.3s;--dur:6.2s"><img class="pkg-img" src="images/cherry.png" alt=""></div>
+    <div class="pkg" style="--l:47%;--t:8%;--w:14%;--r:1deg;--delay:.4s;--dur:7.4s"><img class="pkg-img" src="images/vanilla.png" alt=""></div>
+    <div class="pkg" style="--l:61%;--t:11%;--w:14%;--r:5deg;--delay:1s;--dur:6.8s"><img class="pkg-img" src="images/blueberry.png" alt=""></div>
+    <div class="pkg" style="--l:74%;--t:18%;--w:13%;--r:10deg;--delay:.2s;--dur:7.2s"><img class="pkg-img" src="images/strawberry.png" alt=""></div>
+    <div class="pkg" style="--l:85%;--t:30%;--w:12%;--r:15deg;--delay:.9s;--dur:6.4s"><img class="pkg-img" src="images/apple.png" alt=""></div>
+    <div class="pkg" style="--l:20%;--t:67%;--w:12%;--r:-5deg;--delay:.6s;--dur:6.6s"><img class="pkg-img" src="images/cinnamon.png" alt=""></div>
+    <div class="pkg" style="--l:45%;--t:70%;--w:12%;--r:2deg;--delay:1.1s;--dur:7.1s"><img class="pkg-img" src="images/cookie.png" alt=""></div>
+    <div class="pkg" style="--l:67%;--t:67%;--w:12%;--r:7deg;--delay:.3s;--dur:6.9s"><img class="pkg-img" src="images/fruit.png" alt=""></div>
+  </div>
   <div class="hero-scrim" aria-hidden="true"></div>
   <div class="hero-content">
     <h1>Овсянка,<br>которую не нужно<br><em>варить</em></h1>
@@ -718,23 +745,6 @@ a:focus-visible,button:focus-visible,input:focus-visible{
     });
   }, { threshold: 0, rootMargin: '0px 0px -10% 0px' });
   io.observe(section);
-})();
-
-// Hero video: plays muted on load, freezes on its last frame (no loop),
-// and restarts whenever the hero scrolls back into view.
-(function(){
-  var hero = document.querySelector('.hero');
-  var v = document.querySelector('.hero-video');
-  if(!hero || !v) return;
-  v.muted = true;                 // ensure autoplay is allowed
-  if(!('IntersectionObserver' in window)){ v.play().catch(function(){}); return; }
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){ try{ v.currentTime = 0; }catch(_){}; v.play().catch(function(){}); }
-      else { v.pause(); }
-    });
-  }, { threshold: 0.35 });
-  io.observe(hero);
 })();
 </script>
 
