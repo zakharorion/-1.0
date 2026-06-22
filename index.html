@@ -300,13 +300,13 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 /* Auto flavor carousel — slides left, 1.5s per flavor, infinite loop.
    Track holds 11 slides (10 flavors + caramel repeat) for a seamless loop. */
 .reveal-pouch{
-  width:360px;max-width:84vw;height:480px;
+  width:min(540px,90vw);aspect-ratio:3/4;
   margin:34px auto 38px;          /* raised ~1cm above the bottom edge */
   overflow:hidden;
 }
 .reveal-track{
   display:flex;width:1100%;height:100%;
-  animation:flavorSlide 15s linear infinite;
+  animation:flavorSlide 16s infinite;will-change:transform;
 }
 .reveal-track .slide{
   width:calc(100%/11);height:100%;flex:0 0 auto;
@@ -315,18 +315,29 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 .reveal-track .slide img{
   max-width:100%;height:100%;width:auto;object-fit:contain;display:block;
 }
+/* hold each flavor, then ease smoothly to the next (per-segment easing) */
 @keyframes flavorSlide{
-  0%,7%    {transform:translateX(0);}
-  10%,17%  {transform:translateX(-9.0909%);}
-  20%,27%  {transform:translateX(-18.1818%);}
-  30%,37%  {transform:translateX(-27.2727%);}
-  40%,47%  {transform:translateX(-36.3636%);}
-  50%,57%  {transform:translateX(-45.4545%);}
-  60%,67%  {transform:translateX(-54.5455%);}
-  70%,77%  {transform:translateX(-63.6364%);}
-  80%,87%  {transform:translateX(-72.7273%);}
-  90%,97%  {transform:translateX(-81.8182%);}
-  100%     {transform:translateX(-90.9091%);}
+  0%   {transform:translateX(0);}
+  6%   {transform:translateX(0);animation-timing-function:cubic-bezier(.55,0,.25,1);}
+  10%  {transform:translateX(-9.0909%);}
+  16%  {transform:translateX(-9.0909%);animation-timing-function:cubic-bezier(.55,0,.25,1);}
+  20%  {transform:translateX(-18.1818%);}
+  26%  {transform:translateX(-18.1818%);animation-timing-function:cubic-bezier(.55,0,.25,1);}
+  30%  {transform:translateX(-27.2727%);}
+  36%  {transform:translateX(-27.2727%);animation-timing-function:cubic-bezier(.55,0,.25,1);}
+  40%  {transform:translateX(-36.3636%);}
+  46%  {transform:translateX(-36.3636%);animation-timing-function:cubic-bezier(.55,0,.25,1);}
+  50%  {transform:translateX(-45.4545%);}
+  56%  {transform:translateX(-45.4545%);animation-timing-function:cubic-bezier(.55,0,.25,1);}
+  60%  {transform:translateX(-54.5455%);}
+  66%  {transform:translateX(-54.5455%);animation-timing-function:cubic-bezier(.55,0,.25,1);}
+  70%  {transform:translateX(-63.6364%);}
+  76%  {transform:translateX(-63.6364%);animation-timing-function:cubic-bezier(.55,0,.25,1);}
+  80%  {transform:translateX(-72.7273%);}
+  86%  {transform:translateX(-72.7273%);animation-timing-function:cubic-bezier(.55,0,.25,1);}
+  90%  {transform:translateX(-81.8182%);}
+  96%  {transform:translateX(-81.8182%);animation-timing-function:cubic-bezier(.55,0,.25,1);}
+  100% {transform:translateX(-90.9091%);}
 }
 
 /* ---------- Section scaffolding ---------- */
