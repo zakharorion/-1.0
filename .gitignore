@@ -3,3 +3,7 @@ node_modules/
 # Local render artifacts (generated for preview, not source)
 preview_new.png
 preview_new.pdf
+
+# Python cache
+__pycache__/
+*.pyc
