@@ -107,14 +107,30 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   grid-column:2;grid-row:1;
   display:flex;align-items:center;gap:20px;flex-wrap:nowrap;
 }
-.menu{display:flex;align-items:center;gap:20px;list-style:none;flex-wrap:wrap;}
+.menu{display:flex;align-items:center;gap:10px;list-style:none;flex-wrap:wrap;}
 .menu-primary{flex-wrap:nowrap;flex-shrink:0;}
 .menu a{
+  position:relative;z-index:0;display:inline-block;
   font-size:14px;font-weight:600;letter-spacing:0.02em;
-  text-transform:uppercase;white-space:nowrap;
-  padding-bottom:2px;border-bottom:2px solid transparent;
+  text-transform:uppercase;white-space:nowrap;color:var(--ink);
+  padding:7px 12px;transition:color .3s ease;
 }
-.menu a:hover,.menu a:focus-visible{color:var(--red);border-color:var(--red);}
+/* hover effect (from provided component): ink fill from top + top/bottom
+   border frame, text turns white */
+.menu a::before{
+  content:"";position:absolute;inset:0;z-index:-1;background:var(--ink);
+  transform:scale(0);transform-origin:top;opacity:0;
+  transition:transform .3s ease,opacity .3s ease;
+}
+.menu a::after{
+  content:"";position:absolute;inset:0;z-index:-1;
+  border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);
+  transform:scaleY(2);opacity:0;
+  transition:transform .3s ease,opacity .3s ease;
+}
+.menu a:hover,.menu a:focus-visible{color:#fff;outline:none;}
+.menu a:hover::before,.menu a:focus-visible::before{transform:scale(1);opacity:1;}
+.menu a:hover::after,.menu a:focus-visible::after{transform:scaleY(1);opacity:1;}
 /* Burger toggle for the secondary row */
 .burger{
   display:inline-flex;align-items:center;justify-content:center;
