@@ -353,48 +353,28 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 }
 .sec-head .shoplink:hover{color:var(--red);border-color:var(--red);}
 
-/* ---------- Product grid (hover-reveal cards) ---------- */
+/* ---------- Product grid (photo cards) ---------- */
 .grid{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
 }
 .tile{
-  position:relative;background:var(--cream);
-  border:1.5px solid var(--ink);overflow:hidden;
-  aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;padding:26px;
+  position:relative;aspect-ratio:3/4;border-radius:20px;overflow:hidden;
+  background:var(--cream);
+  box-shadow:0 14px 34px rgba(60,40,20,.14);   /* soft separation, no border */
 }
-/* default: just the product image */
-.tile .photo{width:100%;height:100%;display:flex;align-items:center;justify-content:center;min-height:0;}
-.tile .photo img{
-  max-width:100%;max-height:100%;width:auto;object-fit:contain;display:block;
-  transition:transform .45s cubic-bezier(.2,.8,.2,1);
+.tile .photo{height:100%;display:block;}
+.tile .photo img{width:100%;height:100%;object-fit:cover;display:block;}
+.tile.is-pouch .photo img{object-fit:contain;padding:24px;}   /* fallback transparent pouches */
+.tile .ph-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-mono);font-size:12px;letter-spacing:0.04em;text-transform:uppercase;
+  color:var(--ink);opacity:.45;}
+/* product name — top, centred, chocolate */
+.tile h3{
+  position:absolute;top:20px;left:50%;transform:translateX(-50%);
+  width:88%;text-align:center;margin:0;z-index:2;
+  color:#4a2c18;font-weight:800;text-transform:uppercase;
+  font-size:clamp(15px,1.5vw,20px);line-height:1.06;letter-spacing:var(--tk-h-sm);
 }
-.tile:hover .photo img,.tile:focus-within .photo img{transform:translateY(-16px) scale(1.05);}
-.tile .ph-fallback{font-family:var(--font-mono);font-size:12px;letter-spacing:0.04em;
-  text-transform:uppercase;color:var(--ink);opacity:.45;}
-/* hover: name fades in at top */
-.tile-top{
-  position:absolute;top:0;left:0;right:0;z-index:2;padding:16px 18px;
-  display:flex;justify-content:space-between;align-items:flex-start;gap:10px;
-  opacity:0;transform:translateY(-8px);
-  transition:opacity .35s ease,transform .35s ease;
-}
-.tile:hover .tile-top,.tile:focus-within .tile-top{opacity:1;transform:none;}
-.tile-top h3{font-weight:800;font-size:clamp(16px,1.5vw,20px);line-height:1.05;
-  text-transform:uppercase;letter-spacing:var(--tk-h-sm);}
-.tile-top .code{font-family:var(--font-mono);font-size:11px;letter-spacing:0.02em;opacity:.6;flex:none;}
-/* hover: CTA panel with buttons slides up from the bottom */
-.tile-cta{
-  position:absolute;left:0;right:0;bottom:0;z-index:2;
-  background:var(--cream);border-top:1.5px solid var(--ink);
-  padding:14px 18px 16px;display:flex;flex-direction:column;gap:11px;
-  transform:translateY(101%);transition:transform .4s cubic-bezier(.2,.8,.2,1);
-}
-.tile:hover .tile-cta,.tile:focus-within .tile-cta{transform:translateY(0);}
-.tile-cta .tagline{font-family:var(--font-mono);font-size:11px;letter-spacing:0.02em;color:var(--ink);}
-.tile-cta .btns{display:flex;gap:8px;}
-.tile-cta .btn{min-height:44px;padding:11px 12px;font-size:12px;}
-.tile-cta .btn-ozon{flex:1 1 auto;}
-.tile-cta .btn-desc{flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;}
 
 /* ---------- Benefits ---------- */
 .benefits{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap);}
@@ -673,123 +653,52 @@ a:focus-visible,button:focus-visible,input:focus-visible{
     <div class="grid">
 
       <article class="tile">
-        <div class="photo"><img src="images/caramel.png" alt="OFF Сянка — Арахис и солёная карамель" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-01'}))"></div>
-        <div class="tile-top"><h3>Арахис и солёная карамель</h3><span class="code">OS-01®</span></div>
-        <div class="tile-cta">
-          <p class="tagline">390 ₽ · 25 г белка</p>
-          <div class="btns">
-            <a href="#" class="btn btn-fill btn-ozon">Заказать на OZON</a>
-            <a href="#" class="btn btn-outline btn-desc">Описание <span aria-hidden="true">↗</span></a>
-          </div>
-        </div>
+        <div class="photo"><img src="images/card3.png" alt="OFF Сянка — Арахис и солёная карамель" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-01'}))"></div>
+        <h3>Арахис и солёная карамель</h3>
       </article>
 
       <article class="tile">
-        <div class="photo"><img src="images/banana.png" alt="OFF Сянка — Банан с арахисовой пастой и шоколадом" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-02'}))"></div>
-        <div class="tile-top"><h3>Банан, паста и шоколад</h3><span class="code">OS-02®</span></div>
-        <div class="tile-cta">
-          <p class="tagline">390 ₽ · 25 г белка</p>
-          <div class="btns">
-            <a href="#" class="btn btn-fill btn-ozon">Заказать на OZON</a>
-            <a href="#" class="btn btn-outline btn-desc">Описание <span aria-hidden="true">↗</span></a>
-          </div>
-        </div>
+        <div class="photo"><img src="images/card2.png" alt="OFF Сянка — Банан, паста и шоколад" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-02'}))"></div>
+        <h3>Банан, паста и шоколад</h3>
       </article>
 
-      <article class="tile">
+      <article class="tile is-pouch">
         <div class="photo"><img src="images/vanilla.png" alt="OFF Сянка — Ванильное мороженое" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-03'}))"></div>
-        <div class="tile-top"><h3>Ванильное мороженое</h3><span class="code">OS-03®</span></div>
-        <div class="tile-cta">
-          <p class="tagline">390 ₽ · 25 г белка</p>
-          <div class="btns">
-            <a href="#" class="btn btn-fill btn-ozon">Заказать на OZON</a>
-            <a href="#" class="btn btn-outline btn-desc">Описание <span aria-hidden="true">↗</span></a>
-          </div>
-        </div>
+        <h3>Ванильное мороженое</h3>
       </article>
 
       <article class="tile">
-        <div class="photo"><img src="images/cherry.png" alt="OFF Сянка — Вишнёвый пирог" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-04'}))"></div>
-        <div class="tile-top"><h3>Вишнёвый пирог</h3><span class="code">OS-04®</span></div>
-        <div class="tile-cta">
-          <p class="tagline">390 ₽ · 25 г белка</p>
-          <div class="btns">
-            <a href="#" class="btn btn-fill btn-ozon">Заказать на OZON</a>
-            <a href="#" class="btn btn-outline btn-desc">Описание <span aria-hidden="true">↗</span></a>
-          </div>
-        </div>
+        <div class="photo"><img src="images/card5.png" alt="OFF Сянка — Вишнёвый пирог" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-04'}))"></div>
+        <h3>Вишнёвый пирог</h3>
       </article>
 
       <article class="tile">
-        <div class="photo"><img src="images/blueberry.png" alt="OFF Сянка — Глазированный пончик с черникой" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-05'}))"></div>
-        <div class="tile-top"><h3>Пончик с черникой</h3><span class="code">OS-05®</span></div>
-        <div class="tile-cta">
-          <p class="tagline">390 ₽ · 24 г белка</p>
-          <div class="btns">
-            <a href="#" class="btn btn-fill btn-ozon">Заказать на OZON</a>
-            <a href="#" class="btn btn-outline btn-desc">Описание <span aria-hidden="true">↗</span></a>
-          </div>
-        </div>
+        <div class="photo"><img src="images/card4.png" alt="OFF Сянка — Глазированный пончик с черникой" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-05'}))"></div>
+        <h3>Пончик с черникой</h3>
       </article>
 
       <article class="tile">
-        <div class="photo"><img src="images/apple.png" alt="OFF Сянка — Яблоко с корицей" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-06'}))"></div>
-        <div class="tile-top"><h3>Яблоко с корицей</h3><span class="code">OS-06®</span></div>
-        <div class="tile-cta">
-          <p class="tagline">390 ₽ · 24 г белка</p>
-          <div class="btns">
-            <a href="#" class="btn btn-fill btn-ozon">Заказать на OZON</a>
-            <a href="#" class="btn btn-outline btn-desc">Описание <span aria-hidden="true">↗</span></a>
-          </div>
-        </div>
+        <div class="photo"><img src="images/card1.png" alt="OFF Сянка — Яблоко с корицей" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-06'}))"></div>
       </article>
 
       <article class="tile">
-        <div class="photo"><img src="images/cinnamon.png" alt="OFF Сянка — Рулет с корицей и глазурью" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-07'}))"></div>
-        <div class="tile-top"><h3>Рулет с корицей</h3><span class="code">OS-07®</span></div>
-        <div class="tile-cta">
-          <p class="tagline">390 ₽ · 25 г белка</p>
-          <div class="btns">
-            <a href="#" class="btn btn-fill btn-ozon">Заказать на OZON</a>
-            <a href="#" class="btn btn-outline btn-desc">Описание <span aria-hidden="true">↗</span></a>
-          </div>
-        </div>
+        <div class="photo"><img src="images/card6.png" alt="OFF Сянка — Рулет с корицей и глазурью" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-07'}))"></div>
+        <h3>Рулет с корицей</h3>
       </article>
 
       <article class="tile">
-        <div class="photo"><img src="images/cookie.png" alt="OFF Сянка — Печенье со сливками" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-08'}))"></div>
-        <div class="tile-top"><h3>Печенье со сливками</h3><span class="code">OS-08®</span></div>
-        <div class="tile-cta">
-          <p class="tagline">390 ₽ · 25 г белка</p>
-          <div class="btns">
-            <a href="#" class="btn btn-fill btn-ozon">Заказать на OZON</a>
-            <a href="#" class="btn btn-outline btn-desc">Описание <span aria-hidden="true">↗</span></a>
-          </div>
-        </div>
+        <div class="photo"><img src="images/card7.png" alt="OFF Сянка — Печенье со сливками" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-08'}))"></div>
+        <h3>Печенье со сливками</h3>
       </article>
 
       <article class="tile">
-        <div class="photo"><img src="images/fruit.png" alt="OFF Сянка — Фруктовые хлопья" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-09'}))"></div>
-        <div class="tile-top"><h3>Фруктовые хлопья</h3><span class="code">OS-09®</span></div>
-        <div class="tile-cta">
-          <p class="tagline">390 ₽ · 24 г белка</p>
-          <div class="btns">
-            <a href="#" class="btn btn-fill btn-ozon">Заказать на OZON</a>
-            <a href="#" class="btn btn-outline btn-desc">Описание <span aria-hidden="true">↗</span></a>
-          </div>
-        </div>
+        <div class="photo"><img src="images/card8.png" alt="OFF Сянка — Фруктовые хлопья" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-09'}))"></div>
+        <h3>Фруктовые хлопья</h3>
       </article>
 
       <article class="tile">
-        <div class="photo"><img src="images/strawberry.png" alt="OFF Сянка — Клубника со сливками" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-10'}))"></div>
-        <div class="tile-top"><h3>Клубника со сливками</h3><span class="code">OS-10®</span></div>
-        <div class="tile-cta">
-          <p class="tagline">390 ₽ · 24 г белка</p>
-          <div class="btns">
-            <a href="#" class="btn btn-fill btn-ozon">Заказать на OZON</a>
-            <a href="#" class="btn btn-outline btn-desc">Описание <span aria-hidden="true">↗</span></a>
-          </div>
-        </div>
+        <div class="photo"><img src="images/card9.png" alt="OFF Сянка — Клубника со сливками" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-10'}))"></div>
+        <h3>Клубника со сливками</h3>
       </article>
 
     </div>
