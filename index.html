@@ -7,7 +7,7 @@
 <meta name="description" content="Ленивая протеиновая овсянка OFF Сянка. 25 г белка, без сахара, без варки. Десять вкусов. Просто добавь молоко с вечера." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&family=Russo+One&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="tokens.css" />
 <style>
 /* ============================================================
@@ -358,22 +358,25 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
 }
 .tile{
-  position:relative;aspect-ratio:3/4;border-radius:20px;overflow:hidden;
-  background:var(--cream);
+  position:relative;border-radius:20px;overflow:hidden;
+  background:var(--cream);display:flex;flex-direction:column;
   box-shadow:0 14px 34px rgba(60,40,20,.14);   /* soft separation, no border */
 }
-.tile .photo{height:100%;display:block;}
+.tile .photo{position:relative;aspect-ratio:3/4;display:block;}
 .tile .photo img{width:100%;height:100%;object-fit:cover;display:block;}
 .tile.is-pouch .photo img{object-fit:contain;padding:24px;}   /* fallback transparent pouches */
 .tile .ph-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
   font-family:var(--font-mono);font-size:12px;letter-spacing:0.04em;text-transform:uppercase;
   color:var(--ink);opacity:.45;}
-/* product name — top, centred, chocolate */
+/* reserved strip for the 2 order buttons (added later) — ~1cm */
+.tile .actions{flex:0 0 auto;height:40px;}
+/* product name — top, centred, chocolate, Russo One */
 .tile h3{
-  position:absolute;top:20px;left:50%;transform:translateX(-50%);
-  width:88%;text-align:center;margin:0;z-index:2;
-  color:#4a2c18;font-weight:800;text-transform:uppercase;
-  font-size:clamp(15px,1.5vw,20px);line-height:1.06;letter-spacing:var(--tk-h-sm);
+  position:absolute;top:18px;left:50%;transform:translateX(-50%);
+  width:84%;text-align:center;margin:0;z-index:2;
+  color:#4a2c18;font-family:'Russo One',var(--font-display);font-weight:400;
+  text-transform:uppercase;text-wrap:balance;
+  font-size:clamp(14px,1.55vw,20px);line-height:1.12;letter-spacing:.012em;
 }
 
 /* ---------- Benefits ---------- */
@@ -655,50 +658,60 @@ a:focus-visible,button:focus-visible,input:focus-visible{
       <article class="tile">
         <div class="photo"><img src="images/card3.png" alt="OFF Сянка — Арахис и солёная карамель" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-01'}))"></div>
         <h3>Арахис и солёная карамель</h3>
+        <div class="actions"></div>
       </article>
 
       <article class="tile">
-        <div class="photo"><img src="images/card2.png" alt="OFF Сянка — Банан, паста и шоколад" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-02'}))"></div>
-        <h3>Банан, паста и шоколад</h3>
+        <div class="photo"><img src="images/card2.png" alt="OFF Сянка — Банан с арахисовой пастой и шоколадом" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-02'}))"></div>
+        <h3>Банан с арахисовой пастой и шоколадом</h3>
+        <div class="actions"></div>
       </article>
 
       <article class="tile is-pouch">
         <div class="photo"><img src="images/vanilla.png" alt="OFF Сянка — Ванильное мороженое" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-03'}))"></div>
         <h3>Ванильное мороженое</h3>
+        <div class="actions"></div>
       </article>
 
       <article class="tile">
         <div class="photo"><img src="images/card5.png" alt="OFF Сянка — Вишнёвый пирог" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-04'}))"></div>
         <h3>Вишнёвый пирог</h3>
+        <div class="actions"></div>
       </article>
 
       <article class="tile">
         <div class="photo"><img src="images/card4.png" alt="OFF Сянка — Глазированный пончик с черникой" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-05'}))"></div>
         <h3>Пончик с черникой</h3>
+        <div class="actions"></div>
       </article>
 
       <article class="tile">
         <div class="photo"><img src="images/card1.png" alt="OFF Сянка — Яблоко с корицей" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-06'}))"></div>
+        <div class="actions"></div>
       </article>
 
       <article class="tile">
         <div class="photo"><img src="images/card6.png" alt="OFF Сянка — Рулет с корицей и глазурью" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-07'}))"></div>
         <h3>Рулет с корицей</h3>
+        <div class="actions"></div>
       </article>
 
       <article class="tile">
         <div class="photo"><img src="images/card7.png" alt="OFF Сянка — Печенье со сливками" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-08'}))"></div>
         <h3>Печенье со сливками</h3>
+        <div class="actions"></div>
       </article>
 
       <article class="tile">
         <div class="photo"><img src="images/card8.png" alt="OFF Сянка — Фруктовые хлопья" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-09'}))"></div>
         <h3>Фруктовые хлопья</h3>
+        <div class="actions"></div>
       </article>
 
       <article class="tile">
         <div class="photo"><img src="images/card9.png" alt="OFF Сянка — Клубника со сливками" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-10'}))"></div>
         <h3>Клубника со сливками</h3>
+        <div class="actions"></div>
       </article>
 
     </div>
