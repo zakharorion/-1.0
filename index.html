@@ -467,9 +467,87 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   font-family:var(--font-mono);font-size:13px;letter-spacing:0.02em;
 }
 
+/* ---------- Production ---------- */
+.prod-lead{
+  max-width:46ch;margin:0 0 72px;
+  font-weight:600;font-size:clamp(20px,2.7vw,30px);line-height:1.34;
+  letter-spacing:var(--tk-h-sm);
+}
+.prod-title{
+  text-align:center;margin:0 0 48px;
+  font-weight:800;font-size:clamp(30px,5vw,56px);line-height:1.0;
+  text-transform:uppercase;letter-spacing:var(--tk-h-lg);
+}
+.stages{
+  list-style:none;margin:0 0 80px;padding:0;
+  display:flex;align-items:stretch;justify-content:center;gap:14px;flex-wrap:wrap;
+}
+.stage{
+  flex:1 1 0;min-width:170px;max-width:250px;
+  border:1.5px solid var(--ink);border-radius:18px;background:var(--cream);
+  padding:22px 20px;display:flex;flex-direction:column;align-items:flex-start;gap:20px;
+}
+.stage-ic{width:40px;height:40px;display:block;color:var(--ink);}
+.stage-ic svg{width:100%;height:100%;display:block;}
+.stage-name{
+  font-weight:800;text-transform:uppercase;font-size:15px;line-height:1.16;
+  letter-spacing:var(--tk-h-sm);
+}
+.stage-arrow{
+  flex:0 0 auto;align-self:center;display:flex;align-items:center;
+  color:var(--red);font-weight:700;font-size:26px;line-height:1;
+}
+/* Feature carousel (vanilla port) */
+.fcar{max-width:980px;margin:0 auto;}
+.fcar-card{
+  position:relative;border:1.5px solid var(--ink);border-radius:24px;
+  background:var(--cream);overflow:hidden;
+  display:grid;grid-template-columns:1fr 1fr;gap:28px;
+  min-height:380px;padding:44px;
+}
+.fcar-copy{display:flex;flex-direction:column;gap:14px;justify-content:center;}
+.fcar-kicker{
+  font-family:var(--font-mono);font-size:13px;text-transform:uppercase;
+  letter-spacing:0.06em;color:var(--red);
+}
+.fcar-title{
+  font-weight:800;text-transform:uppercase;font-size:clamp(22px,3vw,34px);
+  line-height:1.05;letter-spacing:var(--tk-h-sm);
+}
+.fcar-desc{font-size:16px;line-height:1.5;color:var(--ink);opacity:.78;}
+.fcar-media{position:relative;min-height:240px;}
+.fcar-ph{
+  position:absolute;inset:0;border-radius:16px;border:1.5px dashed rgba(35,31,32,.32);
+  background:#fff;display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-mono);font-size:13px;text-transform:uppercase;
+  letter-spacing:0.04em;color:rgba(35,31,32,.5);text-align:center;padding:0 16px;
+}
+.fcar-copy,.fcar-media{animation:fcarIn .45s ease;}
+@keyframes fcarIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+.fcar-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:30px;}
+.fcar-pill{
+  display:inline-flex;align-items:center;gap:9px;
+  border:1.5px solid var(--ink);border-radius:999px;background:var(--cream);color:var(--ink);
+  padding:7px 16px 7px 7px;cursor:pointer;
+  font-weight:700;text-transform:uppercase;font-size:13px;letter-spacing:0.03em;
+  transition:background .25s ease,color .25s ease;
+}
+.fcar-dot{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:24px;height:24px;border-radius:999px;background:var(--ink);color:#fff;
+  font-family:var(--font-mono);font-size:12px;flex:none;
+}
+.fcar-pill:hover{background:var(--ink);color:#fff;}
+.fcar-pill.is-active{background:var(--ink);color:#fff;}
+.fcar-pill.is-active .fcar-dot{background:var(--red);}
+
 /* ---------- Responsive ---------- */
 @media (max-width:900px){
   .grid{grid-template-columns:repeat(2,1fr);}
+  .stages{flex-direction:column;align-items:stretch;}
+  .stage{max-width:none;}
+  .stage-arrow{transform:rotate(90deg);}
+  .fcar-card{grid-template-columns:1fr;}
 }
 @media (max-width:760px){
   .brand .logo-img{height:60px;}
@@ -731,6 +809,57 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   </section>
 </div>
 
+<!-- PRODUCTION -->
+<div class="wrap" id="production">
+  <section class="section">
+    <p class="prod-lead">За каждым идеальным вкусом стоит наука и инновационный подход. Мы потратили немало времени на эксперименты и тестирование каждого вкуса, чтобы добиться идеальной формулы.</p>
+
+    <h2 class="prod-title">Этапы производства</h2>
+
+    <ol class="stages">
+      <li class="stage">
+        <span class="stage-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V8"/><path d="M12 8c0-2 1.5-3.6 3.6-3.6C15.6 6.5 14.1 8 12 8Z"/><path d="M12 8c0-2-1.5-3.6-3.6-3.6C8.4 6.5 9.9 8 12 8Z"/><path d="M12 13c0-2 1.5-3.6 3.6-3.6C15.6 11.5 14.1 13 12 13Z"/><path d="M12 13c0-2-1.5-3.6-3.6-3.6C8.4 11.5 9.9 13 12 13Z"/><path d="M12 18c0-2 1.5-3.6 3.6-3.6C15.6 16.5 14.1 18 12 18Z"/><path d="M12 18c0-2-1.5-3.6-3.6-3.6C8.4 16.5 9.9 18 12 18Z"/></svg></span>
+        <span class="stage-name">Отбор ингредиентов</span>
+      </li>
+      <li class="stage-arrow" aria-hidden="true">→</li>
+      <li class="stage">
+        <span class="stage-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.2L5.6 17a2 2 0 0 0 1.8 3h9.2a2 2 0 0 0 1.8-3L14 9.2V3"/><path d="M8 15h8"/></svg></span>
+        <span class="stage-name">Создание рецептуры</span>
+      </li>
+      <li class="stage-arrow" aria-hidden="true">→</li>
+      <li class="stage">
+        <span class="stage-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M7 18h.01M12 18h.01M17 18h.01"/></svg></span>
+        <span class="stage-name">Современный цех</span>
+      </li>
+      <li class="stage-arrow" aria-hidden="true">→</li>
+      <li class="stage">
+        <span class="stage-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1Z"/><path d="m9 12 2 2 4-4"/></svg></span>
+        <span class="stage-name">Контроль качества</span>
+      </li>
+    </ol>
+
+    <!-- Feature carousel (auto-cycling, vanilla JS) -->
+    <div class="fcar" id="prodcar">
+      <div class="fcar-card">
+        <div class="fcar-copy">
+          <div class="fcar-kicker">Этап 01</div>
+          <h3 class="fcar-title">Отбор ингредиентов</h3>
+          <p class="fcar-desc">Описание этапа добавим позже.</p>
+        </div>
+        <div class="fcar-media">
+          <div class="fcar-ph">Фото · этап 01</div>
+        </div>
+      </div>
+      <nav class="fcar-nav" aria-label="Этапы производства">
+        <button type="button" class="fcar-pill is-active" data-i="0"><span class="fcar-dot">1</span><span class="fcar-lbl">Отбор</span></button>
+        <button type="button" class="fcar-pill" data-i="1"><span class="fcar-dot">2</span><span class="fcar-lbl">Рецептура</span></button>
+        <button type="button" class="fcar-pill" data-i="2"><span class="fcar-dot">3</span><span class="fcar-lbl">Цех</span></button>
+        <button type="button" class="fcar-pill" data-i="3"><span class="fcar-dot">4</span><span class="fcar-lbl">Контроль</span></button>
+      </nav>
+    </div>
+  </section>
+</div>
+
 <!-- HOW -->
 <div class="wrap" id="how">
   <section class="section">
@@ -809,6 +938,55 @@ a:focus-visible,button:focus-visible,input:focus-visible{
     });
   }, { threshold: 0, rootMargin: '0px 0px -10% 0px' });
   io.observe(section);
+})();
+
+// Production feature carousel: auto-cycles 4 steps, pills jump + reset, pause off-screen.
+(function(){
+  var car = document.getElementById('prodcar');
+  if(!car) return;
+  var STEPS = [
+    {k:'Этап 01', t:'Отбор ингредиентов',  d:'Описание этапа добавим позже.'},
+    {k:'Этап 02', t:'Создание рецептуры',  d:'Описание этапа добавим позже.'},
+    {k:'Этап 03', t:'Современный цех',      d:'Описание этапа добавим позже.'},
+    {k:'Этап 04', t:'Контроль качества',   d:'Описание этапа добавим позже.'}
+  ];
+  var TOTAL = STEPS.length, INTERVAL = 5000;
+  var kicker = car.querySelector('.fcar-kicker');
+  var title  = car.querySelector('.fcar-title');
+  var desc   = car.querySelector('.fcar-desc');
+  var ph     = car.querySelector('.fcar-ph');
+  var copy   = car.querySelector('.fcar-copy');
+  var media  = car.querySelector('.fcar-media');
+  var pills  = Array.prototype.slice.call(car.querySelectorAll('.fcar-pill'));
+  var cur = 0, timer = null;
+
+  function render(i){
+    cur = (i + TOTAL) % TOTAL;
+    var s = STEPS[cur];
+    kicker.textContent = s.k;
+    title.textContent  = s.t;
+    desc.textContent   = s.d;
+    ph.textContent     = 'Фото · ' + s.k.toLowerCase();
+    [copy, media].forEach(function(el){ el.style.animation='none'; void el.offsetWidth; el.style.animation=''; });
+    pills.forEach(function(p, idx){
+      p.classList.toggle('is-active', idx === cur);
+      var dot = p.querySelector('.fcar-dot');
+      dot.textContent = idx < cur ? '✓' : String(idx + 1);
+    });
+  }
+  function start(){ stop(); timer = setInterval(function(){ render(cur + 1); }, INTERVAL); }
+  function stop(){ if(timer){ clearInterval(timer); timer = null; } }
+
+  pills.forEach(function(p, idx){
+    p.addEventListener('click', function(){ render(idx); start(); });
+  });
+  render(0); start();
+
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){
+      es.forEach(function(e){ e.isIntersecting ? start() : stop(); });
+    }, {threshold:0}).observe(car);
+  }
 })();
 
 // Hero video: loops continuously while the hero is on screen, pauses when it leaves.
