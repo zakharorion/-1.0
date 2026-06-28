@@ -498,14 +498,18 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   color:var(--red);font-weight:700;font-size:26px;line-height:1;
 }
 /* Feature carousel (vanilla port) */
-.fcar{max-width:980px;margin:0 auto;}
+.fcar{max-width:1040px;margin:0 auto;}
 .fcar-card{
   position:relative;border:1.5px solid var(--ink);border-radius:24px;
-  background:var(--cream);overflow:hidden;
-  display:grid;grid-template-columns:1fr 1fr;gap:28px;
-  min-height:380px;padding:44px;
+  background:var(--cream);overflow:hidden;padding:44px;
 }
-.fcar-copy{display:flex;flex-direction:column;gap:14px;justify-content:center;}
+/* slides: only the active one shows */
+.fcar-slide{display:none;}
+.fcar-slide.is-active{display:block;animation:fcarIn .45s ease;}
+@keyframes fcarIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+/* per-step layout: content left, media right */
+.fstep{display:grid;grid-template-columns:1.25fr 1fr;gap:32px;align-items:stretch;}
+.fstep-main{display:flex;flex-direction:column;gap:16px;min-width:0;}
 .fcar-kicker{
   font-family:var(--font-mono);font-size:13px;text-transform:uppercase;
   letter-spacing:0.06em;color:var(--red);
@@ -514,16 +518,39 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   font-weight:800;text-transform:uppercase;font-size:clamp(22px,3vw,34px);
   line-height:1.05;letter-spacing:var(--tk-h-sm);
 }
-.fcar-desc{font-size:16px;line-height:1.5;color:var(--ink);opacity:.78;}
-.fcar-media{position:relative;min-height:240px;}
+.fstep-sub{font-size:15.5px;line-height:1.5;color:var(--ink);opacity:.82;}
+/* four square text cells */
+.fstep-cells{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:4px;}
+.fcell{
+  aspect-ratio:1;border:1.5px solid var(--ink);border-radius:16px;
+  background:var(--cream);padding:16px;display:flex;flex-direction:column;gap:10px;
+  overflow:hidden;
+}
+.fcell-n{
+  display:inline-flex;align-items:center;justify-content:center;flex:none;
+  width:26px;height:26px;border-radius:999px;background:var(--ink);color:#fff;
+  font-family:var(--font-mono);font-size:13px;
+}
+.fcell p{font-size:12.5px;line-height:1.36;color:var(--ink);}
+/* orange result box */
+.fstep-result{
+  background:var(--red);color:var(--ink);border-radius:16px;padding:20px 22px;
+  display:flex;flex-direction:column;gap:8px;
+}
+.fstep-result-lbl{
+  font-family:var(--font-mono);font-size:12px;text-transform:uppercase;
+  letter-spacing:0.06em;font-weight:600;
+}
+.fstep-result p{font-size:15px;line-height:1.45;font-weight:600;}
+/* media column */
+.fstep-media{position:relative;min-height:260px;border-radius:18px;overflow:hidden;}
+.fstep-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
 .fcar-ph{
-  position:absolute;inset:0;border-radius:16px;border:1.5px dashed rgba(35,31,32,.32);
+  position:absolute;inset:0;border-radius:18px;border:1.5px dashed rgba(35,31,32,.32);
   background:#fff;display:flex;align-items:center;justify-content:center;
   font-family:var(--font-mono);font-size:13px;text-transform:uppercase;
   letter-spacing:0.04em;color:rgba(35,31,32,.5);text-align:center;padding:0 16px;
 }
-.fcar-copy,.fcar-media{animation:fcarIn .45s ease;}
-@keyframes fcarIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
 .fcar-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:30px;}
 .fcar-pill{
   display:inline-flex;align-items:center;gap:9px;
@@ -547,7 +574,12 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   .stages{flex-direction:column;align-items:stretch;}
   .stage{max-width:none;}
   .stage-arrow{transform:rotate(90deg);}
-  .fcar-card{grid-template-columns:1fr;}
+  .fstep{grid-template-columns:1fr;}
+  .fstep-media{min-height:240px;order:-1;}
+}
+@media (max-width:540px){
+  .fstep-cells{grid-template-columns:1fr;}
+  .fcell{aspect-ratio:auto;}
 }
 @media (max-width:760px){
   .brand .logo-img{height:60px;}
@@ -841,17 +873,70 @@ a:focus-visible,button:focus-visible,input:focus-visible{
     <!-- Feature carousel (auto-cycling, vanilla JS) -->
     <div class="fcar" id="prodcar">
       <div class="fcar-card">
-        <div class="fcar-copy">
-          <div class="fcar-kicker">Этап 01</div>
-          <h3 class="fcar-title">Отбор ингредиентов</h3>
-          <p class="fcar-desc">Описание этапа добавим позже.</p>
+
+        <!-- STEP 1 -->
+        <div class="fcar-slide is-active" data-i="0">
+          <div class="fstep">
+            <div class="fstep-main">
+              <div class="fcar-kicker">Этап 01</div>
+              <h3 class="fcar-title">Подбор ингредиентов</h3>
+              <p class="fstep-sub">Работа начинается с формирования надёжной базы компонентов. Наша задача — создать основу, которая гарантирует насыщенный вкус, комфортную текстуру и полезный состав без добавления сахара.</p>
+              <div class="fstep-cells">
+                <div class="fcell"><span class="fcell-n">1</span><p>Анализируем производителей сырья, проверяя соответствие документов и оценивая реальные свойства ингредиентов.</p></div>
+                <div class="fcell"><span class="fcell-n">2</span><p>Используем функциональные белковые компоненты, клетчатку и современные подсластители, отвечающие требованиям качества и вкуса.</p></div>
+                <div class="fcell"><span class="fcell-n">3</span><p>Отказываемся от ингредиентов, способных ухудшить вкусовое восприятие или сделать текстуру слишком плотной и искусственной.</p></div>
+                <div class="fcell"><span class="fcell-n">4</span><p>Создаём несколько вариантов базовых рецептур, адаптированных под различные вкусовые концепции.</p></div>
+              </div>
+              <div class="fstep-result">
+                <span class="fstep-result-lbl">Результат</span>
+                <p>Получаем надёжную рецептурную основу, которая обеспечивает стабильное качество, приятный вкус и правильную консистенцию готового продукта.</p>
+              </div>
+            </div>
+            <div class="fstep-media">
+              <img src="images/choose.png" alt="Лаборатория OFF Сянка — подбор ингредиентов" loading="lazy">
+            </div>
+          </div>
         </div>
-        <div class="fcar-media">
-          <div class="fcar-ph">Фото · этап 01</div>
+
+        <!-- STEP 2 -->
+        <div class="fcar-slide" data-i="1">
+          <div class="fstep">
+            <div class="fstep-main">
+              <div class="fcar-kicker">Этап 02</div>
+              <h3 class="fcar-title">Создание рецептуры</h3>
+              <p class="fstep-sub">Контент этого этапа добавим позже.</p>
+            </div>
+            <div class="fstep-media"><div class="fcar-ph">Фото · этап 02</div></div>
+          </div>
         </div>
+
+        <!-- STEP 3 -->
+        <div class="fcar-slide" data-i="2">
+          <div class="fstep">
+            <div class="fstep-main">
+              <div class="fcar-kicker">Этап 03</div>
+              <h3 class="fcar-title">Современный цех</h3>
+              <p class="fstep-sub">Контент этого этапа добавим позже.</p>
+            </div>
+            <div class="fstep-media"><div class="fcar-ph">Фото · этап 03</div></div>
+          </div>
+        </div>
+
+        <!-- STEP 4 -->
+        <div class="fcar-slide" data-i="3">
+          <div class="fstep">
+            <div class="fstep-main">
+              <div class="fcar-kicker">Этап 04</div>
+              <h3 class="fcar-title">Контроль качества</h3>
+              <p class="fstep-sub">Контент этого этапа добавим позже.</p>
+            </div>
+            <div class="fstep-media"><div class="fcar-ph">Фото · этап 04</div></div>
+          </div>
+        </div>
+
       </div>
       <nav class="fcar-nav" aria-label="Этапы производства">
-        <button type="button" class="fcar-pill is-active" data-i="0"><span class="fcar-dot">1</span><span class="fcar-lbl">Отбор</span></button>
+        <button type="button" class="fcar-pill is-active" data-i="0"><span class="fcar-dot">1</span><span class="fcar-lbl">Подбор</span></button>
         <button type="button" class="fcar-pill" data-i="1"><span class="fcar-dot">2</span><span class="fcar-lbl">Рецептура</span></button>
         <button type="button" class="fcar-pill" data-i="2"><span class="fcar-dot">3</span><span class="fcar-lbl">Цех</span></button>
         <button type="button" class="fcar-pill" data-i="3"><span class="fcar-dot">4</span><span class="fcar-lbl">Контроль</span></button>
@@ -944,30 +1029,15 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 (function(){
   var car = document.getElementById('prodcar');
   if(!car) return;
-  var STEPS = [
-    {k:'Этап 01', t:'Отбор ингредиентов',  d:'Описание этапа добавим позже.'},
-    {k:'Этап 02', t:'Создание рецептуры',  d:'Описание этапа добавим позже.'},
-    {k:'Этап 03', t:'Современный цех',      d:'Описание этапа добавим позже.'},
-    {k:'Этап 04', t:'Контроль качества',   d:'Описание этапа добавим позже.'}
-  ];
-  var TOTAL = STEPS.length, INTERVAL = 5000;
-  var kicker = car.querySelector('.fcar-kicker');
-  var title  = car.querySelector('.fcar-title');
-  var desc   = car.querySelector('.fcar-desc');
-  var ph     = car.querySelector('.fcar-ph');
-  var copy   = car.querySelector('.fcar-copy');
-  var media  = car.querySelector('.fcar-media');
+  var INTERVAL = 5000;
+  var slides = Array.prototype.slice.call(car.querySelectorAll('.fcar-slide'));
   var pills  = Array.prototype.slice.call(car.querySelectorAll('.fcar-pill'));
+  var TOTAL  = slides.length;
   var cur = 0, timer = null;
 
   function render(i){
     cur = (i + TOTAL) % TOTAL;
-    var s = STEPS[cur];
-    kicker.textContent = s.k;
-    title.textContent  = s.t;
-    desc.textContent   = s.d;
-    ph.textContent     = 'Фото · ' + s.k.toLowerCase();
-    [copy, media].forEach(function(el){ el.style.animation='none'; void el.offsetWidth; el.style.animation=''; });
+    slides.forEach(function(s, idx){ s.classList.toggle('is-active', idx === cur); });
     pills.forEach(function(p, idx){
       p.classList.toggle('is-active', idx === cur);
       var dot = p.querySelector('.fcar-dot');
