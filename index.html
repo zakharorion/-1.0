@@ -370,6 +370,80 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 .soon-wrap:hover .soon-pop,
 .soon-wrap.show .soon-pop{opacity:1;visibility:visible;transform:translateY(0);}
 
+/* ---------- Partnership ---------- */
+.partner-band{
+  display:flex;align-items:center;justify-content:space-between;gap:28px;
+  border:1.5px solid var(--ink);border-radius:26px;background:var(--cream);
+  padding:30px 40px;flex-wrap:wrap;
+}
+.partner-text{
+  font-weight:800;text-transform:uppercase;line-height:1.12;
+  font-size:clamp(18px,2.3vw,28px);letter-spacing:var(--tk-h-sm);
+  text-align:right;max-width:54%;margin:0;
+}
+.btn-apply{
+  flex:none;cursor:pointer;font-family:inherit;
+  background:var(--red);color:#fff;border:none;border-radius:999px;
+  padding:15px 36px;font-weight:800;font-size:15px;text-transform:uppercase;
+  letter-spacing:var(--tk-h-sm);transition:filter .2s ease,transform .2s ease;
+}
+.btn-apply:hover{filter:brightness(1.07);}
+.btn-apply:active{transform:translateY(1px);}
+
+/* Modal */
+.modal{position:fixed;inset:0;z-index:120;display:none;}
+.modal.open{display:block;}
+.modal-overlay{position:absolute;inset:0;background:rgba(35,31,32,.62);}
+.modal-box{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:min(680px,92vw);max-height:90vh;overflow:auto;
+  background:var(--cream);border:2px solid var(--ink);border-radius:24px;
+  padding:34px;box-shadow:8px 8px 0 var(--red);
+}
+.modal-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;}
+.modal-head h3{
+  font-weight:800;text-transform:uppercase;letter-spacing:var(--tk-h-sm);
+  font-size:clamp(24px,3.4vw,36px);line-height:1.0;margin:0;
+}
+.modal-close{
+  flex:none;width:42px;height:42px;border-radius:999px;cursor:pointer;
+  background:transparent;border:2px solid var(--ink);color:var(--ink);
+  display:flex;align-items:center;justify-content:center;transition:background .2s,color .2s;
+}
+.modal-close svg{width:20px;height:20px;}
+.modal-close:hover{background:var(--ink);color:var(--cream);}
+.modal-sub{text-align:right;margin:6px 0 0;color:var(--ink);opacity:.72;
+  font-size:15px;line-height:1.4;}
+.apply-form{display:flex;flex-direction:column;gap:20px;margin-top:26px;}
+.field{display:flex;flex-direction:column;gap:8px;}
+.field label{
+  font-family:var(--font-mono);font-size:12px;text-transform:uppercase;
+  letter-spacing:0.05em;color:var(--ink);
+}
+.field input,.field textarea{
+  font-family:inherit;font-size:15px;color:var(--ink);background:var(--white);
+  border:1.5px solid var(--ink);border-radius:12px;padding:12px 14px;width:100%;
+  resize:vertical;
+}
+.field input:focus,.field textarea:focus{outline:2px solid var(--red);outline-offset:1px;}
+.field.invalid input{border-color:var(--red);box-shadow:0 0 0 3px rgba(255,99,75,.22);}
+.field-err{display:none;color:var(--red);font-size:12.5px;font-weight:600;}
+.field.invalid .field-err{display:block;}
+.agree{display:flex;align-items:flex-start;gap:11px;font-size:14px;line-height:1.4;cursor:pointer;}
+.agree input{width:20px;height:20px;flex:none;margin-top:1px;accent-color:var(--red);}
+.agree a{color:var(--red);text-decoration:underline;font-weight:600;}
+.agree-err{display:none;color:var(--red);font-weight:700;font-size:13px;}
+.agree-err.show{display:block;}
+.btn-submit{
+  align-self:flex-start;cursor:pointer;font-family:inherit;
+  background:var(--red);color:#fff;border:none;border-radius:14px;
+  padding:14px 34px;font-weight:800;font-size:15px;text-transform:uppercase;
+  letter-spacing:var(--tk-h-sm);transition:filter .2s ease;
+}
+.btn-submit:hover{filter:brightness(1.07);}
+.apply-ok{display:none;margin:0;font-weight:700;color:#1f7a3d;font-size:15px;}
+.apply-ok.show{display:block;}
+
 /* ---------- Product grid (photo cards) ---------- */
 .grid{
   display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
@@ -667,6 +741,9 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   .steps{grid-template-columns:1fr;}
   .bundle{grid-template-columns:1fr;}
   .bundle-photos{grid-template-columns:repeat(5,1fr);}
+  .partner-band{flex-direction:column;align-items:stretch;text-align:center;}
+  .partner-text{text-align:center;max-width:none;}
+  .btn-apply{width:100%;}
 }
 @media (max-width:540px){
   .grid{grid-template-columns:1fr;}
@@ -1080,6 +1157,62 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   </section>
 </div>
 
+<!-- PARTNERSHIP -->
+<div class="wrap" id="partnership">
+  <section class="section">
+    <div class="sec-head"><h2>Сотрудничество</h2></div>
+    <div class="partner-band">
+      <button type="button" class="btn-apply" id="applyOpen">Оставить заявку</button>
+      <p class="partner-text">Развиваем продажи вместе с OFF&nbsp;Сянка</p>
+    </div>
+  </section>
+</div>
+
+<!-- PARTNERSHIP MODAL -->
+<div class="modal" id="applyModal" aria-hidden="true">
+  <div class="modal-overlay" data-close></div>
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="applyTitle">
+    <div class="modal-head">
+      <h3 id="applyTitle">Заполни форму</h3>
+      <button type="button" class="modal-close" id="applyClose" aria-label="Закрыть">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+      </button>
+    </div>
+    <p class="modal-sub">Мы свяжемся и обсудим сотрудничество</p>
+
+    <form class="apply-form" id="applyForm" novalidate>
+      <div class="field">
+        <label for="afName">Имя</label>
+        <input type="text" id="afName" name="name" autocomplete="name">
+      </div>
+      <div class="field">
+        <label for="afPhone">Телефон</label>
+        <input type="tel" id="afPhone" name="phone" inputmode="tel" autocomplete="tel"
+               pattern="[0-9+()\-\s]*" placeholder="">
+        <span class="field-err" data-err="afPhone"></span>
+      </div>
+      <div class="field">
+        <label for="afEmail">Email</label>
+        <input type="email" id="afEmail" name="email" inputmode="email" autocomplete="email">
+        <span class="field-err" data-err="afEmail"></span>
+      </div>
+      <div class="field">
+        <label for="afGoal">Краткое описание / цель запроса</label>
+        <textarea id="afGoal" name="goal" rows="3"></textarea>
+      </div>
+
+      <label class="agree">
+        <input type="checkbox" id="afAgree" name="agree">
+        <span>Я соглашаюсь с <a href="privacy.html" target="_blank" rel="noopener">политикой конфиденциальности</a></span>
+      </label>
+      <span class="agree-err" id="agreeErr">Обязательно</span>
+
+      <button type="submit" class="btn-submit">Отправить</button>
+      <p class="apply-ok" id="applyOk">Спасибо, ваша заявка принята</p>
+    </form>
+  </div>
+</div>
+
 <!-- HOW -->
 <div class="wrap" id="how">
   <section class="section">
@@ -1158,6 +1291,72 @@ a:focus-visible,button:focus-visible,input:focus-visible{
     });
   }, { threshold: 0, rootMargin: '0px 0px -10% 0px' });
   io.observe(section);
+})();
+
+// Partnership modal: open/close, phone filtering, validation, mailto submit.
+(function(){
+  var modal = document.getElementById('applyModal');
+  if(!modal) return;
+  var openBtn = document.getElementById('applyOpen');
+  var form    = document.getElementById('applyForm');
+  var phone   = document.getElementById('afPhone');
+  var email   = document.getElementById('afEmail');
+  var agree   = document.getElementById('afAgree');
+  var agreeErr= document.getElementById('agreeErr');
+  var okMsg   = document.getElementById('applyOk');
+
+  function open(){ modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
+  function close(){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+
+  openBtn.addEventListener('click', open);
+  modal.querySelectorAll('[data-close], #applyClose').forEach(function(el){ el.addEventListener('click', close); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape' && modal.classList.contains('open')) close(); });
+
+  // Phone: allow only digits and + ( ) - space
+  phone.addEventListener('input', function(){
+    this.value = this.value.replace(/[^0-9+()\-\s]/g,'');
+  });
+
+  function setInvalid(input, on, msg){
+    var field = input.closest('.field');
+    field.classList.toggle('invalid', on);
+    var err = field.querySelector('.field-err');
+    if(err) err.textContent = on ? (msg||'Обязательно') : '';
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    okMsg.classList.remove('show');
+    var phoneEmpty = !phone.value.trim();
+    var emailEmpty = !email.value.trim();
+    var emailBad   = !emailEmpty && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim());
+
+    setInvalid(phone, phoneEmpty, 'Обязательно');
+    setInvalid(email, emailEmpty || emailBad, emailBad ? 'Неверный email' : 'Обязательно');
+
+    var agreeOk = agree.checked;
+    agreeErr.classList.toggle('show', !agreeOk);
+
+    if(phoneEmpty || emailEmpty || emailBad || !agreeOk) return;
+
+    // Build the email notification and hand off to the mail client.
+    var name = (document.getElementById('afName').value || '—').trim();
+    var goal = (document.getElementById('afGoal').value || '—').trim();
+    var body = 'Имя: '+name+'\nТелефон: '+phone.value.trim()+'\nEmail: '+email.value.trim()+'\nЦель запроса: '+goal;
+    var href = 'mailto:hello@offsyanka.ru'
+      + '?subject=' + encodeURIComponent('Заявка на сотрудничество — OFF Сянка')
+      + '&body='    + encodeURIComponent(body);
+    window.location.href = href;
+
+    okMsg.classList.add('show');
+    form.reset();
+  });
+
+  // Clear error styling as the user fixes fields
+  [phone, email].forEach(function(inp){
+    inp.addEventListener('input', function(){ setInvalid(inp, false); });
+  });
+  agree.addEventListener('change', function(){ if(agree.checked) agreeErr.classList.remove('show'); });
 })();
 
 // "Взять набор" → show a small "Скоро!" popup on click/tap (hover handled by CSS).
