@@ -551,7 +551,11 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 .about-sub{
   color:#4a2c18;font-weight:800;text-transform:uppercase;
   font-size:clamp(26px,3.6vw,44px);line-height:1.0;letter-spacing:var(--tk-h-sm);
-  margin:0 0 18px;
+  margin:0 0 20px;
+}
+.about-sq{
+  display:block;width:16px;height:16px;background:var(--red);
+  border-radius:3px;margin:0 auto 20px;
 }
 .about-text{
   color:#b08d57;                 /* beige */
@@ -1249,10 +1253,12 @@ a:focus-visible,button:focus-visible,input:focus-visible{
     <div class="sec-head"><h2>О нас</h2></div>
     <div class="about-block">
       <h3 class="about-sub">Миссия</h3>
+      <span class="about-sq" aria-hidden="true"></span>
       <p class="about-text">Работаем, пока хотя бы один будильник звонит по утрам.</p>
     </div>
     <div class="about-block">
       <h3 class="about-sub">Философия</h3>
+      <span class="about-sq" aria-hidden="true"></span>
       <p class="about-text">Верим, что осознанный выбор начинается с того, что лежит на столе утром.</p>
     </div>
   </section>
