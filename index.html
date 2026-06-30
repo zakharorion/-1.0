@@ -351,6 +351,24 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   text-transform:uppercase;border-bottom:1.5px solid var(--ink);padding-bottom:2px;
 }
 .sec-head .shoplink:hover{color:var(--red);border-color:var(--red);}
+/* "Скоро!" popup on the bundle link */
+.soon-wrap{position:relative;display:inline-block;}
+.soon-pop{
+  position:absolute;top:calc(100% + 12px);right:0;z-index:30;
+  background:var(--ink);color:var(--cream);
+  font-family:var(--font-mono);font-size:12px;letter-spacing:0.06em;
+  text-transform:uppercase;font-weight:600;white-space:nowrap;
+  padding:8px 14px;border-radius:10px;box-shadow:3px 3px 0 var(--red);
+  opacity:0;visibility:hidden;transform:translateY(-6px);
+  transition:opacity .2s ease,transform .2s ease,visibility .2s;
+  pointer-events:none;
+}
+.soon-pop::before{
+  content:"";position:absolute;bottom:100%;right:18px;
+  border:6px solid transparent;border-bottom-color:var(--ink);
+}
+.soon-wrap:hover .soon-pop,
+.soon-wrap.show .soon-pop{opacity:1;visibility:visible;transform:translateY(0);}
 
 /* ---------- Product grid (photo cards) ---------- */
 .grid{
@@ -819,7 +837,10 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   <section class="section">
     <div class="sec-head">
       <h2>Все вкусы</h2>
-      <a href="#bundle" class="shoplink">Взять набор →</a>
+      <span class="soon-wrap">
+        <a href="#bundle" class="shoplink" id="bundleLink">Взять набор →</a>
+        <span class="soon-pop" role="status">Скоро!</span>
+      </span>
     </div>
     <div class="grid">
 
@@ -1137,6 +1158,23 @@ a:focus-visible,button:focus-visible,input:focus-visible{
     });
   }, { threshold: 0, rootMargin: '0px 0px -10% 0px' });
   io.observe(section);
+})();
+
+// "Взять набор" → show a small "Скоро!" popup on click/tap (hover handled by CSS).
+(function(){
+  var link = document.getElementById('bundleLink');
+  if(!link) return;
+  var wrap = link.closest('.soon-wrap');
+  var t;
+  link.addEventListener('click', function(e){
+    e.preventDefault();
+    wrap.classList.add('show');
+    clearTimeout(t);
+    t = setTimeout(function(){ wrap.classList.remove('show'); }, 2200);
+  });
+  document.addEventListener('click', function(e){
+    if(!wrap.contains(e.target)) wrap.classList.remove('show');
+  });
 })();
 
 // Benefit marquee: pause only when fully off-screen (no hover pause).
