@@ -346,6 +346,13 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   font-weight:800;font-size:clamp(32px,5.5vw,58px);
   line-height:1.0;letter-spacing:var(--tk-h-lg);text-transform:uppercase;
 }
+/* heading accent: red rules on both sides (— ЗАГОЛОВОК —) */
+.sec-head h2::before,.sec-head h2::after{
+  content:"";display:inline-block;vertical-align:middle;
+  width:clamp(26px,3vw,54px);height:7px;background:var(--red);border-radius:2px;
+}
+.sec-head h2::before{margin-right:clamp(14px,1.8vw,26px);}
+.sec-head h2::after{margin-left:clamp(14px,1.8vw,26px);}
 .sec-head .shoplink{
   font-size:14px;font-weight:600;letter-spacing:var(--tk-sub);
   text-transform:uppercase;border-bottom:1.5px solid var(--ink);padding-bottom:2px;
