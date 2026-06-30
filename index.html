@@ -443,6 +443,9 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 .btn-submit:hover{filter:brightness(1.07);}
 .apply-ok{display:none;margin:0;font-weight:700;color:#1f7a3d;font-size:15px;}
 .apply-ok.show{display:block;}
+.apply-err{display:none;margin:0;font-weight:600;color:var(--red);font-size:14px;}
+.apply-err.show{display:block;}
+.btn-submit:disabled{opacity:.6;cursor:default;}
 
 /* ---------- Product grid (photo cards) ---------- */
 .grid{
@@ -1207,8 +1210,9 @@ a:focus-visible,button:focus-visible,input:focus-visible{
       </label>
       <span class="agree-err" id="agreeErr">Обязательно</span>
 
-      <button type="submit" class="btn-submit">Отправить</button>
+      <button type="submit" class="btn-submit" id="applySubmit">Отправить</button>
       <p class="apply-ok" id="applyOk">Спасибо, ваша заявка принята</p>
+      <p class="apply-err" id="applyErr">Не удалось отправить. Попробуйте ещё раз или напишите на <a href="mailto:hello@offsyanka.ru">hello@offsyanka.ru</a></p>
     </form>
   </div>
 </div>
@@ -1304,6 +1308,14 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   var agree   = document.getElementById('afAgree');
   var agreeErr= document.getElementById('agreeErr');
   var okMsg   = document.getElementById('applyOk');
+  var errMsg  = document.getElementById('applyErr');
+  var submitBtn = document.getElementById('applySubmit');
+
+  // Formspree endpoint — заявки уходят на hello@offsyanka.ru автоматически.
+  // 1) зарегистрируйтесь на https://formspree.io (бесплатно),
+  // 2) создайте форму с получателем hello@offsyanka.ru,
+  // 3) вставьте её ID вместо XXXXXXXX ниже.
+  var FORM_ENDPOINT = 'https://formspree.io/f/XXXXXXXX';
 
   function open(){ modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
   function close(){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
@@ -1324,9 +1336,17 @@ a:focus-visible,button:focus-visible,input:focus-visible{
     if(err) err.textContent = on ? (msg||'Обязательно') : '';
   }
 
+  function mailtoFallback(name, goal){
+    var body = 'Имя: '+name+'\nТелефон: '+phone.value.trim()+'\nEmail: '+email.value.trim()+'\nЦель запроса: '+goal;
+    window.location.href = 'mailto:hello@offsyanka.ru'
+      + '?subject=' + encodeURIComponent('Заявка на сотрудничество — OFF Сянка')
+      + '&body='    + encodeURIComponent(body);
+  }
+
   form.addEventListener('submit', function(e){
     e.preventDefault();
     okMsg.classList.remove('show');
+    errMsg.classList.remove('show');
     var phoneEmpty = !phone.value.trim();
     var emailEmpty = !email.value.trim();
     var emailBad   = !emailEmpty && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim());
@@ -1339,17 +1359,38 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 
     if(phoneEmpty || emailEmpty || emailBad || !agreeOk) return;
 
-    // Build the email notification and hand off to the mail client.
     var name = (document.getElementById('afName').value || '—').trim();
     var goal = (document.getElementById('afGoal').value || '—').trim();
-    var body = 'Имя: '+name+'\nТелефон: '+phone.value.trim()+'\nEmail: '+email.value.trim()+'\nЦель запроса: '+goal;
-    var href = 'mailto:hello@offsyanka.ru'
-      + '?subject=' + encodeURIComponent('Заявка на сотрудничество — OFF Сянка')
-      + '&body='    + encodeURIComponent(body);
-    window.location.href = href;
 
-    okMsg.classList.add('show');
-    form.reset();
+    // If the Formspree endpoint isn't configured yet, fall back to mailto.
+    if(FORM_ENDPOINT.indexOf('XXXXXXXX') !== -1){
+      mailtoFallback(name, goal);
+      okMsg.classList.add('show');
+      form.reset();
+      return;
+    }
+
+    // Send the application to hello@offsyanka.ru automatically via Formspree.
+    submitBtn.disabled = true;
+    var prevLabel = submitBtn.textContent;
+    submitBtn.textContent = 'Отправляем…';
+    var data = new FormData(form);
+    data.append('_subject', 'Заявка на сотрудничество — OFF Сянка');
+
+    fetch(FORM_ENDPOINT, { method:'POST', body:data, headers:{ 'Accept':'application/json' } })
+      .then(function(res){
+        if(res.ok){
+          okMsg.classList.add('show');
+          form.reset();
+        } else {
+          errMsg.classList.add('show');
+        }
+      })
+      .catch(function(){ errMsg.classList.add('show'); })
+      .finally(function(){
+        submitBtn.disabled = false;
+        submitBtn.textContent = prevLabel;
+      });
   });
 
   // Clear error styling as the user fixes fields
