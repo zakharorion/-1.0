@@ -545,6 +545,20 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 }
 .step p{font-size:15px;line-height:1.6;letter-spacing:var(--tk-body-sm);}
 
+/* ---------- About ---------- */
+.about-block{text-align:center;max-width:780px;margin:0 auto;}
+.about-block + .about-block{margin-top:64px;}
+.about-sub{
+  color:#4a2c18;font-weight:800;text-transform:uppercase;
+  font-size:clamp(26px,3.6vw,44px);line-height:1.0;letter-spacing:var(--tk-h-sm);
+  margin:0 0 18px;
+}
+.about-text{
+  color:#b08d57;                 /* beige */
+  font-weight:600;font-size:clamp(18px,2.1vw,26px);line-height:1.42;
+  letter-spacing:var(--tk-body);margin:0;
+}
+
 /* ---------- Bundle ---------- */
 .bundle{
   background:var(--ink);color:var(--cream);
@@ -1229,14 +1243,17 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   </div>
 </div>
 
-<!-- HOW -->
-<div class="wrap" id="how">
+<!-- ABOUT -->
+<div class="wrap" id="about">
   <section class="section">
-    <div class="sec-head"><h2>Три шага до завтрака</h2></div>
-    <div class="steps">
-      <div class="step"><div class="n">Шаг 01</div><h4>Добавь молоко</h4><p>Залей содержимое пакета молоком или растительным напитком прямо в банку.</p></div>
-      <div class="step"><div class="n">Шаг 02</div><h4>Оставь на ночь</h4><p>Перемешай, закрой и убери в холодильник на 6–8 часов.</p></div>
-      <div class="step"><div class="n">Шаг 03</div><h4>Наслаждайся</h4><p>Утром тебя ждёт густой кремовый завтрак с 25 г белка.</p></div>
+    <div class="sec-head"><h2>О нас</h2></div>
+    <div class="about-block">
+      <h3 class="about-sub">Миссия</h3>
+      <p class="about-text">Работаем, пока хотя бы один будильник звонит по утрам.</p>
+    </div>
+    <div class="about-block">
+      <h3 class="about-sub">Философия</h3>
+      <p class="about-text">Верим, что осознанный выбор начинается с того, что лежит на столе утром.</p>
     </div>
   </section>
 </div>
@@ -1286,7 +1303,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
     <div class="brand">OFF <span class="reg">Сянка</span><span class="dot" aria-hidden="true"></span></div>
     <nav class="fl" aria-label="Подвал">
       <a href="#flavors">Вкусы</a>
-      <a href="#how">Как готовить</a>
+      <a href="#about">О нас</a>
       <a href="#why">Состав</a>
       <a href="#">Контакты</a>
     </nav>
