@@ -467,6 +467,8 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 }
 
 /* ---------- Production ---------- */
+.prod-head-sec{padding-bottom:40px;}
+.prod-head-sec .sec-head{margin-bottom:0;}
 /* Dark intro band — same look as the "Десять вкусов" section */
 .prod-intro{
   background-color:var(--ink);color:var(--cream);
@@ -863,7 +865,12 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 </div>
 
 <!-- PRODUCTION -->
-<section class="prod-intro" id="production">
+<div class="wrap" id="production">
+  <section class="section prod-head-sec">
+    <div class="sec-head"><h2>Производство</h2></div>
+  </section>
+</div>
+<section class="prod-intro">
   <div class="prod-intro-inner">
     <p class="prod-lead">За каждым идеальным вкусом стоит наука и инновационный подход. Мы потратили немало времени на эксперименты и тестирование каждого вкуса, чтобы добиться идеальной формулы.</p>
   </div>
