@@ -392,24 +392,33 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 .bcard p{font-size:15px;line-height:1.6;letter-spacing:var(--tk-body-sm);}
 /* Benefit marquee — single continuous row of icons (no hover pause) */
 .why-marquee{
-  width:100%;overflow:hidden;
+  width:100%;overflow:hidden;margin-top:1.2cm;        /* dropped below the heading */
   -webkit-mask:linear-gradient(90deg,transparent 0,#000 8%,#000 92%,transparent 100%);
   mask:linear-gradient(90deg,transparent 0,#000 8%,#000 92%,transparent 100%);
 }
 .why-track{
   display:flex;width:max-content;align-items:flex-start;
   animation:whyScroll 34s linear infinite;will-change:transform;
+  padding:8px 0 14px;                                  /* room for the hard shadow */
 }
 .why-item{
   flex:0 0 auto;width:210px;padding:0 6px;
-  display:flex;flex-direction:column;align-items:center;gap:16px;
+  display:flex;flex-direction:column;align-items:center;gap:18px;
 }
+/* bold candy-wrapper sticker: coloured disc, thick ink ring, hard offset shadow */
 .why-ic{
-  width:98px;height:98px;border-radius:999px;border:2px solid var(--ink);
-  background:var(--white);color:var(--ink);
+  width:104px;height:104px;border-radius:999px;border:3px solid var(--ink);
+  color:var(--ink);box-shadow:5px 5px 0 var(--ink);
   display:flex;align-items:center;justify-content:center;
 }
-.why-ic svg{width:46px;height:46px;display:block;}
+.why-ic svg{width:52px;height:52px;display:block;stroke-width:2.3px;}
+/* per-position colours (groups of 6 repeat for the seamless loop) */
+.why-item:nth-child(6n+1) .why-ic{background:#ffa53c;}  /* orange  — белок   */
+.why-item:nth-child(6n+2) .why-ic{background:#ff634b;}  /* red     — сахар   */
+.why-item:nth-child(6n+3) .why-ic{background:#8cc4ec;}  /* blue    — варка   */
+.why-item:nth-child(6n+4) .why-ic{background:#8ed99f;}  /* green   — состав  */
+.why-item:nth-child(6n+5) .why-ic{background:#f6a8c6;}  /* pink    — вкус    */
+.why-item:nth-child(6n+6) .why-ic{background:#ffd23e;}  /* yellow  — 5 мин   */
 .why-cap{
   font-weight:800;text-transform:uppercase;font-size:15px;line-height:1.15;
   letter-spacing:var(--tk-h-sm);text-align:center;color:var(--ink);
