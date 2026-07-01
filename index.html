@@ -686,12 +686,8 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   position:relative;color:#4a2c18;
   width:100vw;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;
   background:var(--cream);                             /* cream */
+  border-top:2px dashed #4a2c18;                       /* chocolate dashed line, edge to edge */
   padding:52px 0 30px;overflow:hidden;margin-bottom:0;
-}
-/* torn top — blends into the cream page above */
-.site-nav::before{
-  content:"";position:absolute;top:0;left:0;right:0;height:15px;z-index:2;
-  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 15' preserveAspectRatio='none'%3E%3Cpath d='M0 0 L1200 0 L1200 8 L1150 13 L1100 4 L1050 12 L1000 5 L950 13 L900 4 L850 11 L800 3 L750 13 L700 5 L650 13 L600 4 L550 11 L500 4 L450 12 L400 5 L350 13 L300 4 L250 11 L200 4 L150 12 L100 5 L50 13 L0 6 Z' fill='%23f0ede7'/%3E%3C/svg%3E") top center/100% 100% no-repeat;
 }
 /* torn bottom — tears into the red footer so they merge */
 .site-nav::after{
