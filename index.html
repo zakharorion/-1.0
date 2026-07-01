@@ -511,12 +511,12 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   mask:linear-gradient(90deg,transparent 0,#000 8%,#000 92%,transparent 100%);
 }
 .why-track{
-  display:flex;width:max-content;align-items:center;
-  animation:whyScroll 34s linear infinite;will-change:transform;
+  display:flex;width:max-content;align-items:flex-start;   /* circles on one plane */
+  animation:whyScroll 60s linear infinite;will-change:transform;  /* slow, calm */
   padding:8px 0 14px;                                  /* room for the hard shadow */
 }
 .why-item{
-  flex:0 0 auto;width:210px;padding:0 6px;
+  flex:0 0 auto;width:210px;padding:0 22px;            /* more even spacing */
   display:flex;flex-direction:column;align-items:center;gap:18px;
 }
 /* bold candy-wrapper sticker: coloured disc, thick ink ring, hard offset shadow */
