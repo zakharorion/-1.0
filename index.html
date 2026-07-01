@@ -681,6 +681,47 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 /* legal modal body */
 .modal-legal{margin:22px 0 0;font-size:15px;line-height:1.6;color:var(--ink);opacity:.8;}
 
+/* ---------- Site nav (above footer, torn chocolate) ---------- */
+.site-nav{
+  position:relative;color:var(--cream);
+  width:100vw;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;
+  background:#4a2c18;                                  /* chocolate */
+  padding:52px 0 30px;overflow:hidden;margin-bottom:0;
+}
+/* torn top — blends into the cream page above */
+.site-nav::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:15px;z-index:2;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 15' preserveAspectRatio='none'%3E%3Cpath d='M0 0 L1200 0 L1200 8 L1150 13 L1100 4 L1050 12 L1000 5 L950 13 L900 4 L850 11 L800 3 L750 13 L700 5 L650 13 L600 4 L550 11 L500 4 L450 12 L400 5 L350 13 L300 4 L250 11 L200 4 L150 12 L100 5 L50 13 L0 6 Z' fill='%23f0ede7'/%3E%3C/svg%3E") top center/100% 100% no-repeat;
+}
+/* torn bottom — tears into the red footer so they merge */
+.site-nav::after{
+  content:"";position:absolute;bottom:0;left:0;right:0;height:15px;z-index:2;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 15' preserveAspectRatio='none'%3E%3Cpath d='M0 15 L1200 15 L1200 7 L1150 12 L1100 3 L1050 13 L1000 5 L950 12 L900 4 L850 11 L800 5 L750 13 L700 4 L650 12 L600 5 L550 11 L500 3 L450 12 L400 5 L350 13 L300 4 L250 11 L200 5 L150 12 L100 4 L50 11 L0 6 Z' fill='%23ff634b'/%3E%3C/svg%3E") bottom center/100% 100% no-repeat;
+}
+.site-nav-inner{
+  max-width:var(--page-max);margin:0 auto;padding:0 28px;position:relative;z-index:1;
+}
+.site-nav-title{
+  font-family:var(--font-mono);font-size:13px;letter-spacing:0.06em;
+  text-transform:uppercase;color:var(--tan,#b08d57);margin-bottom:20px;
+}
+.site-nav-cols{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;}
+.nav-col{list-style:none;display:flex;flex-direction:column;gap:12px;}
+.nav-col-right{text-align:right;}
+.nav-col a{
+  display:inline-block;position:relative;color:var(--cream);
+  font-size:14px;font-weight:500;letter-spacing:0.02em;text-transform:uppercase;
+  text-decoration:none;
+}
+.nav-col a::after{
+  content:"";position:absolute;left:0;right:0;bottom:-3px;height:1.5px;
+  background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .25s ease;
+}
+.nav-col-right a::after{transform-origin:right;}
+.nav-col a:hover::after,.nav-col a:focus-visible::after{transform:scaleX(1);}
+/* footer sits flush against the torn band */
+.footer{margin-top:0;}
+
 /* ---------- Production ---------- */
 .prod-head-sec{padding-bottom:40px;}
 .prod-head-sec .sec-head{margin-bottom:0;}
@@ -836,6 +877,9 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   .social-grid{grid-template-columns:repeat(2,1fr);}
   .footer .foot-bottom{grid-template-columns:1fr;justify-items:start;gap:12px;}
   .footer .foot-priv,.footer .foot-terms{justify-self:start;}
+  .site-nav-cols{flex-direction:column;gap:22px;}
+  .nav-col-right{text-align:left;}
+  .nav-col-right a::after{transform-origin:left;}
 }
 @media (max-width:540px){
   .grid{grid-template-columns:1fr;}
@@ -1397,6 +1441,27 @@ a:focus-visible,button:focus-visible,input:focus-visible{
     </form>
   </section>
 </div>
+
+<!-- SITE NAV (above footer) -->
+<nav class="site-nav" aria-label="Навигация по сайту">
+  <div class="site-nav-inner">
+    <div class="site-nav-title">Навигация по сайту</div>
+    <div class="site-nav-cols">
+      <ul class="nav-col">
+        <li><a href="#flavors">Вкусы</a></li>
+        <li><a href="#production">Производство</a></li>
+        <li><a href="#partnership">Сотрудничество</a></li>
+        <li><a href="#about">О нас</a></li>
+      </ul>
+      <ul class="nav-col nav-col-right">
+        <li><a href="#why">Почему OFF Сянка</a></li>
+        <li><a href="#social">Мы в соцсетях</a></li>
+        <li><a href="#bundle">Где купить</a></li>
+        <li><a href="#contacts">Контактные данные</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
 <!-- FOOTER BAND -->
 <footer class="footer" id="contacts">
