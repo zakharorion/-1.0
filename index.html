@@ -625,10 +625,11 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   display:inline-block;font-family:var(--font-mono);font-size:13px;
   letter-spacing:0.06em;text-transform:uppercase;color:var(--red);margin-bottom:14px;
 }
+.bundle .bundle-cta-wrap{flex:0 0 100%;text-align:center;margin-top:16px;}
 .bundle .bundle-cta{
-  flex:0 0 100%;display:block;width:max-content;margin:14px auto 0;
+  display:inline-block;width:5cm;box-sizing:border-box;text-align:center;
   background:var(--red);color:#fff;border:none;border-radius:14px;
-  padding:17px 0.5cm;font-weight:800;font-size:16px;text-transform:uppercase;
+  padding:16px 0;font-weight:800;font-size:16px;text-transform:uppercase;
   letter-spacing:var(--tk-h-sm);text-decoration:none;
   transition:filter .2s ease,transform .2s ease;
 }
@@ -1440,7 +1441,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
         <div class="photo"><img src="images/fruit.png" alt="Фруктовые хлопья" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'09'}))"></div>
         <div class="photo"><img src="images/strawberry.png" alt="Клубника со сливками" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'10'}))"></div>
       </div>
-      <a href="#" target="_blank" rel="noopener" class="bundle-cta">Заказать на OZON</a>
+      <div class="bundle-cta-wrap"><a href="#" target="_blank" rel="noopener" class="bundle-cta">Заказать на OZON</a></div>
     </div>
   </section>
 </div>
