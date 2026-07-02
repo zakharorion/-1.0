@@ -609,7 +609,11 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   background:var(--ink);color:var(--cream);
   padding:clamp(32px,5vw,55px);
   display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;
+  grid-template-areas:"copy photos" "cta cta";
 }
+.bundle .copy{grid-area:copy;}
+.bundle .bundle-photos{grid-area:photos;}
+.bundle .bundle-cta{grid-area:cta;}
 .bundle .copy h2{
   font-weight:800;font-size:clamp(34px,4.5vw,56px);line-height:0.98;
   letter-spacing:var(--tk-h-lg);text-transform:uppercase;margin:16px 0 18px;
