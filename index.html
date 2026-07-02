@@ -628,7 +628,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 .bundle .bundle-cta{
   flex:0 0 100%;display:block;width:max-content;margin:14px auto 0;
   background:var(--red);color:#fff;border:none;border-radius:14px;
-  padding:17px 48px;font-weight:800;font-size:16px;text-transform:uppercase;
+  padding:17px 0.5cm;font-weight:800;font-size:16px;text-transform:uppercase;
   letter-spacing:var(--tk-h-sm);text-decoration:none;
   transition:filter .2s ease,transform .2s ease;
 }
@@ -636,9 +636,10 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 .bundle .bundle-cta:active{transform:translateY(1px);}
 .bundle-photos{
   display:flex;flex-wrap:wrap;gap:10px;justify-content:center;
+  max-width:390px;margin-left:auto;                 /* keep to a tidy 5-per-row block */
 }
 .bundle-photos .photo{
-  flex:0 0 auto;width:clamp(88px,9vw,116px);
+  flex:0 0 auto;width:66px;                          /* 5 per row → 2 rows */
   border-radius:8px;overflow:hidden;
 }
 .bundle-photos .photo img{width:100%;height:auto;display:block;}
