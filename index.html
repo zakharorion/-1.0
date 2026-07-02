@@ -623,6 +623,15 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   display:inline-block;font-family:var(--font-mono);font-size:13px;
   letter-spacing:0.06em;text-transform:uppercase;color:var(--red);margin-bottom:14px;
 }
+.bundle .bundle-cta{
+  grid-column:1 / -1;justify-self:center;margin-top:14px;
+  background:var(--red);color:#fff;border:none;border-radius:14px;
+  padding:17px 48px;font-weight:800;font-size:16px;text-transform:uppercase;
+  letter-spacing:var(--tk-h-sm);text-decoration:none;
+  transition:filter .2s ease,transform .2s ease;
+}
+.bundle .bundle-cta:hover{filter:brightness(1.07);}
+.bundle .bundle-cta:active{transform:translateY(1px);}
 .bundle-photos{
   display:grid;grid-template-columns:repeat(5,1fr);gap:10px;
 }
@@ -1410,7 +1419,6 @@ a:focus-visible,button:focus-visible,input:focus-visible{
         <span class="bundle-kick">Переходи на OZON</span>
         <h2>Все десять вкусов в одном наборе</h2>
         <p>Попробуй всю линейку OFF Сянка и найди свой любимый вкус.</p>
-        <a href="#" class="btn btn-outline btn-lg">Купить набор · 2 925 ₽</a>
       </div>
       <div class="bundle-photos">
         <div class="photo"><img src="images/caramel.png" alt="Арахис и солёная карамель" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'01'}))"></div>
@@ -1424,6 +1432,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
         <div class="photo"><img src="images/fruit.png" alt="Фруктовые хлопья" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'09'}))"></div>
         <div class="photo"><img src="images/strawberry.png" alt="Клубника со сливками" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'10'}))"></div>
       </div>
+      <a href="#" target="_blank" rel="noopener" class="bundle-cta">Заказать на OZON</a>
     </div>
   </section>
 </div>
