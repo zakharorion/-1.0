@@ -1498,7 +1498,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
     <div class="foot-bottom">
       <span class="foot-copy">© 2026. Овсянка быстрого приготовления. offsyanka.ru</span>
       <button type="button" class="foot-link foot-priv" data-modal="privacyModal">Политика конфиденциальности</button>
-      <button type="button" class="foot-link foot-terms" data-modal="termsModal">Пользовательское соглашение</button>
+      <a class="foot-link foot-terms" href="politica/">Пользовательское соглашение</a>
     </div>
   </div>
 </footer>
@@ -1509,19 +1509,6 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="privacyTitle">
     <div class="modal-head">
       <h3 id="privacyTitle">Политика конфиденциальности</h3>
-      <button type="button" class="modal-close" data-close aria-label="Закрыть">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
-      </button>
-    </div>
-    <p class="modal-legal">Текст будет добавлен позже.</p>
-  </div>
-</div>
-
-<div class="modal" id="termsModal" aria-hidden="true">
-  <div class="modal-overlay" data-close></div>
-  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="termsTitle">
-    <div class="modal-head">
-      <h3 id="termsTitle">Пользовательское соглашение</h3>
       <button type="button" class="modal-close" data-close aria-label="Закрыть">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
       </button>
@@ -1563,7 +1550,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   // 1) зарегистрируйтесь на https://formspree.io (бесплатно),
   // 2) создайте форму с получателем hello@offsyanka.ru,
   // 3) вставьте её ID вместо XXXXXXXX ниже.
-  var FORM_ENDPOINT = 'https://formspree.io/f/XXXXXXXX';
+  var FORM_ENDPOINT = 'https://formspree.io/f/mwvdrlgl';
 
   function open(){ modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
   function close(){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
