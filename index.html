@@ -476,6 +476,25 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   color:var(--ink);opacity:.45;}
 /* reserved strip for the 2 order buttons (added later) — ~1cm */
 .tile .actions{flex:0 0 auto;height:40px;}
+/* ---------- Interactive apple card (hover plays a clip) ---------- */
+.tile.apple .photo{position:relative;aspect-ratio:3/4;overflow:hidden;background:var(--cream);}
+/* resting first-frame image keeps the box height */
+.tile.apple .rest{position:relative;z-index:1;width:100%;height:100%;object-fit:cover;display:block;}
+.tile.apple .tile-vid{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;
+  z-index:2;opacity:0;pointer-events:none;
+  transition:opacity .5s ease;   /* smooth cross-fade in/out */
+}
+.tile.apple.playing .tile-vid{opacity:1;}
+/* order/description buttons — centred under the pack, inside the card */
+.tile.apple .tile-actions{
+  position:absolute;left:14px;right:14px;bottom:14px;z-index:4;
+  display:flex;gap:12px;justify-content:center;
+  opacity:0;transform:translateY(12px);
+  transition:opacity .35s ease, transform .35s ease;
+}
+.tile.apple:hover .tile-actions{opacity:1;transform:none;transition-delay:.2s;}
+
 /* ---------- Interactive vanilla card ---------- */
 .tile.vanilla .photo{position:relative;aspect-ratio:3/4;overflow:hidden;background:var(--cream);}
 /* pack stays in-flow so it defines the box height (avoids collapsed aspect-ratio) */
@@ -1194,8 +1213,15 @@ a:focus-visible,button:focus-visible,input:focus-visible{
         <div class="actions"></div>
       </article>
 
-      <article class="tile">
-        <div class="photo"><img src="images/card1.png" alt="OFF Сянка — Яблоко с корицей" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-06'}))"></div>
+      <article class="tile apple">
+        <div class="photo">
+          <img class="rest" src="images/apple-poster.jpg" alt="OFF Сянка — Яблоко с корицей" loading="lazy">
+          <video class="tile-vid" src="images/ani1.1.mp4" muted playsinline preload="metadata" poster="images/apple-poster.jpg"></video>
+          <div class="tile-actions">
+            <a class="tile-btn ozon" href="#" target="_blank" rel="noopener">Заказать на OZON</a>
+            <a class="tile-btn desc" href="#">Описание</a>
+          </div>
+        </div>
         <h3>Яблоко с корицей</h3>
         <div class="actions"></div>
       </article>
@@ -1756,6 +1782,27 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   });
   document.addEventListener('keydown', function(e){
     if(e.key==='Escape') document.querySelectorAll('.modal.open').forEach(close);
+  });
+})();
+
+// Apple flavor card: play the clip on hover, freeze on last frame, cross-fade back on leave.
+(function(){
+  var tile=document.querySelector('.tile.apple');
+  if(!tile) return;
+  var v=tile.querySelector('.tile-vid');
+  if(!v) return;
+  v.muted=true; v.loop=false; v.playsInline=true;
+  var resetT=null;
+  tile.addEventListener('mouseenter', function(){
+    clearTimeout(resetT);
+    tile.classList.add('playing');
+    try{ v.currentTime=0; }catch(e){}
+    v.play().catch(function(){});
+  });
+  tile.addEventListener('mouseleave', function(){
+    tile.classList.remove('playing');            // fade video out → reveal resting first frame
+    clearTimeout(resetT);
+    resetT=setTimeout(function(){ v.pause(); try{ v.currentTime=0; }catch(e){} }, 520);
   });
 })();
 
