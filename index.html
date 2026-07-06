@@ -476,6 +476,42 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   color:var(--ink);opacity:.45;}
 /* reserved strip for the 2 order buttons (added later) — ~1cm */
 .tile .actions{flex:0 0 auto;height:40px;}
+/* ---------- Interactive vanilla card ---------- */
+.tile.vanilla .photo{position:relative;aspect-ratio:3/4;overflow:hidden;background:var(--cream);}
+/* pack stays in-flow so it defines the box height (avoids collapsed aspect-ratio) */
+.tile.vanilla .pack{position:relative;z-index:3;width:100%;height:100%;object-fit:contain;display:block;padding:0;}
+.tile.vanilla .eff{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;
+  z-index:1;opacity:0;transform:translateY(58px) scale(.92);pointer-events:none;
+  transition:opacity .5s ease, transform .78s cubic-bezier(.2,.75,.25,1);
+}
+/* leave order (top → down: milk first, ice cream last) */
+.tile.vanilla .eff1{transition-delay:.30s;}
+.tile.vanilla .eff2{transition-delay:.20s;}
+.tile.vanilla .eff3{transition-delay:.10s;}
+.tile.vanilla .eff4{transition-delay:0s;}
+/* hover order (bottom → up: ice cream first, milk last) */
+.tile.vanilla:hover .eff{opacity:1;transform:none;}
+.tile.vanilla:hover .eff1{transition-delay:0s;}
+.tile.vanilla:hover .eff2{transition-delay:.13s;}
+.tile.vanilla:hover .eff3{transition-delay:.26s;}
+.tile.vanilla:hover .eff4{transition-delay:.39s;}
+/* order/description buttons at the bottom */
+.tile.vanilla .tile-actions{
+  position:absolute;left:10px;right:10px;bottom:12px;z-index:4;
+  display:flex;gap:8px;opacity:0;transform:translateY(12px);
+  transition:opacity .35s ease, transform .35s ease;
+}
+.tile.vanilla:hover .tile-actions{opacity:1;transform:none;transition-delay:.22s;}
+.tile-btn{
+  flex:1;text-align:center;padding:10px 6px;border-radius:10px;cursor:pointer;
+  font-family:inherit;font-weight:800;text-transform:uppercase;font-size:11px;
+  letter-spacing:.02em;line-height:1.05;text-decoration:none;
+}
+.tile-btn.ozon{background:var(--red);color:#fff;}
+.tile-btn.desc{background:var(--cream);color:var(--ink);border:1.6px solid var(--ink);}
+.tile-btn:hover{filter:brightness(1.06);}
+
 /* product name — top, centred, chocolate, Russo One */
 .tile h3{
   position:absolute;top:18px;left:50%;transform:translateX(-50%);
@@ -1140,8 +1176,18 @@ a:focus-visible,button:focus-visible,input:focus-visible{
         <div class="actions"></div>
       </article>
 
-      <article class="tile">
-        <div class="photo"><img src="images/card10.png" alt="OFF Сянка — Ванильное мороженое" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-03'}))"></div>
+      <article class="tile vanilla">
+        <div class="photo">
+          <img class="eff eff1" src="images/eff1.png" alt="" aria-hidden="true" loading="lazy">
+          <img class="eff eff2" src="images/eff2.png" alt="" aria-hidden="true" loading="lazy">
+          <img class="eff eff3" src="images/eff3.png" alt="" aria-hidden="true" loading="lazy">
+          <img class="eff eff4" src="images/eff4.png" alt="" aria-hidden="true" loading="lazy">
+          <img class="pack" src="images/vanilla.png" alt="OFF Сянка — Ванильное мороженое" loading="lazy">
+          <div class="tile-actions">
+            <a class="tile-btn ozon" href="#" target="_blank" rel="noopener">Заказать на OZON</a>
+            <a class="tile-btn desc" href="#">Описание</a>
+          </div>
+        </div>
         <h3>Ванильное мороженое</h3>
         <div class="actions"></div>
       </article>
