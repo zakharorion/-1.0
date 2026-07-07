@@ -380,11 +380,13 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 /* ---------- Partnership ---------- */
 .partner-band{
   display:flex;align-items:center;justify-content:space-between;gap:40px;
-  border:none;border-radius:32px;
+  border:none;border-radius:0;
   background-color:var(--ink);
   background-image:radial-gradient(rgba(240,237,231,.10) 1px,transparent 1.6px);
   background-size:12px 12px;
-  padding:64px 60px;min-height:320px;flex-wrap:nowrap;
+  padding:64px clamp(28px,6vw,90px);min-height:320px;flex-wrap:nowrap;
+  /* full-bleed: frame spans the whole page width */
+  width:100vw;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;
 }
 .partner-text{
   font-weight:800;text-transform:uppercase;line-height:1.12;
@@ -559,6 +561,8 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   border-top:2px dashed var(--ink);
   border-bottom:2px dashed var(--ink);
   padding:40px 0;
+  /* full-bleed: dashed frame + marquee span the whole page width */
+  width:100vw;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;
 }
 .why-marquee{
   width:100%;overflow:hidden;
@@ -715,8 +719,10 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 /* ---------- Bundle ---------- */
 .bundle{
   background:var(--ink);color:var(--cream);
-  padding:clamp(32px,5vw,55px);
+  padding:clamp(32px,5vw,55px) clamp(28px,6vw,90px);
   display:flex;flex-wrap:wrap;align-items:center;gap:36px 44px;
+  /* full-bleed: frame spans the whole page width */
+  width:100vw;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;
 }
 .bundle .copy{flex:1 1 300px;min-width:280px;}
 .bundle .bundle-photos{flex:1 1 340px;}
@@ -1909,7 +1915,7 @@ Array.prototype.forEach.call(document.querySelectorAll('.tile.has-vid'), functio
 (function(){
   var car = document.getElementById('prodcar');
   if(!car) return;
-  var INTERVAL = 5000;
+  var INTERVAL = 2500;
   var slides = Array.prototype.slice.call(car.querySelectorAll('.fcar-slide'));
   var pills  = Array.prototype.slice.call(car.querySelectorAll('.fcar-pill'));
   var TOTAL  = slides.length;
