@@ -379,22 +379,27 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 
 /* ---------- Partnership ---------- */
 .partner-band{
-  display:flex;align-items:center;justify-content:space-between;gap:40px;
+  display:flex;align-items:center;justify-content:center;
   border:none;border-radius:0;
   background-color:var(--ink);
   background-image:radial-gradient(rgba(240,237,231,.10) 1px,transparent 1.6px);
   background-size:12px 12px;
-  padding:64px clamp(28px,6vw,90px);min-height:320px;flex-wrap:nowrap;
+  padding:64px clamp(28px,6vw,90px);min-height:320px;
   /* full-bleed: frame spans the whole page width */
   width:100vw;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;
+}
+/* text + button grouped and centred on the page */
+.partner-inner{
+  display:flex;align-items:center;justify-content:center;flex-wrap:nowrap;
+  gap:clamp(28px,4vw,56px);max-width:var(--page-max);width:100%;
 }
 .partner-text{
   font-weight:800;text-transform:uppercase;line-height:1.12;
   font-size:clamp(24px,2.6vw,34px);letter-spacing:var(--tk-h-sm);
-  text-align:left;max-width:62%;margin:0;color:var(--cream);
+  text-align:left;margin:0;color:var(--cream);
 }
 .btn-apply{
-  flex:none;margin-left:auto;cursor:pointer;font-family:inherit;
+  flex:none;cursor:pointer;font-family:inherit;
   display:flex;align-items:center;justify-content:center;
   background:var(--red);color:#fff;border:none;border-radius:30px;
   padding:46px 32px;min-width:0;text-align:center;
@@ -720,9 +725,14 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 .bundle{
   background:var(--ink);color:var(--cream);
   padding:clamp(32px,5vw,55px) clamp(28px,6vw,90px);
-  display:flex;flex-wrap:wrap;align-items:center;gap:36px 44px;
+  display:flex;justify-content:center;
   /* full-bleed: frame spans the whole page width */
   width:100vw;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;
+}
+/* content grouped and centred on the page */
+.bundle-inner{
+  display:flex;flex-wrap:wrap;align-items:center;gap:36px 44px;
+  max-width:var(--page-max);width:100%;
 }
 .bundle .copy{flex:1 1 300px;min-width:280px;}
 .bundle .bundle-photos{flex:1 1 340px;}
@@ -912,49 +922,49 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 .fcar{max-width:1040px;margin:0 auto;}
 .fcar-card{
   position:relative;border:1.5px solid var(--ink);border-radius:24px;
-  background:var(--cream);overflow:hidden;padding:44px;
+  background:var(--cream);overflow:hidden;padding:26px 30px;
 }
 /* slides: only the active one shows */
 .fcar-slide{display:none;}
 .fcar-slide.is-active{display:block;animation:fcarIn .45s ease;}
 @keyframes fcarIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
 /* per-step layout: content left, media right */
-.fstep{display:grid;grid-template-columns:1.25fr 1fr;gap:32px;align-items:stretch;}
-.fstep-main{display:flex;flex-direction:column;gap:16px;min-width:0;}
+.fstep{display:grid;grid-template-columns:1.25fr 1fr;gap:26px;align-items:stretch;}
+.fstep-main{display:flex;flex-direction:column;gap:11px;min-width:0;}
 .fcar-kicker{
   font-family:var(--font-mono);font-size:13px;text-transform:uppercase;
   letter-spacing:0.06em;color:var(--red);
 }
 .fcar-title{
-  font-weight:800;text-transform:uppercase;font-size:clamp(22px,3vw,34px);
-  line-height:1.05;letter-spacing:var(--tk-h-sm);
+  font-weight:800;text-transform:uppercase;font-size:clamp(20px,2.4vw,28px);
+  line-height:1.04;letter-spacing:var(--tk-h-sm);
 }
-.fstep-sub{font-size:15.5px;line-height:1.5;color:var(--ink);opacity:.82;}
-/* four square text cells */
-.fstep-cells{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:4px;}
+.fstep-sub{font-size:13.5px;line-height:1.4;color:var(--ink);opacity:.82;}
+/* four compact text cells (size to content so the card fits one screen) */
+.fstep-cells{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:2px;}
 .fcell{
-  aspect-ratio:1;border:1.5px solid var(--ink);border-radius:16px;
-  background:var(--cream);padding:16px;display:flex;flex-direction:column;gap:10px;
+  border:1.5px solid var(--ink);border-radius:14px;
+  background:var(--cream);padding:11px 13px;display:flex;flex-direction:column;gap:7px;
   overflow:hidden;
 }
 .fcell-n{
   display:inline-flex;align-items:center;justify-content:center;flex:none;
-  width:26px;height:26px;border-radius:999px;background:var(--ink);color:#fff;
-  font-family:var(--font-mono);font-size:13px;
+  width:22px;height:22px;border-radius:999px;background:var(--ink);color:#fff;
+  font-family:var(--font-mono);font-size:12px;
 }
-.fcell p{font-size:12.5px;line-height:1.36;color:var(--ink);}
+.fcell p{font-size:11.5px;line-height:1.3;color:var(--ink);}
 /* orange result box */
 .fstep-result{
-  background:var(--red);color:var(--ink);border-radius:16px;padding:20px 22px;
-  display:flex;flex-direction:column;gap:8px;
+  background:var(--red);color:var(--ink);border-radius:14px;padding:13px 16px;
+  display:flex;flex-direction:column;gap:5px;margin-top:auto;
 }
 .fstep-result-lbl{
-  font-family:var(--font-mono);font-size:12px;text-transform:uppercase;
+  font-family:var(--font-mono);font-size:11px;text-transform:uppercase;
   letter-spacing:0.06em;font-weight:600;
 }
-.fstep-result p{font-size:15px;line-height:1.45;font-weight:600;}
+.fstep-result p{font-size:13px;line-height:1.38;font-weight:600;}
 /* media column */
-.fstep-media{position:relative;min-height:260px;border-radius:18px;overflow:hidden;}
+.fstep-media{position:relative;min-height:220px;border-radius:18px;overflow:hidden;}
 .fstep-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
 .fcar-ph{
   position:absolute;inset:0;border-radius:18px;border:1.5px dashed rgba(35,31,32,.32);
@@ -962,7 +972,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   font-family:var(--font-mono);font-size:13px;text-transform:uppercase;
   letter-spacing:0.04em;color:rgba(35,31,32,.5);text-align:center;padding:0 16px;
 }
-.fcar-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:30px;}
+.fcar-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:20px;}
 .fcar-pill{
   display:inline-flex;align-items:center;gap:9px;
   border:1.5px solid var(--ink);border-radius:999px;background:var(--cream);color:var(--ink);
@@ -1002,7 +1012,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   .steps{grid-template-columns:1fr;}
   .bundle{grid-template-columns:1fr;}
   .bundle-photos{grid-template-columns:repeat(5,1fr);}
-  .partner-band{flex-direction:column;align-items:stretch;text-align:center;}
+  .partner-inner{flex-direction:column;align-items:stretch;text-align:center;gap:24px;}
   .partner-text{text-align:center;max-width:none;}
   .btn-apply{width:100%;}
   .social-grid{grid-template-columns:repeat(2,1fr);}
@@ -1502,8 +1512,10 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   <section class="section">
     <div class="sec-head"><h2>Сотрудничество</h2></div>
     <div class="partner-band">
-      <p class="partner-text">Развиваем<br>продажи вместе с<br>OFF&nbsp;Сянка бренд</p>
-      <button type="button" class="btn-apply" id="applyOpen">Оставить заявку</button>
+      <div class="partner-inner">
+        <p class="partner-text">Развиваем<br>продажи вместе с<br>OFF&nbsp;Сянка бренд</p>
+        <button type="button" class="btn-apply" id="applyOpen">Оставить заявку</button>
+      </div>
     </div>
   </section>
 </div>
@@ -1600,6 +1612,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
         <span class="social-ic"><svg viewBox="0 0 24 24" role="img" aria-label="Instagram"><defs><linearGradient id="igGrad" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#FEDA75"/><stop offset=".25" stop-color="#FA7E1E"/><stop offset=".5" stop-color="#D62976"/><stop offset=".75" stop-color="#962FBF"/><stop offset="1" stop-color="#4F5BD5"/></linearGradient></defs><path fill="url(#igGrad)" d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227a3.81 3.81 0 0 1-.899 1.382 3.744 3.744 0 0 1-1.38.896c-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421a3.716 3.716 0 0 1-1.379-.899 3.644 3.644 0 0 1-.9-1.38c-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06zm0 3.678a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm7.846-10.405a1.441 1.441 0 0 1-2.88 0 1.44 1.44 0 0 1 2.88 0z"/></svg></span>
         <span class="social-txt"><span class="social-t">Фото и сторис</span><span class="social-d">Instagram</span></span>
       </a>
+      <!-- Второй ряд соцсетей — временно скрыт, может понадобиться позже:
       <a class="social-card" href="#" target="_blank" rel="noopener">
         <span class="social-ic"><svg viewBox="0 0 24 24" role="img" aria-label="YouTube"><path fill="#FF0000" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></span>
         <span class="social-txt"><span class="social-t">Рецепты и видео</span><span class="social-d">YouTube</span></span>
@@ -1612,6 +1625,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
         <span class="social-ic"><svg viewBox="0 0 24 24" role="img" aria-label="WhatsApp"><path fill="#25D366" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.71.306 1.263.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.885-9.885 9.885M20.52 3.449C18.24 1.245 15.24 0 12.045 0 5.463 0 .104 5.359.101 11.892c0 2.096.549 4.14 1.595 5.945L0 24l6.335-1.652a11.9 11.9 0 0 0 5.71 1.454h.005c6.582 0 11.941-5.359 11.944-11.945a11.86 11.86 0 0 0-3.474-8.408Z"/></svg></span>
         <span class="social-txt"><span class="social-t">Пиши нам</span><span class="social-d">WhatsApp</span></span>
       </a>
+      -->
     </div>
   </section>
 </div>
@@ -1620,6 +1634,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 <div class="wrap" id="bundle">
   <section class="section">
     <div class="bundle">
+      <div class="bundle-inner">
       <div class="copy">
         <span class="bundle-kick">Переходи на OZON</span>
         <h2>Все десять вкусов в одном наборе</h2>
@@ -1638,6 +1653,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
         <div class="photo"><img src="images/strawberry.png" alt="Клубника со сливками" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'10'}))"></div>
       </div>
       <div class="bundle-cta-wrap"><a href="#" target="_blank" rel="noopener" class="bundle-cta">Заказать на OZON</a></div>
+      </div>
     </div>
   </section>
 </div>
@@ -1930,17 +1946,26 @@ Array.prototype.forEach.call(document.querySelectorAll('.tile.has-vid'), functio
       dot.textContent = idx < cur ? '✓' : String(idx + 1);
     });
   }
-  function start(){ stop(); timer = setInterval(function(){ render(cur + 1); }, INTERVAL); }
+  var interacted = false;   // true once the user drives the carousel by hand
+  function start(){ if(interacted) return; stop(); timer = setInterval(function(){ render(cur + 1); }, INTERVAL); }
   function stop(){ if(timer){ clearInterval(timer); timer = null; } }
 
+  // Any manual navigation stops the autoplay until the user scrolls out of the section.
   pills.forEach(function(p, idx){
-    p.addEventListener('click', function(){ render(idx); start(); });
+    p.addEventListener('click', function(){ interacted = true; stop(); render(idx); });
   });
   render(0); start();
 
   if('IntersectionObserver' in window){
     new IntersectionObserver(function(es){
-      es.forEach(function(e){ e.isIntersecting ? start() : stop(); });
+      es.forEach(function(e){
+        if(e.isIntersecting){
+          start();                 // (re)starts only if the user hasn't taken over
+        } else {
+          stop();
+          interacted = false;      // left the section → next time it autoplays again
+        }
+      });
     }, {threshold:0}).observe(car);
   }
 })();
