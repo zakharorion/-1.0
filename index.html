@@ -477,23 +477,23 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 /* reserved strip for the 2 order buttons (added later) — ~1cm */
 .tile .actions{flex:0 0 auto;height:40px;}
 /* ---------- Interactive apple card (hover plays a clip) ---------- */
-.tile.apple .photo{position:relative;aspect-ratio:3/4;overflow:hidden;background:var(--cream);}
+.tile.has-vid .photo{position:relative;aspect-ratio:3/4;overflow:hidden;background:var(--cream);}
 /* resting first-frame image keeps the box height */
-.tile.apple .rest{position:relative;z-index:1;width:100%;height:100%;object-fit:cover;display:block;}
-.tile.apple .tile-vid{
+.tile.has-vid .rest{position:relative;z-index:1;width:100%;height:100%;object-fit:cover;display:block;}
+.tile.has-vid .tile-vid{
   position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;
   z-index:2;opacity:0;pointer-events:none;
   transition:opacity .5s ease;   /* smooth cross-fade in/out */
 }
-.tile.apple.playing .tile-vid{opacity:1;}
+.tile.has-vid.playing .tile-vid{opacity:1;}
 /* order/description buttons — centred under the pack, inside the card */
-.tile.apple .tile-actions{
+.tile.has-vid .tile-actions{
   position:absolute;left:14px;right:14px;bottom:14px;z-index:4;
   display:flex;gap:12px;justify-content:center;
   opacity:0;transform:translateY(12px);
   transition:opacity .35s ease, transform .35s ease;
 }
-.tile.apple:hover .tile-actions{opacity:1;transform:none;transition-delay:.2s;}
+.tile.has-vid:hover .tile-actions{opacity:1;transform:none;transition-delay:.2s;}
 
 /* ---------- Interactive vanilla card ---------- */
 .tile.vanilla .photo{position:relative;aspect-ratio:3/4;overflow:hidden;background:var(--cream);}
@@ -1183,37 +1183,72 @@ a:focus-visible,button:focus-visible,input:focus-visible{
     </div>
     <div class="grid">
 
-      <article class="tile">
-        <div class="photo"><img src="images/card3.png" alt="OFF Сянка — Арахис и солёная карамель" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-01'}))"></div>
+      <article class="tile has-vid">
+        <div class="photo">
+          <img class="rest" src="images/card3-poster.jpg" alt="OFF Сянка — Арахис и солёная карамель" loading="lazy">
+          <video class="tile-vid" src="images/card3.33.mp4" muted playsinline preload="metadata" poster="images/card3-poster.jpg"></video>
+          <div class="tile-actions">
+            <a class="tile-btn ozon" href="#" target="_blank" rel="noopener">Заказать на OZON</a>
+            <a class="tile-btn desc" href="#">Описание</a>
+          </div>
+        </div>
         <h3>Арахис и солёная карамель</h3>
         <div class="actions"></div>
       </article>
 
-      <article class="tile">
-        <div class="photo"><img src="images/card2.png" alt="OFF Сянка — Банан с арахисовой пастой и шоколадом" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-02'}))"></div>
+      <article class="tile has-vid">
+        <div class="photo">
+          <img class="rest" src="images/card2-poster.jpg" alt="OFF Сянка — Банан с арахисовой пастой и шоколадом" loading="lazy">
+          <video class="tile-vid" src="images/card2.22.mp4" muted playsinline preload="metadata" poster="images/card2-poster.jpg"></video>
+          <div class="tile-actions">
+            <a class="tile-btn ozon" href="#" target="_blank" rel="noopener">Заказать на OZON</a>
+            <a class="tile-btn desc" href="#">Описание</a>
+          </div>
+        </div>
         <h3>Банан с арахисовой пастой и шоколадом</h3>
         <div class="actions"></div>
       </article>
 
-      <article class="tile">
-        <div class="photo"><img src="images/card10.png" alt="OFF Сянка — Ванильное мороженое" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-03'}))"></div>
+      <article class="tile has-vid">
+        <div class="photo">
+          <img class="rest" src="images/card10-poster.jpg" alt="OFF Сянка — Ванильное мороженое" loading="lazy">
+          <video class="tile-vid" src="images/card10.1010.mp4" muted playsinline preload="metadata" poster="images/card10-poster.jpg"></video>
+          <div class="tile-actions">
+            <a class="tile-btn ozon" href="#" target="_blank" rel="noopener">Заказать на OZON</a>
+            <a class="tile-btn desc" href="#">Описание</a>
+          </div>
+        </div>
         <h3>Ванильное мороженое</h3>
         <div class="actions"></div>
       </article>
 
-      <article class="tile">
-        <div class="photo"><img src="images/card5.png" alt="OFF Сянка — Вишнёвый пирог" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-04'}))"></div>
+      <article class="tile has-vid">
+        <div class="photo">
+          <img class="rest" src="images/card5-poster.jpg" alt="OFF Сянка — Вишнёвый пирог" loading="lazy">
+          <video class="tile-vid" src="images/card5.55.mp4" muted playsinline preload="metadata" poster="images/card5-poster.jpg"></video>
+          <div class="tile-actions">
+            <a class="tile-btn ozon" href="#" target="_blank" rel="noopener">Заказать на OZON</a>
+            <a class="tile-btn desc" href="#">Описание</a>
+          </div>
+        </div>
         <h3>Вишнёвый пирог</h3>
         <div class="actions"></div>
       </article>
 
-      <article class="tile">
-        <div class="photo"><img src="images/card4.png" alt="OFF Сянка — Глазированный пончик с черникой" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-05'}))"></div>
+      <article class="tile has-vid">
+        <div class="photo">
+          <img class="rest" src="images/card4-poster.jpg" alt="OFF Сянка — Глазированный пончик с черникой" loading="lazy">
+          <video class="tile-vid" src="images/card4.44.mp4" muted playsinline preload="metadata" poster="images/card4-poster.jpg"></video>
+          <div class="tile-actions">
+            <a class="tile-btn ozon" href="#" target="_blank" rel="noopener">Заказать на OZON</a>
+            <a class="tile-btn desc" href="#">Описание</a>
+          </div>
+        </div>
         <h3>Пончик с черникой</h3>
         <div class="actions"></div>
       </article>
 
-      <article class="tile apple">
+      <article class="tile has-vid">
         <div class="photo">
           <img class="rest" src="images/apple-poster.jpg" alt="OFF Сянка — Яблоко с корицей" loading="lazy">
           <video class="tile-vid" src="images/ani1.1.mp4" muted playsinline preload="metadata" poster="images/apple-poster.jpg"></video>
@@ -1226,26 +1261,54 @@ a:focus-visible,button:focus-visible,input:focus-visible{
         <div class="actions"></div>
       </article>
 
-      <article class="tile">
-        <div class="photo"><img src="images/card6.png" alt="OFF Сянка — Рулет с корицей и глазурью" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-07'}))"></div>
+      <article class="tile has-vid">
+        <div class="photo">
+          <img class="rest" src="images/card6-poster.jpg" alt="OFF Сянка — Рулет с корицей и глазурью" loading="lazy">
+          <video class="tile-vid" src="images/card6.66.mp4" muted playsinline preload="metadata" poster="images/card6-poster.jpg"></video>
+          <div class="tile-actions">
+            <a class="tile-btn ozon" href="#" target="_blank" rel="noopener">Заказать на OZON</a>
+            <a class="tile-btn desc" href="#">Описание</a>
+          </div>
+        </div>
         <h3>Рулет с корицей</h3>
         <div class="actions"></div>
       </article>
 
-      <article class="tile">
-        <div class="photo"><img src="images/card7.png" alt="OFF Сянка — Печенье со сливками" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-08'}))"></div>
+      <article class="tile has-vid">
+        <div class="photo">
+          <img class="rest" src="images/card7-poster.jpg" alt="OFF Сянка — Печенье со сливками" loading="lazy">
+          <video class="tile-vid" src="images/card7.77.mp4" muted playsinline preload="metadata" poster="images/card7-poster.jpg"></video>
+          <div class="tile-actions">
+            <a class="tile-btn ozon" href="#" target="_blank" rel="noopener">Заказать на OZON</a>
+            <a class="tile-btn desc" href="#">Описание</a>
+          </div>
+        </div>
         <h3>Печенье со сливками</h3>
         <div class="actions"></div>
       </article>
 
-      <article class="tile">
-        <div class="photo"><img src="images/card9.png" alt="OFF Сянка — Клубника со сливками" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-10'}))"></div>
+      <article class="tile has-vid">
+        <div class="photo">
+          <img class="rest" src="images/card9-poster.jpg" alt="OFF Сянка — Клубника со сливками" loading="lazy">
+          <video class="tile-vid" src="images/card9.99.mp4" muted playsinline preload="metadata" poster="images/card9-poster.jpg"></video>
+          <div class="tile-actions">
+            <a class="tile-btn ozon" href="#" target="_blank" rel="noopener">Заказать на OZON</a>
+            <a class="tile-btn desc" href="#">Описание</a>
+          </div>
+        </div>
         <h3>Клубника со сливками</h3>
         <div class="actions"></div>
       </article>
 
-      <article class="tile">
-        <div class="photo"><img src="images/card8.png" alt="OFF Сянка — Фруктовые хлопья" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph-fallback',textContent:'OS-09'}))"></div>
+      <article class="tile has-vid">
+        <div class="photo">
+          <img class="rest" src="images/card8-poster.jpg" alt="OFF Сянка — Фруктовые хлопья" loading="lazy">
+          <video class="tile-vid" src="images/card8.88.mp4" muted playsinline preload="metadata" poster="images/card8-poster.jpg"></video>
+          <div class="tile-actions">
+            <a class="tile-btn ozon" href="#" target="_blank" rel="noopener">Заказать на OZON</a>
+            <a class="tile-btn desc" href="#">Описание</a>
+          </div>
+        </div>
         <h3>Фруктовые хлопья</h3>
         <div class="actions"></div>
       </article>
@@ -1785,10 +1848,8 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   });
 })();
 
-// Apple flavor card: play the clip on hover, freeze on last frame, cross-fade back on leave.
-(function(){
-  var tile=document.querySelector('.tile.apple');
-  if(!tile) return;
+// Flavor cards with a clip: play on hover, freeze on last frame, cross-fade back on leave.
+Array.prototype.forEach.call(document.querySelectorAll('.tile.has-vid'), function(tile){
   var v=tile.querySelector('.tile-vid');
   if(!v) return;
   v.muted=true; v.loop=false; v.playsInline=true;
@@ -1804,7 +1865,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
     clearTimeout(resetT);
     resetT=setTimeout(function(){ v.pause(); try{ v.currentTime=0; }catch(e){} }, 520);
   });
-})();
+});
 
 // About section: staggered scroll-reveal (heading → mission → philosophy).
 (function(){
