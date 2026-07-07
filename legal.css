@@ -31,7 +31,37 @@ body{
   margin:44px 0 18px;font-weight:600;font-size:clamp(20px,2.4vw,28px);
   letter-spacing:0.01em;color:var(--ink);
 }
-.legal-body{font-size:16px;letter-spacing:0.01em;color:var(--ink);opacity:.75;}
+/* ---------- Structured legal document body ---------- */
+.legal-body{font-size:15.5px;line-height:1.7;letter-spacing:0.01em;color:var(--ink);}
+.legal-body > h2{
+  margin:38px 0 12px;font-weight:800;text-transform:uppercase;
+  font-size:clamp(17px,2vw,21px);letter-spacing:0.02em;line-height:1.2;color:var(--ink);
+}
+.legal-body > h2:first-child{margin-top:8px;}
+.legal-body h3{margin:22px 0 8px;font-weight:700;font-size:16px;color:var(--ink);}
+.legal-body p{margin:0 0 12px;color:var(--ink);opacity:.85;}
+.legal-body ul{margin:0 0 14px;padding-left:22px;}
+.legal-body li{margin:0 0 7px;color:var(--ink);opacity:.85;}
+.legal-body a{color:var(--red);word-break:break-word;}
+/* purpose-of-processing table (section 6) */
+.legal-table{width:100%;border-collapse:collapse;margin:6px 0 18px;font-size:14.5px;}
+.legal-table th,.legal-table td{
+  border:1.5px solid rgba(35,31,32,.22);padding:12px 14px;text-align:left;vertical-align:top;
+}
+.legal-table th{
+  width:34%;background:rgba(74,44,24,.06);font-weight:700;color:var(--ink);
+}
+.legal-table td{opacity:.85;}
+.legal-table ul{margin:0;padding-left:18px;}
+.legal-table li{margin:0 0 5px;}
+/* contact block (agreement, section 10) */
+.legal-contact{
+  margin:8px 0 0;padding:20px 22px;border:1.5px solid rgba(35,31,32,.22);border-radius:12px;
+  background:rgba(74,44,24,.05);
+}
+.legal-contact p{margin:0 0 6px;opacity:.9;}
+.legal-contact p:last-child{margin-bottom:0;}
+.legal-contact strong{font-weight:700;}
 .doc a{color:var(--red);}
 
 /* ---------- Shared footer (orange-red, torn top) ---------- */
