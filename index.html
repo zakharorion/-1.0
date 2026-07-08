@@ -2111,7 +2111,7 @@ Array.prototype.forEach.call(document.querySelectorAll('.tile.has-vid'), functio
       return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td></tr>';
     }).join('');
     elPhoto.innerHTML = f.photo
-      ? '<video src="'+f.photo+'" autoplay muted loop playsinline preload="auto"></video>'
+      ? '<video src="'+f.photo+'" autoplay muted playsinline preload="auto"></video>'
       : '<span class="bento-photo-ph">Фото<br>скоро</span>';
     lastFocus=document.activeElement;
     modal.classList.add('open');
