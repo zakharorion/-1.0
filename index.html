@@ -1040,6 +1040,68 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   *{animation:none !important;transition:none !important;scroll-behavior:auto !important;}
 }
 </style>
+
+<style>
+/* ---------- Flavor description modal (bento) ---------- */
+.fmodal{position:fixed;inset:0;z-index:120;display:none;}
+.fmodal.open{display:block;}
+.fmodal-overlay{position:absolute;inset:0;background:rgba(28,18,10,.62);}
+.fmodal-box{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:min(940px,94vw);max-height:92vh;overflow:auto;
+  background:var(--cream);border:2px solid var(--ink);border-radius:26px;
+  padding:24px clamp(16px,3vw,30px) clamp(20px,3vw,30px);box-shadow:0 30px 90px rgba(0,0,0,.45);
+}
+.fmodal-close{
+  position:absolute;top:14px;right:14px;width:38px;height:38px;border-radius:999px;
+  border:1.6px solid var(--ink);background:var(--cream);cursor:pointer;z-index:2;
+  display:flex;align-items:center;justify-content:center;transition:background .2s ease;
+}
+.fmodal-close:hover{background:#e7dfd3;}
+.fmodal-close svg{width:18px;height:18px;stroke:var(--ink);stroke-width:2.2;}
+.fmodal-title{
+  font-weight:800;text-transform:uppercase;color:#4a2c18;
+  font-size:clamp(20px,2.6vw,30px);letter-spacing:0.02em;line-height:1.05;
+  margin:2px 0 18px;padding-right:44px;
+}
+.bento{
+  display:grid;gap:14px;grid-template-columns:0.82fr 1.18fr;
+  grid-template-areas:"photo desc" "photo compo" "nutri nutri";
+}
+.bento > div{
+  background:#fffdf9;border-radius:18px;padding:18px 20px;
+  box-shadow:0 0 0 1.5px rgba(74,44,24,.16), 0 0 24px 2px rgba(120,64,26,.42);  /* warm brown glow */
+}
+.bento-photo{
+  grid-area:photo;display:flex;align-items:center;justify-content:center;
+  min-height:230px;overflow:hidden;padding:0;background:radial-gradient(circle at 50% 38%,#fff,#f2ece3);
+}
+.bento-photo img,.bento-photo video{width:100%;height:100%;object-fit:cover;display:block;}
+.bento-photo-ph{
+  font-family:var(--font-mono);font-size:12px;letter-spacing:0.05em;text-transform:uppercase;
+  color:rgba(74,44,24,.5);text-align:center;padding:0 12px;
+}
+.bento-desc{grid-area:desc;}
+.bento-compo{grid-area:compo;}
+.bento-nutri{grid-area:nutri;}
+.bento h4{
+  margin:0 0 8px;color:#4a2c18;font-weight:800;text-transform:uppercase;
+  font-size:16px;letter-spacing:0.03em;
+}
+.bento-desc p{margin:0;font-size:14px;line-height:1.55;color:var(--ink);}
+.bento-compo p{margin:0;font-size:12.5px;line-height:1.5;color:var(--ink);opacity:.9;}
+.nutri-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:12px;flex-wrap:wrap;}
+.nutri-big{font-weight:800;text-transform:uppercase;color:#4a2c18;font-size:clamp(16px,2vw,22px);letter-spacing:0.02em;}
+.nutri-serv{font-family:var(--font-mono);font-size:13px;color:var(--ink);opacity:.7;white-space:nowrap;}
+.nutri-table{width:100%;border-collapse:collapse;}
+.nutri-table td{padding:9px 2px;font-size:14px;border-bottom:1px solid rgba(74,44,24,.16);color:var(--ink);}
+.nutri-table tr:last-child td{border-bottom:none;}
+.nutri-table td:last-child{text-align:right;font-weight:700;white-space:nowrap;}
+@media(max-width:640px){
+  .bento{grid-template-columns:1fr;grid-template-areas:"photo" "desc" "compo" "nutri";}
+  .bento-photo{min-height:190px;}
+}
+</style>
 </head>
 <body>
 
@@ -1212,7 +1274,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
           <video class="tile-vid" src="images/card3.33.mp4" muted playsinline preload="metadata" poster="images/card3-poster.jpg"></video>
           <div class="tile-actions">
             <a class="tile-btn ozon" href="#" target="_blank" rel="noopener">Заказать на OZON</a>
-            <a class="tile-btn desc" href="#">Описание</a>
+            <a class="tile-btn desc" href="#" data-flavor="caramel">Описание</a>
           </div>
         </div>
         <h3>Арахис и солёная карамель</h3>
@@ -1225,7 +1287,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
           <video class="tile-vid" src="images/card2.22.mp4" muted playsinline preload="metadata" poster="images/card2-poster.jpg"></video>
           <div class="tile-actions">
             <a class="tile-btn ozon" href="#" target="_blank" rel="noopener">Заказать на OZON</a>
-            <a class="tile-btn desc" href="#">Описание</a>
+            <a class="tile-btn desc" href="#" data-flavor="banana">Описание</a>
           </div>
         </div>
         <h3>Банан с арахисовой пастой и шоколадом</h3>
@@ -1238,7 +1300,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
           <video class="tile-vid" src="images/card10.1010.mp4" muted playsinline preload="metadata" poster="images/card10-poster.jpg"></video>
           <div class="tile-actions">
             <a class="tile-btn ozon" href="#" target="_blank" rel="noopener">Заказать на OZON</a>
-            <a class="tile-btn desc" href="#">Описание</a>
+            <a class="tile-btn desc" href="#" data-flavor="vanilla">Описание</a>
           </div>
         </div>
         <h3>Ванильное мороженое</h3>
@@ -1251,7 +1313,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
           <video class="tile-vid" src="images/card5.55.mp4" muted playsinline preload="metadata" poster="images/card5-poster.jpg"></video>
           <div class="tile-actions">
             <a class="tile-btn ozon" href="#" target="_blank" rel="noopener">Заказать на OZON</a>
-            <a class="tile-btn desc" href="#">Описание</a>
+            <a class="tile-btn desc" href="#" data-flavor="cherry">Описание</a>
           </div>
         </div>
         <h3>Вишнёвый пирог</h3>
@@ -1264,7 +1326,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
           <video class="tile-vid" src="images/card4.44.mp4" muted playsinline preload="metadata" poster="images/card4-poster.jpg"></video>
           <div class="tile-actions">
             <a class="tile-btn ozon" href="#" target="_blank" rel="noopener">Заказать на OZON</a>
-            <a class="tile-btn desc" href="#">Описание</a>
+            <a class="tile-btn desc" href="#" data-flavor="blueberry">Описание</a>
           </div>
         </div>
         <h3>Пончик с черникой</h3>
@@ -1277,7 +1339,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
           <video class="tile-vid" src="images/ani1.1.mp4" muted playsinline preload="metadata" poster="images/apple-poster.jpg"></video>
           <div class="tile-actions">
             <a class="tile-btn ozon" href="#" target="_blank" rel="noopener">Заказать на OZON</a>
-            <a class="tile-btn desc" href="#">Описание</a>
+            <a class="tile-btn desc" href="#" data-flavor="apple">Описание</a>
           </div>
         </div>
         <h3>Яблоко с корицей</h3>
@@ -1290,7 +1352,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
           <video class="tile-vid" src="images/card6.66.mp4" muted playsinline preload="metadata" poster="images/card6-poster.jpg"></video>
           <div class="tile-actions">
             <a class="tile-btn ozon" href="#" target="_blank" rel="noopener">Заказать на OZON</a>
-            <a class="tile-btn desc" href="#">Описание</a>
+            <a class="tile-btn desc" href="#" data-flavor="cinnamon">Описание</a>
           </div>
         </div>
         <h3>Рулет с корицей</h3>
@@ -1303,7 +1365,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
           <video class="tile-vid" src="images/Card7.77.mp4" muted playsinline preload="metadata" poster="images/card7-poster.jpg"></video>
           <div class="tile-actions">
             <a class="tile-btn ozon" href="#" target="_blank" rel="noopener">Заказать на OZON</a>
-            <a class="tile-btn desc" href="#">Описание</a>
+            <a class="tile-btn desc" href="#" data-flavor="cookie">Описание</a>
           </div>
         </div>
         <h3>Печенье со сливками</h3>
@@ -1316,7 +1378,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
           <video class="tile-vid" src="images/card9.99.mp4" muted playsinline preload="metadata" poster="images/card9-poster.jpg"></video>
           <div class="tile-actions">
             <a class="tile-btn ozon" href="#" target="_blank" rel="noopener">Заказать на OZON</a>
-            <a class="tile-btn desc" href="#">Описание</a>
+            <a class="tile-btn desc" href="#" data-flavor="strawberry">Описание</a>
           </div>
         </div>
         <h3>Клубника со сливками</h3>
@@ -1329,7 +1391,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
           <video class="tile-vid" src="images/card8.88.mp4" muted playsinline preload="metadata" poster="images/card8-poster.jpg"></video>
           <div class="tile-actions">
             <a class="tile-btn ozon" href="#" target="_blank" rel="noopener">Заказать на OZON</a>
-            <a class="tile-btn desc" href="#">Описание</a>
+            <a class="tile-btn desc" href="#" data-flavor="fruit">Описание</a>
           </div>
         </div>
         <h3>Фруктовые хлопья</h3>
@@ -2007,5 +2069,69 @@ Array.prototype.forEach.call(document.querySelectorAll('.tile.has-vid'), functio
 })();
 </script>
 
+
+<!-- FLAVOR DESCRIPTION MODAL -->
+<div class="fmodal" id="flavorModal" aria-hidden="true">
+  <div class="fmodal-overlay" data-fclose></div>
+  <div class="fmodal-box" role="dialog" aria-modal="true" aria-labelledby="fmodalTitle">
+    <button type="button" class="fmodal-close" id="fmodalClose" aria-label="Закрыть">
+      <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+    </button>
+    <h3 class="fmodal-title" id="fmodalTitle"></h3>
+    <div class="bento">
+      <div class="bento-photo" id="fmPhoto"><span class="bento-photo-ph">Фото<br>скоро</span></div>
+      <div class="bento-desc"><h4>Описание</h4><p id="fmDesc"></p></div>
+      <div class="bento-compo"><h4>Состав</h4><p id="fmCompo"></p></div>
+      <div class="bento-nutri">
+        <div class="nutri-head"><span class="nutri-big">Пищевая ценность</span><span class="nutri-serv">на порцию 60 г</span></div>
+        <table class="nutri-table"><tbody id="fmNutri"></tbody></table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Flavor description modal (bento). Data is populated on click of a card's "Описание".
+(function(){
+  var FLAVORS = {"caramel": {"title": "Арахис и солёная карамель", "desc": "Нежный вкус солёной карамели с насыщенным арахисом: мягкий, кремовый, с аппетитными ореховыми нотками и деликатным акцентом розовой гималайской соли.", "compo": "Овсяные хлопья без глютена, белковый комплекс (концентрат сывороточного белка, концентрат молочного белка, казеинат натрия, яичный белок), арахис жареный, молоко цельное сухое карамелизованное, олигофруктоза (растворимые пищевые волокна), семена чиа, молоко сухое обезжиренное, пудра финиковая, бамбуковая клетчатка (нерастворимые пищевые волокна), соль розовая гималайская, ароматизаторы идентичные натуральным, экстракт монк фрута (подсластитель), лимонная кислота (регулятор кислотности).", "nutri": [["Белки", "15,2 г"], ["Жиры", "6,0 г"], ["Углеводы", "30,8 г"], ["Пищевые волокна", "5,8 г"], ["Энергетическая ценность", "250 ккал / 1046 кДж"]]}, "banana": {"title": "Банан с арахисовой пастой и шоколадом", "desc": "Любимое сочетание банана, арахисовой пасты и шоколада в нежной овсянке. Мягкий сливочный вкус, яркие фруктовые ноты, насыщенный арахисовый акцент и шоколадное послевкусие.", "compo": "Овсяные хлопья без глютена, белковый комплекс (концентрат сывороточного белка, концентрат молочного белка, казеинат натрия, яичный белок), банан сушеный, арахис жареный, сухой сок банана, какао-порошок алкализованный, семена чиа, бамбуковая клетчатка (нерастворимые пищевые волокна), ароматизаторы идентичные натуральным, экстракт монк фрута (подсластитель), лимонная кислота (регулятор кислотности), соль розовая гималайская.", "nutri": [["Белки", "15,1 г"], ["Жиры", "5,0 г"], ["Углеводы", "31,6 г"], ["Пищевые волокна", "3,6 г"], ["Энергетическая ценность", "238 ккал / 997 кДж"]]}, "vanilla": {"title": "Ванильное мороженое", "desc": "Сливочная нежность ванильного мороженого. Мягкий, кремовый вкус с тонкими сладкими нотками и лёгким ванильным ароматом.", "compo": "Овсяные хлопья без глютена, белковый комплекс (концентрат сывороточного белка, концентрат молочного белка, казеинат натрия, яичный белок), сливки сухие, молоко сухое обезжиренное, олигофруктоза (растворимые пищевые волокна), семена чиа, пудра финиковая, бамбуковая клетчатка (нерастворимые пищевые волокна), ароматизаторы идентичные натуральным, экстракт монк фрута (подсластитель), соль розовая гималайская, лимонная кислота (регулятор кислотности).", "nutri": [["Белки", "15,1 г"], ["Жиры", "4,7 г"], ["Углеводы", "31,9 г"], ["Пищевые волокна", "5,6 г"], ["Энергетическая ценность", "241 ккал / 1009 кДж"]]}, "cherry": {"title": "Вишнёвый пирог", "desc": "Яркий вкус спелой вишни с ароматом домашней выпечки. Мягкий, сочный, с насыщенными ягодными нотками и аппетитным послевкусием любимого пирога.", "compo": "Овсяные хлопья без глютена, белковый комплекс (концентрат сывороточного белка, концентрат молочного белка, казеинат натрия, яичный белок), вишня сушеная, молоко сухое обезжиренное, рисовые шарики (мука рисовая, мука пшеничная, соль), семена чиа, олигофруктоза (растворимые пищевые волокна), бамбуковая клетчатка (нерастворимые пищевые волокна), пудра финиковая, ароматизаторы идентичные натуральным, лимонная кислота (регулятор кислотности), экстракт монк фрута (подсластитель), соль розовая гималайская.", "nutri": [["Белки", "15,0 г"], ["Жиры", "3,1 г"], ["Углеводы", "31,5 г"], ["Пищевые волокна", "4,3 г"], ["Энергетическая ценность", "223 ккал / 931 кДж"]]}, "blueberry": {"title": "Пончик с черникой", "desc": "Сладкий вкус глазированного пончика с насыщенными нотками спелой черники. Мягкий, сливочный, с ароматом свежей выпечки и лёгким ягодным послевкусием.", "compo": "Овсяные хлопья без глютена, белковый комплекс (концентрат сывороточного белка, концентрат молочного белка, казеинат натрия, яичный белок), яблоко сушеное, олигофруктоза (растворимые пищевые волокна), семена чиа, молоко сухое обезжиренное, сухой сок черники, бамбуковая клетчатка (нерастворимые пищевые волокна), соль розовая гималайская, ароматизаторы идентичные натуральным, экстракт монк фрута (подсластитель), лимонная кислота (регулятор кислотности).", "nutri": [["Белки", "14,9 г"], ["Жиры", "3,2 г"], ["Углеводы", "32,3 г"], ["Пищевые волокна", "5,5 г"], ["Энергетическая ценность", "229 ккал / 959 кДж"]]}, "apple": {"title": "Яблоко с корицей", "desc": "Сладость спелых яблок и тонкие нотки корицы создают уютное сочетание, которое напоминает свежеиспечённый яблочный пирог.", "compo": "Овсяные хлопья без глютена, белковый комплекс (концентрат сывороточного белка, концентрат молочного белка, казеинат натрия, яичный белок), яблоко сушеное, семена чиа, молоко сухое обезжиренное, олигофруктоза (растворимые пищевые волокна), пудра финиковая, бамбуковая клетчатка (нерастворимые пищевые волокна), молоко сухое цельное карамелизованное, корица молотая, ароматизаторы идентичные натуральным, экстракт монк фрута (подсластитель), соль розовая гималайская, лимонная кислота (регулятор кислотности).", "nutri": [["Белки", "14,9 г"], ["Жиры", "3,4 г"], ["Углеводы", "32,7 г"], ["Пищевые волокна", "4,4 г"], ["Энергетическая ценность", "230 ккал / 961 кДж"]]}, "cinnamon": {"title": "Рулет с корицей", "desc": "Изысканный вкус ароматного рулета с корицей и нежной глазурью. Бархатистая выпечка, тёплые пряные ноты и мягкая ванильная сладость создают насыщенное десертное удовольствие.", "compo": "Овсяные хлопья без глютена, белковый комплекс (концентрат сывороточного белка, концентрат молочного белка, казеинат натрия, яичный белок), ядра конопли очищенные, молоко сухое обезжиренное, олигофруктоза (растворимые пищевые волокна), семена чиа, пудра финиковая, бамбуковая клетчатка (нерастворимые пищевые волокна), корица молотая, ароматизаторы идентичные натуральным, экстракт монк фрута (подсластитель), соль розовая гималайская, мускатный орех молотый, лимонная кислота (регулятор кислотности).", "nutri": [["Белки", "15,1 г"], ["Жиры", "5,8 г"], ["Углеводы", "31,0 г"], ["Пищевые волокна", "5,5 г"], ["Энергетическая ценность", "248 ккал / 1037 кДж"]]}, "cookie": {"title": "Печенье со сливками", "desc": "Хрустящее печенье и нежные сливки в идеальном балансе. Ничего лишнего.", "compo": "Овсяные хлопья без глютена, белковый комплекс (концентрат сывороточного белка, концентрат молочного белка, казеинат натрия, яичный белок), рисовые шарики с какао (мука рисовая, мука пшеничная, какао порошок, соль), молоко сухое обезжиренное, олигофруктоза (растворимые пищевые волокна), семена чиа, пудра финиковая, бамбуковая клетчатка (нерастворимые пищевые волокна), соль розовая гималайская, ароматизаторы идентичные натуральным, экстракт монк фрута (подсластитель), лимонная кислота (регулятор кислотности).", "nutri": [["Белки", "15 г"], ["Жиры", "3,2 г"], ["Углеводы", "31,2 г"], ["Пищевые волокна", "5,6 г"], ["Энергетическая ценность", "226 ккал / 944 кДж"]]}, "strawberry": {"title": "Клубника со сливками", "desc": "Нежный вкус спелой клубники со сливочными нотками: мягкий, кремовый, с яркой ягодной сладостью и бархатистым молочным послевкусием.", "compo": "Овсяные хлопья без глютена, белковый комплекс (концентрат сывороточного белка, концентрат молочного белка, казеинат натрия, яичный белок), клубника сушеная, олигофруктоза (растворимые пищевые волокна), молоко сухое обезжиренное, семена чиа, сливки сухие, пудра финиковая, бамбуковая клетчатка (нерастворимые пищевые волокна), ароматизаторы идентичные натуральным, экстракт монк фрута (подсластитель), соль розовая гималайская, лимонная кислота (регулятор кислотности).", "nutri": [["Белки", "14,9 г"], ["Жиры", "3,7 г"], ["Углеводы", "32,5 г"], ["Пищевые волокна", "5,1 г"], ["Энергетическая ценность", "233 ккал / 976 кДж"]]}, "fruit": {"title": "Фруктовые хлопья", "desc": "Яркое сочетание фруктовых нот и нежной молочной сладости. Вкус, который напоминает те самые разноцветные хлопья, знакомые с первых ложек. Только тс-с-с!)", "compo": "Овсяные хлопья без глютена, белковый комплекс (концентрат сывороточного белка, концентрат молочного белка, казеинат натрия, яичный белок), молоко сухое обезжиренное, олигофруктоза (растворимые пищевые волокна), сушеная клубника, сушеный персик, семена чиа, сухой сок банана, бамбуковая клетчатка (нерастворимые пищевые волокна), соль розовая гималайская, ароматизаторы идентичные натуральным, экстракт монк фрута (подсластитель), лимонная кислота (регулятор кислотности).", "nutri": [["Белки", "14,9 г"], ["Жиры", "3,2 г"], ["Углеводы", "31,2 г"], ["Пищевые волокна", "5,5 г"], ["Энергетическая ценность", "224 ккал / 937 кДж"]]}};
+  var modal = document.getElementById('flavorModal');
+  if(!modal) return;
+  var elTitle=document.getElementById('fmodalTitle'),
+      elDesc=document.getElementById('fmDesc'),
+      elCompo=document.getElementById('fmCompo'),
+      elNutri=document.getElementById('fmNutri'),
+      elPhoto=document.getElementById('fmPhoto');
+  var lastFocus=null;
+  function open(key){
+    var f=FLAVORS[key]; if(!f) return;
+    elTitle.textContent=f.title;
+    elDesc.textContent=f.desc;
+    elCompo.textContent=f.compo;
+    elNutri.innerHTML=f.nutri.map(function(r){
+      return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td></tr>';
+    }).join('');
+    elPhoto.innerHTML = f.photo
+      ? '<img src="'+f.photo+'" alt="'+f.title+'">'
+      : '<span class="bento-photo-ph">Фото<br>скоро</span>';
+    lastFocus=document.activeElement;
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden','false');
+    document.body.style.overflow='hidden';
+    document.getElementById('fmodalClose').focus();
+  }
+  function close(){
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden','true');
+    document.body.style.overflow='';
+    if(lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('.tile-btn.desc[data-flavor]'), function(btn){
+    btn.addEventListener('click', function(e){ e.preventDefault(); open(btn.getAttribute('data-flavor')); });
+  });
+  document.getElementById('fmodalClose').addEventListener('click', close);
+  modal.addEventListener('click', function(e){ if(e.target.hasAttribute('data-fclose')) close(); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape' && modal.classList.contains('open')) close(); });
+})();
+</script>
 </body>
 </html>
